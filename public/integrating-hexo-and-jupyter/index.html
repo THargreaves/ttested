@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Integrating Hexo and Jupyter to Build a Data Science Blog - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="When creating a data science blog, there are many different approaches that can be taken. The main two decisions revolve around how you wish to write your content and which static site generator you w">
+<meta name="keywords" content="tutorial,python,web-development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Integrating Hexo and Jupyter to Build a Data Science Blog">
+<meta property="og:url" content="https://www.ttested.com/integrating-hexo-and-jupyter/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="When creating a data science blog, there are many different approaches that can be taken. The main two decisions revolve around how you wish to write your content and which static site generator you w">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/integrating-hexo-and-jupyter.png">
+<meta property="og:updated_time" content="2019-11-17T12:27:58.103Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Integrating Hexo and Jupyter to Build a Data Science Blog">
+<meta name="twitter:description" content="When creating a data science blog, there are many different approaches that can be taken. The main two decisions revolve around how you wish to write your content and which static site generator you w">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/integrating-hexo-and-jupyter.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Integrating Hexo and Jupyter to Build a Data Science Blog" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/integrating-hexo-and-jupyter.png" alt="Integrating Hexo and Jupyter to Build a Data Science Blog">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-20T00:00:00.000Z">2019-08-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Meta/">Meta</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    16 minutes read (About 3100 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Integrating Hexo and Jupyter to Build a Data Science Blog
+            
+        </h1>
+        <div class="content">
+            <p>We all know the saying, “New Year, New (The)me”. Inspired by that thought - or perhaps just by the idea of using that as an opener - I decided that I would begin the 2019/20 academic year by re-theming this blog. This was meant to be a short and sweet project; move some files, install some packages, and off we go. That couldn’t have been further from the truth. In transitioning, I have come across many challenges regarding the immaturity of the integration between static site generators and Jupyter. I have spent considerable time over the summer remedying such issues, and I hope that by documenting my struggles and eventual solutions in this post, I can make a similar move much simpler for anyone doing so in the future.</p>
+<h2 id="Hugo-and-Blogdown"><a href="#Hugo-and-Blogdown" class="headerlink" title="Hugo and Blogdown"></a>Hugo and Blogdown</h2><p>When I first created this blog almost a year ago, I decided to use Hugo as the static site generator behind the site. Reaching this decision was simple. At that time, I was only using R for any data science work and RStudio offered an easy-to-use set of add-ins built upon the <code>blogdown</code> package. This made the production of a data science blog a piece of cake. You could build your site directly in RStudio using interactive R notebooks. These would then be processed automatically by the package and converted into a form ready for Hugo to work with. </p>
+<p>This worked well for me for several months but I soon started to grow fed up with system for the following reasons.</p>
+<h3 id="Language-Agnosticism"><a href="#Language-Agnosticism" class="headerlink" title="Language Agnosticism"></a>Language Agnosticism</h3><p>I am a strong believer in using the right tool for the right job. And through this philosophy, I soon realised that solely using R wasn’t going to cut it for complicated projects. I wanted to be learning about and discussing the use of other languages for data science. Currently this has only amounted to a splattering of posts using Python and Bash, but I have plans to be including many more languages in my projects in the future. I therefore want to make sure that I am using a system that is language agnostic and easily expandable.</p>
+<p>RStudio and Blogdown is not such a system. Although it is technically possible to use Python, SQL, and Bash code in R notebooks, the experience is buggy and generally unpleasant. There is a clear preference towards blogging in R. Although this is the main language I use at the moment, who knows what the data science landscape will look like in five years? And so, I decided that it was time to move away from such a tight-knit ecosystem.</p>
+<p>On top of this, when it comes to sharing my code on GitHub, supplying people with an R notebook is not generally helpful. If this notebook contains R code then that makes sense, but if it is written for a different language then it is unlikely that the intended user of the notebook will even have RStudio installed and so won’t be able to open it.</p>
+<h3 id="Static-Site-Generation"><a href="#Static-Site-Generation" class="headerlink" title="Static Site Generation"></a>Static Site Generation</h3><p>Hugo is a good tool for static site generation, but it is not for me. I don’t like the available themes, the limited extendability, the manual configuration of the site. It just doesn’t sit well with me, even though I can understand why many people would like it.</p>
+<p>The Blogdown package defaults to using Hugo as its static site generator and although it is <em>possible</em> to set up the package to use a different generator, the documentation on this is limited and many features - such as syntax highlighting stop working.</p>
+<p>I want a website that is modern and feature-rich. This means tools such as site search, hierarchical categorisation, and customisable word-count/reading-time by default. Hugo almost certainly has the potential to add these features but this would require some serious graft and I do not have the time or skills for that.</p>
+<h2 id="Hexo-and-Jupyter"><a href="#Hexo-and-Jupyter" class="headerlink" title="Hexo and Jupyter"></a>Hexo and Jupyter</h2><p>It was clear that I was finding Blogdown and Hugo frustrating but I hadn’t considered any alternatives. I then stumbled across <a href="https://www.dataquest.io/blog/how-to-setup-a-data-science-blog/" target="_blank" rel="noopener">this</a> blog post on <a href="https://www.dataquest.io/" target="_blank" rel="noopener">dataquest.io</a>. This still wasn’t exactly what I wanted - Pelican themes are painfully minimal in both features and design - but it started the ball rolling. I then came across <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">this</a> GitHub repository for a Hexo theme called Icarus. Now that was exactly what I wanted. The theme is gorgeous, the documentation for Hexo looked clear and intuitive, and using the ideas from the DataQuest blog post, I cloud easily integrate it with Jupyter notebooks (or so I thought).</p>
+<p>I installed Hexo, downloaded the theme, filled out the config files, and opened a single post from my old Blogdown site to use as a test. I copied the Markdown and code chunks from the original file into a Jupyter notebook (using the R kernel), converted it to markdown with <code>jupyter nbconvert --to markdown path/to/file</code>, and voilà…it didn’t work.</p>
+<p>Well, it did work, just not as I expected. There were several issues that needed to be fixed. Hours became days, days became weeks, and soon I was wondering whether it would be easier to just use a Dropbox folder full of TXT files for my website. I did, however, manage to fix the major issues. So let’s begin walking through them, and seeing how I came to a solution.</p>
+<h3 id="Syntax-Highlighting"><a href="#Syntax-Highlighting" class="headerlink" title="Syntax Highlighting"></a>Syntax Highlighting</h3><p>We’ll start simple. When I first generated by Hexo site I noticed that none of the code blocks had syntax highlighting. This was strange since the Icarus theme definitely included highlight.js and yet all codeblocks featured only large blocks of matte grey text. Looking through the <a href="https://blog.zhangruipeng.me/hexo-theme-icarus/categories/" target="_blank" rel="noopener">Icarus documentation</a> I soon realised what was wrong.</p>
+<p>There was a clear disparity between the way that the Jupyter notebook converter and Hexo defined codeblocks. This syntax for the former uses triple backticks to open close a codeblock. Whereas the latter uses a more verbose tag notation shown <a href="https://hexo.io/docs/tag-plugins.html#Code-Block" target="_blank" rel="noopener">here</a>. I would like to include examples of these in this post but I can’t find a way to stop the Hexo render no matter how I try to escape them so you will just have to use your imagination.</p>
+<p>This is very easy to fix using a simple pattern-replace regular expression. For the same reason as above, I cannot include the code directly in this post but, as you will see later, I have created a Python script which you can download to fix all of these issues automatically.</p>
+<h3 id="Image-Directories"><a href="#Image-Directories" class="headerlink" title="Image Directories"></a>Image Directories</h3><p>Arguably, this problem has an even simpler solution than the first. The root of this issue is that the notebook converter places all outputted figures into a folder called <code>{name-of-post}_files</code> and then points all image links in the markdown file to that folder. This needs to be changed to the actual directory that you will be storing such images. Since this change is the same every time, you don’t even require any regex; a simple call to the <code>.replace()</code> string method will do the trick although I did end up going for regex for simplicity.</p>
+<h3 id="LaTeX-issues"><a href="#LaTeX-issues" class="headerlink" title="LaTeX issues"></a>LaTeX issues</h3><p>In almost all cases, LaTeX works the same both with Hugo and with Hexo. I have however noticed some edge-cases that needed fixes. For a start, the <code>align*</code> environment (align environment without line numbering) does not work with Hexo.  This is because the asterisk is interpreted as italics before the MathJax engine renders the LaTeX code. Instead you can use the standard <code>align</code> environment which for some reason doesn’t have line numbers when used with Hexo.</p>
+<p>Another point to note is that the standard <code>//</code> new-line notation does not work as expected. This is because the first slash is used to escape the second, leaving only one slash for MathJax to render. The solution to this is simple - replace every occurrence of two slashes with four.</p>
+<h3 id="Figure-Options"><a href="#Figure-Options" class="headerlink" title="Figure Options"></a>Figure Options</h3><p>When writing a blog post using Blogdown, it was possible to format the figure output of any block of code by using chunk options. Jupyter and Hexo do not offer such functionality although there is a work around. </p>
+<h4 id="Figure-Size"><a href="#Figure-Size" class="headerlink" title="Figure Size"></a>Figure Size</h4><p>When creating Python plots using <code>matplotlib</code>, this is trivial; you simply specify the <code>figsize</code> parameter when calling <code>matplotlib.figure()</code>. But what about with other kernels? So far I have only been generating figures with R and so I only have a solution for that language, however I will edit this post with updates if/when I use others. </p>
+<p>To format figure output when using R, all you have to do is start the relevant code cell with a call to the <code>options()</code> function as so.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">options(repr.plot.width=<span class="hljs-number">8</span>, </span><br><span class="line">        repr.plot.height=<span class="hljs-number">5</span>,</span><br><span class="line">        jupyter.plot_mimetypes = <span class="hljs-string">"image/png"</span>)</span><br></pre></td></tr></table></figure><blockquote class="colorquote info"><p>The MIME type can also be set to <code>image/svg+xml</code> which will output an SVG or <code>image/jpeg</code> for a JPEG.</p>
+</blockquote><blockquote class="colorquote warning"><p>For this to run you will need to have install the <code>repr</code> package from GitHub with <code>devtools::install_github(&#39;IRkernel/repr&#39;)</code> though it doesn’t need to be loaded.</p>
+</blockquote>
+<p>The call to this function can then be removed from the Markdown file using the following regular expression <code>r&#39;options\((?:(?!\()(?:.|\s))*\)\s*&#39;</code></p>
+<h4 id="Figure-Alignment"><a href="#Figure-Alignment" class="headerlink" title="Figure Alignment"></a>Figure Alignment</h4><p>Using R notebook chunk properties, it is possible to set figure alignment to one of <code>left</code>, <code>center</code>, or <code>right</code>. I have not found a way to do this with Jupyter. This, however, has not presented an issue since I would like all my figures to be centred. Hence, I just tweaked the CSS properties related to blog post images to get the desired result.</p>
+<h4 id="Figure-Caption"><a href="#Figure-Caption" class="headerlink" title="Figure Caption"></a>Figure Caption</h4><p>Another useful feature of the <code>blogdown</code> package is the ability to set a figure caption using chunk options. This is a feature that I really wanted to replicate but there appeared to be no standard way of doing so. The <a href="https://github.com/IRkernel/repr/blob/master/R/options.r" target="_blank" rel="noopener">source code</a> for the <code>options()</code> function makes no mention of figure captions. Instead, the caption created by <code>nbconvert</code> is just the file type of the image. For example if you used <code>image/svg+xml</code> for the MIME type, the figure caption would be <code>svg</code>. </p>
+<p>I decided that the best way to fix this was to use a Python script. This will run through each line of the outputted markdown file and look for the pattern <code>@caption=&quot;This is the caption&quot;</code>. The script will then extract the caption text and then carry on searching through the file until it finds an caption-less image, denoted by <code>![svg](/path/to/image)</code> or similar. The script can then replace the default caption with the caption it is storing from the line above.</p>
+<p>Therefore, to use this script, all you have to do is add a cell of type <code>Raw NBConvert</code> containing <code>@caption=&quot;...&quot;</code> before your figure-producing cell and then the rest is handle automatically.</p>
+<h3 id="Other-Chunk-Properties"><a href="#Other-Chunk-Properties" class="headerlink" title="Other Chunk Properties"></a>Other Chunk Properties</h3><p>The above fixes were really quite simple once I knew which direction to head in, but this last issue gave me a bit more of a headache. Never-the-less, I did eventually come to rather simple solutions. These problems revolve around the R notebook chunk options <code>eval</code> and <code>echo</code>. These, respectively, tell R to either not run a chunk of code or to only show the output of a chunk and not the code that produced it. </p>
+<p>The former of these is easy to replicate with Jupyter/Hexo. You simply replace the code cell with a <code>Raw NBConvert</code> cell containing manually entered codeblock tags.</p>
+<p>The latter, however, required some thought. In the end, I decided to use a solution similar to the one before for figure captions. This means that before any cell you don’t wish to echo, you need to add a <code>Raw NBConvert</code> cell containing the command <code>@noecho</code>. Then we can use the regular expression <code>r&#39;@noecho(?:.|\s)*?endcodeblock %}&#39;</code>. This uses the lazy regex quantifier <code>*?</code> to only remove code between the call for <code>@noecho</code> and the next closing codeblock tag.</p>
+<blockquote class="colorquote danger"><p>When using the script provided in the next section, it is import to make sure that any manually entered codeblocks following the <code>@noecho</code> tag are closed else any output/text between that block and the next will be removed.</p>
+</blockquote>
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>I have packaged up these tweaks into a short Python script which can be run on a Markdown file outputted by <code>nbconvert</code>. It can be found <a href="/files/markdown_formatter.py">here</a>. It is worth noting that I have also added a few edits to the theme’s CSS file. I did not make a list of these but none of them were difficult to discover by using the Chrome page inspector tool. </p>
+<p>That concludes the main part of this post. I do however have a few more words to add on the use of colourful quotes and the remaining problems which I have been unable to solve.</p>
+<h2 id="Colourful-Quotes"><a href="#Colourful-Quotes" class="headerlink" title="Colourful Quotes"></a>Colourful Quotes</h2><p>The author of the Icarus theme, <a href="https://github.com/ppoffice/" target="_blank" rel="noopener">ppoffice</a> has also created a Hexo theme called <a href="https://github.com/ppoffice/hexo-theme-minos" target="_blank" rel="noopener">Minos</a> (sensing a pattern?). The theme is a bit too minimalist for my liking but it does have a feature that I really love — colorquotes. You will see these dotted all over this site and even on this page. There are four variants as shown below.</p>
+<blockquote class="colorquote info"><p><strong>Info</strong></p>
+</blockquote>
+
+<blockquote class="colorquote success"><p><strong>Success</strong></p>
+</blockquote>
+
+<blockquote class="colorquote warning"><p><strong>Warning</strong></p>
+</blockquote>
+
+<blockquote class="colorquote danger"><p><strong>Danger</strong></p>
+</blockquote>
+<p>These are not usually a part of the Icarus theme but can be added as so.</p>
+<p>First you need to register a <code>colorquote</code> extend tag. This is done by creating a file called <code>colorquote.js</code> in the directory <code>themes/icarus/scripts</code> containing the following.</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">* Color Quote Block Tag</span></span><br><span class="line"><span class="hljs-comment">* @description Color Quote Block</span></span><br><span class="line"><span class="hljs-comment">* @example</span></span><br><span class="line"><span class="hljs-comment">*     &lt;% colorquote [type] %&gt;</span></span><br><span class="line"><span class="hljs-comment">*     content</span></span><br><span class="line"><span class="hljs-comment">*     &lt;% endcolorquote %&gt;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"></span><br><span class="line">hexo.extend.tag.register(<span class="hljs-string">'colorquote'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">args, content</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">var</span> type =  args[<span class="hljs-number">0</span>];</span><br><span class="line">    <span class="hljs-keyword">var</span> mdContent = hexo.render.renderSync(&#123;<span class="hljs-attr">text</span>: content, <span class="hljs-attr">engine</span>: <span class="hljs-string">'markdown'</span>&#125;);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'&lt;blockquote class="colorquote '</span> + type + <span class="hljs-string">'"&gt;'</span> + mdContent + <span class="hljs-string">'&lt;/blockquote&gt;'</span>;</span><br><span class="line">&#125;, &#123;<span class="hljs-attr">ends</span>: <span class="hljs-literal">true</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>You can then edit the main CSS file for the theme. This can be found at <code>themes/icarus/source/css/style.styl</code>. All you need to do is add the following as a top-level declaration.</p>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-tag">blockquote</span></span><br><span class="line">  <span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">static</span></span><br><span class="line">  <span class="hljs-selector-tag">font-family</span>: <span class="hljs-selector-tag">font-serif</span></span><br><span class="line">  <span class="hljs-selector-tag">font-size</span>: 1<span class="hljs-selector-class">.1em</span></span><br><span class="line">  <span class="hljs-selector-tag">padding</span>: 10<span class="hljs-selector-tag">px</span> 20<span class="hljs-selector-tag">px</span> 10<span class="hljs-selector-tag">px</span> 54<span class="hljs-selector-tag">px</span></span><br><span class="line">  <span class="hljs-selector-tag">background</span>: <span class="hljs-selector-tag">rgba</span>(0,0,0,0<span class="hljs-selector-class">.03</span>)</span><br><span class="line">  <span class="hljs-selector-tag">border-left</span>: 5<span class="hljs-selector-tag">px</span> <span class="hljs-selector-tag">solid</span> <span class="hljs-selector-id">#ee6e73</span></span><br><span class="line">  &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">    <span class="hljs-selector-tag">top</span>: 20<span class="hljs-selector-tag">px</span></span><br><span class="line">    <span class="hljs-selector-tag">left</span>: <span class="hljs-selector-tag">-40px</span></span><br><span class="line">    <span class="hljs-selector-tag">content</span>: "\<span class="hljs-selector-tag">f10d</span>"</span><br><span class="line">    <span class="hljs-selector-tag">color</span>: <span class="hljs-selector-id">#e2e2e2</span></span><br><span class="line">    <span class="hljs-selector-tag">font-size</span>: 32<span class="hljs-selector-tag">px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">font-family</span>: <span class="hljs-selector-tag">FontAwesome</span></span><br><span class="line">    <span class="hljs-selector-tag">text-align</span>: <span class="hljs-selector-tag">center</span></span><br><span class="line">    <span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">relative</span></span><br><span class="line">  <span class="hljs-selector-tag">footer</span></span><br><span class="line">    <span class="hljs-selector-tag">font-size</span>: <span class="hljs-selector-tag">font-size</span></span><br><span class="line">    <span class="hljs-selector-tag">margin</span>: <span class="hljs-selector-tag">line-height</span> 0</span><br><span class="line">    <span class="hljs-selector-tag">font-family</span>: <span class="hljs-selector-tag">font-sans</span></span><br><span class="line">    <span class="hljs-selector-tag">cite</span></span><br><span class="line">      &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">        <span class="hljs-selector-tag">content</span>: "—"</span><br><span class="line">        <span class="hljs-selector-tag">padding</span>: 0 0<span class="hljs-selector-class">.5em</span></span><br><span class="line"><span class="hljs-selector-class">.colorquote</span></span><br><span class="line">  <span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">relative</span>;</span><br><span class="line">  <span class="hljs-selector-tag">padding</span>: 0<span class="hljs-selector-class">.1em</span> 1<span class="hljs-selector-class">.5em</span>;</span><br><span class="line">  <span class="hljs-selector-tag">color</span>: <span class="hljs-selector-id">#4a4a4a</span>;</span><br><span class="line">  <span class="hljs-selector-tag">margin-bottom</span>: 1<span class="hljs-selector-tag">em</span>;</span><br><span class="line">  &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">    <span class="hljs-selector-tag">content</span>: " ";</span><br><span class="line">    <span class="hljs-selector-tag">position</span>: <span class="hljs-selector-tag">absolute</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-selector-tag">top</span>: 50%;</span><br><span class="line">    <span class="hljs-selector-tag">left</span>: <span class="hljs-selector-tag">-14</span><span class="hljs-selector-class">.5px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">margin-top</span>: <span class="hljs-selector-tag">-12px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">width</span>: 24<span class="hljs-selector-tag">px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">height</span>: 24<span class="hljs-selector-tag">px</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-selector-tag">border-radius</span>: 50%;</span><br><span class="line">    <span class="hljs-selector-tag">text-align</span>: <span class="hljs-selector-tag">center</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-selector-tag">color</span>: <span class="hljs-selector-tag">white</span>;</span><br><span class="line">    <span class="hljs-selector-tag">background-size</span>: 16<span class="hljs-selector-tag">px</span> 16<span class="hljs-selector-tag">px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">background-position</span>: 4<span class="hljs-selector-tag">px</span> 4<span class="hljs-selector-tag">px</span>;</span><br><span class="line">    <span class="hljs-selector-tag">background-repeat</span>: <span class="hljs-selector-tag">no-repeat</span>;</span><br><span class="line">  &amp;<span class="hljs-selector-class">.info</span></span><br><span class="line">    <span class="hljs-selector-tag">border-color</span>: <span class="hljs-selector-tag">hsl</span>(204, 86%, 53%);</span><br><span class="line">    <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(204, 86%, 93%);</span><br><span class="line">    &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">      <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(204, 86%, 53%);</span><br><span class="line">      background-image: url("../images/info.svg");</span><br><span class="line">  &amp;<span class="hljs-selector-class">.success</span></span><br><span class="line">    <span class="hljs-selector-tag">border-color</span>: <span class="hljs-selector-tag">hsl</span>(141, 71%, 48%);</span><br><span class="line">    <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(141, 70%, 88%);</span><br><span class="line">    &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">      <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(141, 71%, 48%);</span><br><span class="line">      background-image: url("../images/check.svg");</span><br><span class="line">  &amp;<span class="hljs-selector-class">.warning</span></span><br><span class="line">    <span class="hljs-selector-tag">border-color</span>: <span class="hljs-selector-tag">hsl</span>(48, 100%, 67%);</span><br><span class="line">    <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(48, 100%, 91%);</span><br><span class="line">    &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">      <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(48, 100%, 67%);</span><br><span class="line">      background-image: url("../images/question.svg");</span><br><span class="line">  &amp;<span class="hljs-selector-class">.danger</span></span><br><span class="line">    <span class="hljs-selector-tag">border-color</span>: <span class="hljs-selector-tag">hsl</span>(348, 100%, 61%);</span><br><span class="line">    <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(348, 100%, 85%);</span><br><span class="line">    &amp;<span class="hljs-selector-pseudo">:before</span></span><br><span class="line">      <span class="hljs-selector-tag">background-color</span>: <span class="hljs-selector-tag">hsl</span>(348, 100%, 61%);</span><br><span class="line">      background-image: url("../images/exclamation.svg");</span><br></pre></td></tr></table></figure>
+<p>You will then need to copy the files <code>check.svg</code>, <code>exclamation.svg</code>, <code>info.svg</code>, and <code>question.svg</code> from the <a href="https://github.com/ppoffice/hexo-theme-minos/tree/master/source/images" target="_blank" rel="noopener">Minos repository</a> to the directory <code>themes/icarus/images</code>.</p>
+<p>By this point, the colorquote blocks will work just fine as long as you do not intend to nest a codeblock inside of them. If you wish to do this then you will need to add one more JavaScript file called <code>tags.js</code> under <code>themes/icarus/scripts</code> with the following content.</p>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">* Tags Filter</span></span><br><span class="line"><span class="hljs-comment">* @description Fix the code block using ```&lt;code&gt;``` will render undefined in Nunjucks</span></span><br><span class="line"><span class="hljs-comment">*              https://github.com/hexojs/hexo/issues/2400</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> rEscapeContent = <span class="hljs-regexp">/&lt;escape(?:[^&gt;]*)&gt;([\s\S]*?)&lt;\/escape&gt;/g</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> placeholder = <span class="hljs-string">'\uFFFD'</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> rPlaceholder = <span class="hljs-regexp">/(?:&lt;|&amp;lt;)\!--\uFFFD(\d+)--(?:&gt;|&amp;gt;)/g</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> cache = [];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">escapeContent</span>(<span class="hljs-params">str</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-string">'&lt;!--'</span> + placeholder + (cache.push(str) - <span class="hljs-number">1</span>) + <span class="hljs-string">'--&gt;'</span>;</span><br><span class="line">&#125;</span><br><span class="line">hexo.extend.filter.register(<span class="hljs-string">'before_post_render'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>&#123;</span><br><span class="line">  data.content = data.content.replace(rEscapeContent, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">match, content</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> escapeContent(content);</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="hljs-keyword">return</span> data;</span><br><span class="line">&#125;);</span><br><span class="line">hexo.extend.filter.register(<span class="hljs-string">'after_post_render'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>&#123;</span><br><span class="line">  data.content = data.content.replace(rPlaceholder, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> cache[<span class="hljs-built_in">arguments</span>[<span class="hljs-number">1</span>]];</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="hljs-keyword">return</span> data;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Remaining-Issues"><a href="#Remaining-Issues" class="headerlink" title="Remaining Issues"></a>Remaining Issues</h2><p>Before I close off this post, I would like to discuss the Jupyter/Hexo integration issues that I have not been able to solve. This may be just for cathartic purposes or perhaps someone may be able to suggest a workaround that I have not yet considered. If I do find a solution to any of these issues in the future then I will certainly update this next section.</p>
+<h3 id="Inline-Code"><a href="#Inline-Code" class="headerlink" title="Inline Code"></a>Inline Code</h3><p>R notebooks offer a great feature where you can run code whilst in a markdown block using the notation <code>`r print(&quot;Hello World&quot;)`</code>. In these inline blocks you can also reference variables from the main code chunks. This is incredibly useful when your code has an element of randomness to it and you wish to quote the results that a main code block gave in some explanatory text below. I do not believe there is a simple way to do this and so I have instead resorted to setting random seeds. This works for some cases but not for those such as benchmarking.</p>
+<h3 id="Caching"><a href="#Caching" class="headerlink" title="Caching"></a>Caching</h3><p>Another nifty feature of R notebooks is the ability to cache chunk outputs. This means that if you have a long-running piece of code, you can run it once and then store the output for future use. This is more an issue of convenience then actual practicality and so it’s not a priority for me to solve right now.</p>
+<h3 id="GIFs"><a href="#GIFs" class="headerlink" title="GIFs"></a>GIFs</h3><p>As a proponent of animated visualisations, I am partial to the creation of GIFs in my posts. As mentioned before, the only valid MIME types for R output are PNG, JPEG, and SVG. Therefore GIFs have to be generated separately to the main post and embed using Markdown code. Again, this works fine, although seamless integration would be nice.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/python/">python</a>, <a class="has-link-grey -link" href="/tags/tutorial/">tutorial</a>, <a class="has-link-grey -link" href="/tags/web-development/">web-development</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/paradoxical-tournaments/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Paradoxical Tournaments</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/generating-normal-random-variables-part-1/">
+                <span class="level-item">Generating Normal Random Variables - Part 1: Inverse Transform Sampling</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/integrating-hexo-and-jupyter/';
+        this.page.identifier = 'integrating-hexo-and-jupyter/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        39
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Hugo-and-Blogdown">
+        <span class="has-mr-6">1</span>
+        <span>Hugo and Blogdown</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Language-Agnosticism">
+        <span class="has-mr-6">1.1</span>
+        <span>Language Agnosticism</span>
+        </a></li><li>
+        <a class="is-flex" href="#Static-Site-Generation">
+        <span class="has-mr-6">1.2</span>
+        <span>Static Site Generation</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Hexo-and-Jupyter">
+        <span class="has-mr-6">2</span>
+        <span>Hexo and Jupyter</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Syntax-Highlighting">
+        <span class="has-mr-6">2.1</span>
+        <span>Syntax Highlighting</span>
+        </a></li><li>
+        <a class="is-flex" href="#Image-Directories">
+        <span class="has-mr-6">2.2</span>
+        <span>Image Directories</span>
+        </a></li><li>
+        <a class="is-flex" href="#LaTeX-issues">
+        <span class="has-mr-6">2.3</span>
+        <span>LaTeX issues</span>
+        </a></li><li>
+        <a class="is-flex" href="#Figure-Options">
+        <span class="has-mr-6">2.4</span>
+        <span>Figure Options</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Figure-Size">
+        <span class="has-mr-6">2.4.1</span>
+        <span>Figure Size</span>
+        </a></li><li>
+        <a class="is-flex" href="#Figure-Alignment">
+        <span class="has-mr-6">2.4.2</span>
+        <span>Figure Alignment</span>
+        </a></li><li>
+        <a class="is-flex" href="#Figure-Caption">
+        <span class="has-mr-6">2.4.3</span>
+        <span>Figure Caption</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Other-Chunk-Properties">
+        <span class="has-mr-6">2.5</span>
+        <span>Other Chunk Properties</span>
+        </a></li><li>
+        <a class="is-flex" href="#Summary">
+        <span class="has-mr-6">2.6</span>
+        <span>Summary</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Colourful-Quotes">
+        <span class="has-mr-6">3</span>
+        <span>Colourful Quotes</span>
+        </a></li><li>
+        <a class="is-flex" href="#Remaining-Issues">
+        <span class="has-mr-6">4</span>
+        <span>Remaining Issues</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Inline-Code">
+        <span class="has-mr-6">4.1</span>
+        <span>Inline Code</span>
+        </a></li><li>
+        <a class="is-flex" href="#Caching">
+        <span class="has-mr-6">4.2</span>
+        <span>Caching</span>
+        </a></li><li>
+        <a class="is-flex" href="#GIFs">
+        <span class="has-mr-6">4.3</span>
+        <span>GIFs</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Integrating Hexo and Jupyter to Build a Data Science Blog" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

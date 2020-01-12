@@ -8,7 +8,7 @@ categories:
 - [Data Science, Machine Learning]
 tags:
 - reinforcement-learning
-- no-code
+- no-coding
 - simulation
 ---
 
@@ -258,7 +258,7 @@ There has been a lot of talk of regret. We can define this rigourously at time $
 
 $$R(t) = \sum_{i=1}^t \left( \mu_{\theta^\*} - \mu_{\theta_i}\right)$$
 
-where $\theta\_i$ is the choice we make at step $i$ and $\theta^\*$ is the index of the best arm ($\theta^\* = \textrm{argmax}_{i\in[n]} \mu_i$).
+where $\theta\_i$ is the choice we make at step $i$ and $\theta^*$ is the index of the best arm ($\theta^* = \textrm{argmax}_{i\in[n]} \mu_i$).
 
 Next I would like to take some time to discuss the exact definitions of $\hat{\mu\_k}$ and $\hat{\sigma^2\_k}$ and how we can efficiently update them. If we define $r\_i$ to be the reward received at time step $i$ we can then define for time step $t$
 

@@ -8,7 +8,7 @@ categories:
 - [Data Science, Visualisation]
 tags:
 - clustering
-- data mining
+- data-mining
 - tutorial
 ---
 {% colorquote info %}

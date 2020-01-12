@@ -8,7 +8,7 @@ categories:
 - [Statistics, Probability]
 tags:
 - simulation
-- R
+- r
 - tutorial
 - normal-distribution
 ---

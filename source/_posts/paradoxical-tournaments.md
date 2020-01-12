@@ -325,7 +325,6 @@ th {
 | 3 |    15    |      19     |    19   |    91    |    151    |
 | 4 |    31    |      47     |    ?    |    149   |    1031   |
 | 5 |    63    |     111     |    ?    |    353   |    6427   |
-
 As eluded to in the table, we are still yet to have found the optimal values of $n$ for $k$ bigger than 3. Looking at the Szekeres Lower Bound is it is clear that using traditional computing, this problem is completely intractable for a brute force approach. Never-the-less breakthroughs in the field could open up new possibilities but for now, it's probably best to close your console and get back to pen and paper if you really want to make any progress. 
 
 At this point, I would normally suggest further reading, but frankly, we have exhausted almost all of what the literature has to offer. Perhaps the next step would be to have a look at the original source documents that I have used to write this post (using `ctrl-F` to search for 'src' will help you find those).

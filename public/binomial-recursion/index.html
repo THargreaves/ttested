@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Binomial Recursion - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="In this post, we take a simple coin-flipping puzzle and through scope-expansion and generalisation, turn it into a monster probability problem that we can be proud to have tackled. In it, we look at s">
+<meta name="keywords" content="tutorial,binomial-distribution,coins,no-coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Binomial Recursion">
+<meta property="og:url" content="https://www.ttested.com/binomial-recursion/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="In this post, we take a simple coin-flipping puzzle and through scope-expansion and generalisation, turn it into a monster probability problem that we can be proud to have tackled. In it, we look at s">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/binomial-recursion.jpg">
+<meta property="og:updated_time" content="2019-11-17T12:27:45.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Binomial Recursion">
+<meta name="twitter:description" content="In this post, we take a simple coin-flipping puzzle and through scope-expansion and generalisation, turn it into a monster probability problem that we can be proud to have tackled. In it, we look at s">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/binomial-recursion.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Binomial Recursion" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/binomial-recursion.jpg" alt="Binomial Recursion">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-17T00:00:00.000Z">2018-10-17</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 2500 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Binomial Recursion
+            
+        </h1>
+        <div class="content">
+            <h2 id="An-Infinite-Coin-Problem"><a href="#An-Infinite-Coin-Problem" class="headerlink" title="An Infinite Coin Problem"></a>An Infinite Coin Problem</h2><p>Imagine you have a coin, biased in such a way that it lands heads with probability $p \in [0,1)$ (we will require $p \neq 1$ later in the post) and tails with probability $1-p$. You start by flipping this coin $n \in \mathbb{N}^+$ times. Then, count how many heads you obtained in this series of flips and call this $x_1$. Begin flipping again, but this time doing a total of $x_1$ tosses. You count the heads and call the resulting value $x_2$. You can probably see where this is going.</p>
+<p>In general, on the $i$th set of coin flips, you perform $x_{i-1}$ tosses and record the numberof heads as $x_i$. You repeat this until eventually you get no heads in a series of flips. If this occurred on the $i$th turn, we’d then have $0 = x_k = x_{x+1} = \ldots$. Formalising this, if we let $X_i$ be the random variable representing the number of heads obtained on the $i$th series of tosses, then these random variables are defined by</p>
+<p>$$ X_1 \sim B(n,p) \qquad X_{i+1} \sim B(X_{i}, p) \ \forall i \in \mathbb{N} $$</p>
+<p>There are many questions we could ask about these random variables, which in turn relate to questions about the original scenario. A sensible question might be regarding the distribution of each $X_i$, which will correspond to asking what the likelihood is of getting a particular number of heads on a certain series of tosses. We may also wish to know how many heads we expect to see in total for a given $n$ and $p$. This is equivalent to asking what the value of $\mathbb{E}\left( \sum_{k=1}^\infty X_k \right)$ is.</p>
+<h2 id="Handling-a-specific-case"><a href="#Handling-a-specific-case" class="headerlink" title="Handling a specific case"></a>Handling a specific case</h2><blockquote class="colorquote info"><p>To keep the focus on the important parts of this problem, I have omitted defining any pmfs outside of their support. Therefore, if any value of the pmf is undefined, it can be assumed to be zero.</p>
+</blockquote>
+
+
+<p>We will start simple by finding the distribution of the random variable $X_2$ and from there we can go about generalising this for any $X_i$. To begin, we note that since $X_1$ is binomially distributed with parameters $n$ and $p$, it will have a probability mass function given by</p>
+<p>$$ \mathbb{P}(X_1=k) = {n \choose k}  p^k (1-p)^{n-k} \qquad k \in [n] $$</p>
+<p>We also know, given that $X_1$ takes a particular value $k \in [n]$, that $X_2$ will be distributed binomially with parameters $k$ and $p$ and so it will have the conditional probability mass function</p>
+<p>$$ \mathbb{P}(X_2=l|X_1=k) = {k \choose l} p^l(1-p)^{k-l} \qquad l \in [k] $$</p>
+<p>Combining these and using the definition of conditional probability we can construct the joint pdf </p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X_1 = k, X_2=l)  &amp; = \mathbb{P}(X_1=k)\cdot\mathbb{P}(X_2=l|X_1=k) \\<br>&amp; = {n \choose k}p^k(1-p)^{n-k} \cdot {k \choose l} p^l(1-p)^{k-l} \\<br>&amp; = {n \choose k}  {k \choose l}  p^{k+l} (1-p)^{n-l} \qquad k,l \in [n],\  l\leq k<br>\end{align}<br>$$</p>
+<p>This is a great position to be in as this function describes the entire combined behaviour of $X_1$ and $X_2$. To get the distribution of $X_2$, all we have to do is fix $X_2$ at a certain value and sum across all corresponding possible values for $X_1$ in the support of the joint random variable. If we fix $X_2$ to be $l \in [n]$ then we must have $l&lt;X_1$, and so we are required to sum across the values $l$ to $n$ as follows</p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X_2 = l)  &amp; = \sum_{k=l}^n \mathbb{P}(X_1 = k, X_2=l) \\<br>&amp; = \sum_{k=l}^n {n \choose k}  {k \choose l}  p^{k+l} (1-p)^{n-l} \qquad l \in [n]<br>\end{align}<br>$$</p>
+<p>We can now go about simplifying this sum. First we extract any parts of the summand that do not depend on the index, $k$</p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X_2 = l) &amp; = p^l (1-p)^{n-l} \sum_{k=l}^n {n \choose k}  {k \choose l}  p^{k} \qquad l \in [n]<br>\end{align}<br>$$</p>
+<p>Next we use the change of variable: $m=k-l$. This gives us a sum starting from zero. We follow this with some algebraic manipulation</p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X_2 = l) &amp; = p^l (1-p)^{n-l} \sum_{m=0}^{n-l} {n \choose m+l}  {m+l \choose l}  p^{m+l} \\<br> &amp; = (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} {n \choose m+l}  {m+l \choose l}  p^{m} \\<br>  &amp; = (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} \frac{n!}{(m+l)!(n-m-l)!} \frac{(m+l)!}{m!l!} p^{m} \\<br>&amp; = (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} \frac{n!}{(m+l)!(n-m-l)!} \frac{(m+l)!}{m!l!} p^{m} \\<br>&amp; = (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} \frac{n!}{(n-m-l))!m!l!} p^{m} \\<br>&amp; = \frac{n!}{l!(n-l)!} (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} \frac{(n-l)!}{m!(n-m-l)!} p^{m} \\<br>&amp; = {n \choose l} (p^2)^l (1-p)^{n-l} \sum_{m=0}^{n-l} {n-l\choose m} p^{m} \cdot 1^{(n-l)-m} \qquad l \in [n]<br>\end{align}<br>$$</p>
+<p>Lastly, observe that the summand is actually just the binomial expansion of $(1+p)^{n-l}$ and so we get </p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X_2 = l) &amp; = {n \choose l} (p^2)^l (1-p)^{n-l} (1+p)^{n-l} \\<br>\mathbb{P}(X_2 = l) &amp; = {n \choose l} (p^2)^l (1-p^2)^{n-l} \qquad l \in [n]<br>\end{align}<br>$$</p>
+<p>by the difference of two squares. The eager-eyed reader may notice that this is in fact the probability mass function of a binomial random variable with parameters $n$ and $p^2$ and hence $X_2 \sim B(n,p^2)$. This leads us to conjecture that</p>
+<p>$$X_i \sim B(n,p^i) \quad \forall i \in \mathbb{N}$$</p>
+<p>This turns out to be completely true. What follows is a formal proof of this using induction and then a combinatorial argument which aims to reason why this is true in a less formal way.</p>
+<h2 id="A-Formal-Proof-of-the-General-Case"><a href="#A-Formal-Proof-of-the-General-Case" class="headerlink" title="A Formal Proof of the General Case"></a>A Formal Proof of the General Case</h2><p>We will proceed inductively on $i$. We see that the statement holds for $i=1,2$ so we have our base case covered comfortably. For our inductive hypothesis we suppose that $X_{i-1} \sim B(n,p^i)$ and proceed from here to try and show that $X_{i} \sim B(n,p^{i+1})$. We do this using the same method as for $X_2$; first we calculate the joint probability mass function of $X_i$ and $X_{i}$ and then sum over all valid values of $X_{i-1}$ for fixed $X_{i} = l$ to get the marginal distribution of $X_{i}$ which will hopefully correspond to a binomial random variable with parameters $n$ and $p^{i}$. First note that for all $k,l \in [n],\  l\leq k$ we have</p>
+<p>$$<br>\begin{align}<br>\mathbb{P} \left(X_{i-1} = k, X_i = l \right) &amp; =\mathbb{P} \left( X_{i-1} = k \right) \cdot \mathbb{P} \left( X_i = l| X_{i-1} = k \right)  \\<br>&amp; = {k \choose l} p^l (1-p)^{k-l} \cdot {n \choose k} \left( p^{i-1} \right)^k \left( 1 - p^{i-1} \right)^{n - k}<br>\end{align}<br>$$</p>
+<p>Which implies that</p>
+<p>$$<br>\begin{align}<br>\mathbb{P} \left( X_n = i \right) &amp; = \sum_{k=l}^n {k \choose l} {n \choose k} p^l (1-p)^{k-l}  \left( p^{i-1} \right)^k \left( 1 - p^{i-1} \right)^{n - k} \\<br> &amp; = p^l  \sum_{k=l}^n {k \choose l} {n \choose k} (1-p)^{k-l}  \left( p^{i-1} \right)^k \left( 1 - p^{i-1} \right)^{n - k} \\<br>\end{align}<br>$$</p>
+<p>We then use the substitution $m=k-l$ to get</p>
+<p>$$<br>\begin{align}<br>\mathbb{P} \left( X_n = i \right) &amp; = p^l  \sum_{m=0}^{n-l} {m + l \choose l} {n \choose m + l} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m+l} \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br> &amp; = \left( p^i \right)^l  \sum_{m=0}^{n-l} {m + l \choose l} {n \choose m + l} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m} \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l  \sum_{m=0}^{n-l} \frac{(m+l)!  n!}{l!  m!  (m+l)!  ((n-l)-m)!} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m}  \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l  \sum_{m=0}^{n-l} \frac{n!}{l!  m!  ((n-l)-m)!} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m} \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l \frac{n!}{l!  (n-l)!}  \sum_{m=0}^{n-l} \frac{(n-l)!}{m!  ((n-l)-m)!} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m} \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l {n \choose l}  \sum_{m=0}^{n-l} {n-l \choose m} \left(1-p \right)^{m}  \left( p^{i-1} \right)^{m} \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l {n \choose l}  \sum_{m=0}^{n-l} {n-l \choose m} \left(p^{i-1}-p^i \right)^{m}  \left( 1 - p^{i-1} \right)^{(n - l) - m} \\<br>&amp; = \left( p^i \right)^l {n \choose l} \left( p^{i-1} - p^i + 1 - p^{i-1} \right)^{n-l} \\<br>&amp; = {n \choose l} \left( p^i \right)^l \left(1 - p^i \right)^{n-l} \\<br>\end{align}<br>$$</p>
+<p>Since this last line is the probability mass function for a binomially distributed random variable with parameters $n$ and $p^i$, our induction is complete and so we can rest assured that our conjecture does hold for all $i \in \mathbb{N}$.</p>
+<p>The jump from the third-to-last to penultimate step is probably the toughest and involves spotting that the summand is the binomial expansion of $((p^{i-1}-p^i)+(1-p^{i-1}))^{n-l}$. This may be somewhat difficult to notice in the forward direction but checking it in the reverse is a trivial matter of substituting the two expressions forming the binomial into the expansion formula. In fact, the whole proof may feel like it has an air of aimless wandering with the right results just popping out with little explanation to the logic behind the proof’s direction. I would not argue at all with the analysis! The best way to understand the structure of this proof is to compare it to the specific case of finding the distribution of $X_2$. The proofs are very similar but it is much clearer to follow the thought process behind the simpler case. </p>
+<h2 id="A-Combinatorial-Justification"><a href="#A-Combinatorial-Justification" class="headerlink" title="A Combinatorial Justification"></a>A Combinatorial Justification</h2><p>For those readers who prefer an intuitive explanation of why a result is true more than a formal proof, I also offer a more combinatorial justification of proposition. To keep things simple, I will only focus on the first two random variables $X_1$ and $X_2$, though this result can easily be generalised inductively. </p>
+<p>The key insight to this explanation is noticing that the order of events involved in the problem can be changed without actually affecting the distributions of $X_1$ and $X_2$. A binomial random variable with parameters $n$ and $p$ is simply the sum of $n$ independent and identically distributed Bernoulli random variables with parameter $p$. We can treat Bernoulli random variables as drawing a ticket from a box in which all tickets either have the number 0 or 1 written on them, the proportion of which having 1 being $p$.</p>
+<p>In the original statement of the problem if we have $X_1 = x_1$ take on a specific value, this amounts to use drawing $n$ tickets from such a box mentioned above and counting that $x_1$ have a 1 written on them. Then, if we have $X_2 = x_2$ take on a specific value too, this equates to us performing a secondary follow-up experiment in which we draw $x_1$ tickets from the box again and seeing that $x_2$ of them have a 1 written on them.</p>
+<p>We now frame this problem in a different way. We draw the $n$ tickets for $X_1$ as before but now, rather than waiting till the end to see how many 1’s we have, as soon as we draw a 1, we follow this up by drawing another ticket but for $X_2$ instead. We can think of this procedure as actually just drawing one ticket from the box but with three possibilities for what can be written on it:</p>
+<ul>
+<li>$X_1=0$. This value models drawing a zero for $X_1$ and hence not drawing for $X_2$.</li>
+<li>$X_1=1, X_2 = 0$. This value models drawing a one for $X_1$ but then getting a zero for $X_2$.</li>
+<li>$X_1=1, X_2 = 1$. This value models drawing a one for both $X_1$ and $X_2$.</li>
+</ul>
+<p>We observe that these events occur with probability $(1-p)$, $p(1-p)$ and $p^2$ respectively. Since to have $X_2=x_2$ all we care about is having $x_2$ tickets out of the $n$ total be of the last type which occurs with probability $p^2$ each time, independent of any other ticket combination, we must have $X_2 \sim B(n, p^2)$ as we expected.</p>
+<h2 id="Finding-The-Expectation"><a href="#Finding-The-Expectation" class="headerlink" title="Finding The Expectation"></a>Finding The Expectation</h2><p>Now that we know the distributions of each $X_i$, computing the expectation of their sum isn’t too tricky. We do have to be careful of convergence issues but since we restricted $p$ to be less than 1, we don’t run into any issues. If $p$ is 1, it’s clear that the coin-tossing goes on forever and so obviously don’t have an expectation for the total number of heads. We will calculate this value my first using the linearity of expectation, then recalling that the expected value of a $B(n,p)$ random variable is $np$ and then using the formula for the closed for of an infinite geometric series, which will converge since $p&lt;1$.</p>
+<p>$$<br>\begin{align}<br>\mathbb{E}\left( \sum_{k=1}^\infty X_k \right) &amp; = \sum_{k=1}^\infty \mathbb{E}(X_k) \\<br>&amp; = \sum_{k=1}^\infty np^k \\<br>&amp; = np \sum_{k=1}^\infty p^{k-1} \\<br>&amp; = np \sum_{j=0}^\infty p^{j} \quad [j=k-l]\\<br>&amp; = \frac{np}{1-p} \qquad p \in [0,1)<br>\end{align}<br>$$</p>
+<p>Interestingly, this is exactly the number of tosses you perform on the first set of flips multiplied by the odds of getting a head.</p>
+<h2 id="Final-Comments"><a href="#Final-Comments" class="headerlink" title="Final Comments"></a>Final Comments</h2><p>It is worth mentioning that, in fact, this proposition can be generalised further. We do this by letting $X_1 \sim B(n, p_1)$ and defining $X_i \sim B(X_{i-1}, p_i) \  \forall i \in \mathbb{N}$. Then it is true, similar to above that<br>$$X_i \sim B \left( n, \prod_{k=1}^{i} p_k \right) \  \forall i \in \mathbb{N} $$<br>The proof is almost identical to the one given above just with some more notational complexity. The combinatorial justification can also easily be adapted to accommodate this change. I leave it to the eager reader to confirm the validity of this statement for themselves.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/binomial-distribution/">binomial-distribution</a>, <a class="has-link-grey -link" href="/tags/coins/">coins</a>, <a class="has-link-grey -link" href="/tags/no-coding/">no-coding</a>, <a class="has-link-grey -link" href="/tags/tutorial/">tutorial</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/streamlining-with-magrittr/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Streamlining Your Data Science Workflow With Magrittr</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/gloopy-violin-plots/">
+                <span class="level-item">Gloopy Violin Plots</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/binomial-recursion/';
+        this.page.identifier = 'binomial-recursion/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        39
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#An-Infinite-Coin-Problem">
+        <span class="has-mr-6">1</span>
+        <span>An Infinite Coin Problem</span>
+        </a></li><li>
+        <a class="is-flex" href="#Handling-a-specific-case">
+        <span class="has-mr-6">2</span>
+        <span>Handling a specific case</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Formal-Proof-of-the-General-Case">
+        <span class="has-mr-6">3</span>
+        <span>A Formal Proof of the General Case</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Combinatorial-Justification">
+        <span class="has-mr-6">4</span>
+        <span>A Combinatorial Justification</span>
+        </a></li><li>
+        <a class="is-flex" href="#Finding-The-Expectation">
+        <span class="has-mr-6">5</span>
+        <span>Finding The Expectation</span>
+        </a></li><li>
+        <a class="is-flex" href="#Final-Comments">
+        <span class="has-mr-6">6</span>
+        <span>Final Comments</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Binomial Recursion" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

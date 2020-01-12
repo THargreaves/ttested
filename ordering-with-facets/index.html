@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Ordering Factors within a Faceted Plot - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="ggplot2 is an amazing tool for building beautiful visualisations using a simple and coherent grammar—that is, when it wants to play nice. Sadly, this is not always the case and one can find themselves">
+<meta name="keywords" content="r,tidyverse,tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ordering Factors within a Faceted Plot">
+<meta property="og:url" content="https://www.ttested.com/ordering-with-facets/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="ggplot2 is an amazing tool for building beautiful visualisations using a simple and coherent grammar—that is, when it wants to play nice. Sadly, this is not always the case and one can find themselves">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/ordering-with-facets.png">
+<meta property="og:updated_time" content="2020-01-12T21:15:40.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ordering Factors within a Faceted Plot">
+<meta name="twitter:description" content="ggplot2 is an amazing tool for building beautiful visualisations using a simple and coherent grammar—that is, when it wants to play nice. Sadly, this is not always the case and one can find themselves">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/ordering-with-facets.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Ordering Factors within a Faceted Plot" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/ordering-with-facets.png" alt="Ordering Factors within a Faceted Plot">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-11-05T00:00:00.000Z">2019-11-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 minutes read (About 1300 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Ordering Factors within a Faceted Plot
+            
+        </h1>
+        <div class="content">
+            <p>Recently, I stumbled across an interesting dataset on <a href="https://www.kaggle.com/" target="_blank" rel="noopener">Kaggle</a>. It contained information on every event, for every relevant year of the last 120 years of Olympic Games. The dataset can be found at <a href="https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results" target="_blank" rel="noopener">this</a> link, and although it does have some minor data integrity issues (at least at the time of writing this post) it has clear potential for telling some amazing stories.</p>
+<p>My plan was to start simple, and create a faceted column chart showing how many medals the top 10 countries won over a selection of four games. At least, I <em>thought</em> this would be simple. In fact, this plot ended up taking me down a data-viz rabbit hole, desperately trying to get by factors to order themselves how I wanted. Thankfully, I did eventually emerge, and so I am now here to share my journey so that the next unlucky victim of ggplot’s tyranny can reach a solution without so much frustration.</p>
+<h3 id="The-Data"><a href="#The-Data" class="headerlink" title="The Data"></a>The Data</h3><p>I will skip over the exact details regarding the full scope of the dataset and how I processed it for my use. The Kaggle page explains the contents of the dataset in clear terms and the source code for this project can be found on this blog’s <a href="https://github.com/THargreaves/ttested" target="_blank" rel="noopener">GitHub repository</a>. The important point is that after some messing about, I ended up with a dataset looking like this.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">medals_df</span><br></pre></td></tr></table></figure>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>$(document).ready( function () {$('#table0').DataTable();} );</script>
+<table id="table0" class="display">
+
+<thead>
+    <tr><th scope="col">Team</th><th scope="col">Year</th><th scope="col">Bronze</th><th scope="col">Gold</th><th scope="col">Silver</th><th scope="col">Total</th></tr>
+    <tr><th scope="col">&lt;chr&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;int&gt;</th></tr>
+</thead>
+<tbody>
+    <tr><td>Soviet Union </td><td>1956</td><td>32</td><td>37</td><td>29</td><td> 98</td></tr>
+    <tr><td>United States</td><td>1956</td><td>17</td><td>31</td><td>25</td><td> 73</td></tr>
+    <tr><td>Australia    </td><td>1956</td><td>13</td><td>13</td><td> 7</td><td> 33</td></tr>
+    <tr><td>Germany      </td><td>1956</td><td> 7</td><td> 6</td><td>13</td><td> 26</td></tr>
+    <tr><td>Hungary      </td><td>1956</td><td> 7</td><td> 9</td><td>10</td><td> 26</td></tr>
+    <tr><td>Italy        </td><td>1956</td><td> 9</td><td> 8</td><td> 7</td><td> 24</td></tr>
+    <tr><td>Great Britain</td><td>1956</td><td> 9</td><td> 6</td><td> 6</td><td> 21</td></tr>
+    <tr><td>Japan        </td><td>1956</td><td> 3</td><td> 4</td><td>10</td><td> 17</td></tr>
+    <tr><td>Sweden       </td><td>1956</td><td> 6</td><td> 6</td><td> 5</td><td> 17</td></tr>
+    <tr><td>Finland      </td><td>1956</td><td>11</td><td> 3</td><td> 1</td><td> 15</td></tr>
+    <tr><td>Soviet Union </td><td>1976</td><td>35</td><td>49</td><td>41</td><td>125</td></tr>
+    <tr><td>United States</td><td>1976</td><td>25</td><td>34</td><td>35</td><td> 94</td></tr>
+    <tr><td>East Germany </td><td>1976</td><td>25</td><td>40</td><td>25</td><td> 90</td></tr>
+    <tr><td>West Germany </td><td>1976</td><td>17</td><td>10</td><td>12</td><td> 39</td></tr>
+    <tr><td>Romania      </td><td>1976</td><td>14</td><td> 4</td><td> 9</td><td> 27</td></tr>
+    <tr><td>Poland       </td><td>1976</td><td>13</td><td> 7</td><td> 6</td><td> 26</td></tr>
+    <tr><td>Japan        </td><td>1976</td><td>10</td><td> 9</td><td> 6</td><td> 25</td></tr>
+    <tr><td>Bulgaria     </td><td>1976</td><td> 7</td><td> 6</td><td> 9</td><td> 22</td></tr>
+    <tr><td>Hungary      </td><td>1976</td><td>13</td><td> 4</td><td> 5</td><td> 22</td></tr>
+    <tr><td>Cuba         </td><td>1976</td><td> 3</td><td> 6</td><td> 4</td><td> 13</td></tr>
+    <tr><td>United States</td><td>1996</td><td>25</td><td>43</td><td>31</td><td> 99</td></tr>
+    <tr><td>Germany      </td><td>1996</td><td>26</td><td>20</td><td>18</td><td> 64</td></tr>
+    <tr><td>Russia       </td><td>1996</td><td>16</td><td>26</td><td>21</td><td> 63</td></tr>
+    <tr><td>China        </td><td>1996</td><td>11</td><td>13</td><td>20</td><td> 44</td></tr>
+    <tr><td>Australia    </td><td>1996</td><td>22</td><td> 9</td><td> 9</td><td> 40</td></tr>
+    <tr><td>France       </td><td>1996</td><td>15</td><td>14</td><td> 7</td><td> 36</td></tr>
+    <tr><td>Italy        </td><td>1996</td><td>12</td><td>13</td><td>10</td><td> 35</td></tr>
+    <tr><td>Cuba         </td><td>1996</td><td> 8</td><td> 9</td><td> 8</td><td> 25</td></tr>
+    <tr><td>Ukraine      </td><td>1996</td><td>12</td><td> 9</td><td> 2</td><td> 23</td></tr>
+    <tr><td>South Korea  </td><td>1996</td><td> 3</td><td> 6</td><td>13</td><td> 22</td></tr>
+    <tr><td>United States</td><td>2016</td><td>36</td><td>45</td><td>36</td><td>117</td></tr>
+    <tr><td>China        </td><td>2016</td><td>25</td><td>25</td><td>18</td><td> 68</td></tr>
+    <tr><td>Great Britain</td><td>2016</td><td>17</td><td>27</td><td>23</td><td> 67</td></tr>
+    <tr><td>Russia       </td><td>2016</td><td>20</td><td>18</td><td>17</td><td> 55</td></tr>
+    <tr><td>France       </td><td>2016</td><td>14</td><td>10</td><td>18</td><td> 42</td></tr>
+    <tr><td>Germany      </td><td>2016</td><td>15</td><td>16</td><td>10</td><td> 41</td></tr>
+    <tr><td>Japan        </td><td>2016</td><td>21</td><td>12</td><td> 8</td><td> 41</td></tr>
+    <tr><td>Australia    </td><td>2016</td><td>10</td><td> 8</td><td>11</td><td> 29</td></tr>
+    <tr><td>Italy        </td><td>2016</td><td> 8</td><td> 8</td><td>11</td><td> 27</td></tr>
+    <tr><td>Canada       </td><td>2016</td><td>15</td><td> 4</td><td> 3</td><td> 22</td></tr>
+</tbody>
+</table>
+
+
+
+<p>To summarise, this is a dataset of 40 rows. Each row corresponds to the medals won by a particular country at a particular summer Olympic games. Each value of the year column is one 1956, 1976, 1996, and 2016, and only the ten countries with the most  medals for each year are included.</p>
+<h3 id="Attempt-1-Hope"><a href="#Attempt-1-Hope" class="headerlink" title="Attempt 1 - Hope"></a>Attempt 1 - Hope</h3><p>What I then wanted to do, was to create a column chart showing the medals won by each country, faceted by the year of the games. My first solution was somewhat naive, going something like this.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># tidy the dataset...</span></span><br><span class="line">gather(medals_df, c(Bronze, Gold, Silver), key = <span class="hljs-string">'Medal'</span>, value = <span class="hljs-string">'Count'</span>) %&gt;%</span><br><span class="line">    mutate(Medal = factor(Medal, levels = c(<span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Silver'</span>, <span class="hljs-string">'Bronze'</span>))) %&gt;%</span><br><span class="line">    <span class="hljs-comment"># ...and plot</span></span><br><span class="line">    ggplot(aes(x = Team, y = Count, fill = Medal)) +</span><br><span class="line">        geom_col() +</span><br><span class="line">        facet_wrap(~Year, nrow = <span class="hljs-number">2</span>, scales = <span class="hljs-string">'free_y'</span>) +</span><br><span class="line">        coord_flip() +</span><br><span class="line">        <span class="hljs-comment"># superfluous additions for aesthetics - see GitHub for contents </span></span><br><span class="line">        labels_and_colours</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="/images/ordering-with-facets/ordering-with-facets_13_0.svg" alt></p>
+<p>It’s a valiant effort, but frankly, it’s just ugly. By default, ggplot uses the factor’s underlying ordering when deciding how to arrange a categorical axis. Since we did not specify an ordering, R defaults to using alphabetical order and so, as we can see, the y-axes is sorted alphabetically. Not only does this look bad but it makes the plot difficult to interpret. Which team had the 5th higher medal total in 1976? You’d have to take a second to figure it out; if the levels had been correctly ordered, this would be much simpler.</p>
+<h3 id="Attempt-2-Compromise"><a href="#Attempt-2-Compromise" class="headerlink" title="Attempt 2 - Compromise"></a>Attempt 2 - Compromise</h3><p>The solution seems obvious now (I thought): the problem is brought upon by not specifying an order for the <code>Team</code> factor before plotting. So if we were to do just that, our problem should disappear. We can use the <code>reorder</code> function from base R (alternatively <code>forcats::fct_reorder</code>) combined with a <code>mutate</code> to achieve this (or so I thought). The code and result look something like this.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># first, reorder the factors by total...</span></span><br><span class="line">mutate(medals_df, Team = reorder(Team, Total)) %&gt;%</span><br><span class="line">    <span class="hljs-comment"># ...then tidy the dataset...</span></span><br><span class="line">    gather(c(Bronze, Gold, Silver), key = <span class="hljs-string">'Medal'</span>, value = <span class="hljs-string">'Count'</span>) %&gt;%</span><br><span class="line">    mutate(Medal = factor(Medal, levels = c(<span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Silver'</span>, <span class="hljs-string">'Bronze'</span>))) %&gt;%</span><br><span class="line">    <span class="hljs-comment"># ...and plot</span></span><br><span class="line">    ggplot(aes(x = Team, y = Count, fill = Medal)) +</span><br><span class="line">        geom_col() +</span><br><span class="line">        facet_wrap(~Year, nrow = <span class="hljs-number">2</span>, scales = <span class="hljs-string">'free_y'</span>) +</span><br><span class="line">        coord_flip() +</span><br><span class="line">        <span class="hljs-comment"># superfluous additions for aesthetics - see GitHub for contents </span></span><br><span class="line">        labels_and_colours</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="/images/ordering-with-facets/ordering-with-facets_17_0.svg" alt></p>
+<p>Close, but no cigar. Some ordering has taken place, but things still aren’t quite right. The problem is that reordering has taken place at a global level, not per facet. This is not a bug, but the expected behaviour of <code>reorder</code>. When faced with duplicates in the factor it is given, it only orders the levels by using the median value for each unique level (<code>forcats::fct_reorder</code> uses the mean). Since our dataset contains teams that feature in the top 10 over multiple years (in fact, there are quite a few), this approach to ordering fails too.</p>
+<p>We tried to play nicely and cooperate with ggplot, but that got us nowhere. It’s now time to bring out the big guns.</p>
+<h3 id="Attempt-3-Aggression"><a href="#Attempt-3-Aggression" class="headerlink" title="Attempt 3 - Aggression"></a>Attempt 3 - Aggression</h3><p>At this point, I was starting to lose hope. Maybe this just wasn’t something within the scope of ggplot’s arsenal. I had one more idea though. It wasn’t going to be pretty or even that sensible, but sure enough it worked. Here is the final code I came up with and the resulting plot. I will explain the mechanics of this code immediately after.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">medals_df %&gt;%  </span><br><span class="line">    <span class="hljs-comment"># create a column called Order to store the factor ordering for each year</span></span><br><span class="line">    arrange(Year, Total) %&gt;%</span><br><span class="line">    mutate(Order = row_number()) %&gt;%</span><br><span class="line">    <span class="hljs-comment"># tidy the dataset as before</span></span><br><span class="line">    gather(c(Bronze, Gold, Silver), key = <span class="hljs-string">'Medal'</span>, value = <span class="hljs-string">'Count'</span>) %&gt;%</span><br><span class="line">    mutate(Medal = factor(Medal, levels = c(<span class="hljs-string">'Gold'</span>, <span class="hljs-string">'Silver'</span>, <span class="hljs-string">'Bronze'</span>))) %&gt;%</span><br><span class="line">        <span class="hljs-comment"># wrap in curly brackets so we can access the augmented dataset multiple times</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-comment"># use Order for the x aesthetic instead of Team</span></span><br><span class="line">            ggplot(., aes(x = Order, y = Count, fill = Medal)) +</span><br><span class="line">                geom_col() +</span><br><span class="line">                facet_wrap(~Year, nrow = <span class="hljs-number">2</span>, scales = <span class="hljs-string">'free_y'</span>) +</span><br><span class="line">                coord_flip() +</span><br><span class="line">                <span class="hljs-comment"># add custom breaks and labelling to the x-axis</span></span><br><span class="line">                scale_x_continuous(</span><br><span class="line">                  breaks = .$Order,</span><br><span class="line">                  labels = .$Team,</span><br><span class="line">                  expand = c(<span class="hljs-number">0</span>,<span class="hljs-number">.4</span>)  <span class="hljs-comment"># just for looks</span></span><br><span class="line">                ) +</span><br><span class="line">                <span class="hljs-comment"># superfluous additions for aesthetics - see GitHub for contents </span></span><br><span class="line">                labels_and_colours</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+
+
+
+<p><img src="/images/ordering-with-facets/ordering-with-facets_22_0.svg" alt></p>
+<p>Perfect! Not only is this easier to interpret but it looks much better. So why does this work? Let’s get into the details.</p>
+<p>First, we create a new column, <code>Order</code>, which stores the order that each factor level should appear in <em>within</em> each year. We do this by first arranging by year, then total, and using the <code>row_number()</code> helper to save that ordering. The observations for the year 1956 now have orderings spanning from 1 to 10, and if we carry on till 2016, these have orderings from 31 to 40.</p>
+<p>When we get to plotting, rather than using <code>Team</code> as our x aesthetic, we use this new <code>Order</code>. Since we use a <code>free_y</code> scale when faceting this results in us still having ten y-axis ticks for each facet. At this point though, the ticks will be labelled 1-10, 11-20, etc. for each facet. To correct this, we need to manually set our x-axis breaks and labels.</p>
+<p>We do this in <code>scale_x_continuous()</code>. We set the breaks to be equal to the <code>Order</code> column (note we use <code>.</code> here to access the dataframe we piped into the curly bracketed section) and then use <code>Team</code> as the labels. This means that the numeric labels are replaced with the team name that they original corresponded to. This is exactly what we were after.</p>
+<h3 id="Wrapping-Up"><a href="#Wrapping-Up" class="headerlink" title="Wrapping Up"></a>Wrapping Up</h3><p>There you have it. It may not be the most elegant solution, but it certainly works. This approach can be adapted for any data that you wish to plot in this form. I hope that with this example to guide the way, a significant amount of frustration can be avoided.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/r/">r</a>, <a class="has-link-grey -link" href="/tags/tidyverse/">tidyverse</a>, <a class="has-link-grey -link" href="/tags/tutorial/">tutorial</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/pymetrics-reenvisioned/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/bouncy-numbers/">
+                <span class="level-item">Maths Matters: Bouncy Numbers</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/ordering-with-facets/';
+        this.page.identifier = 'ordering-with-facets/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        39
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Data">
+        <span class="has-mr-6">1</span>
+        <span>The Data</span>
+        </a></li><li>
+        <a class="is-flex" href="#Attempt-1-Hope">
+        <span class="has-mr-6">2</span>
+        <span>Attempt 1 - Hope</span>
+        </a></li><li>
+        <a class="is-flex" href="#Attempt-2-Compromise">
+        <span class="has-mr-6">3</span>
+        <span>Attempt 2 - Compromise</span>
+        </a></li><li>
+        <a class="is-flex" href="#Attempt-3-Aggression">
+        <span class="has-mr-6">4</span>
+        <span>Attempt 3 - Aggression</span>
+        </a></li><li>
+        <a class="is-flex" href="#Wrapping-Up">
+        <span class="has-mr-6">5</span>
+        <span>Wrapping Up</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Ordering Factors within a Faceted Plot" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

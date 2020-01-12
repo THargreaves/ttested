@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>A Statistican&#39;s Guide to Playing Darts - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Although the game of darts requires a tremendous amount of skill to be a good player, there is still a very large probabilistic element. In this post, we take undertake a stochastic analysis of the ga">
+<meta name="keywords" content="animation,sports">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Statistican&#39;s Guide to Playing Darts">
+<meta property="og:url" content="https://www.ttested.com/guide-to-darts/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Although the game of darts requires a tremendous amount of skill to be a good player, there is still a very large probabilistic element. In this post, we take undertake a stochastic analysis of the ga">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/guide-to-darts.png">
+<meta property="og:updated_time" content="2020-01-12T21:15:40.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Statistican&#39;s Guide to Playing Darts">
+<meta name="twitter:description" content="Although the game of darts requires a tremendous amount of skill to be a good player, there is still a very large probabilistic element. In this post, we take undertake a stochastic analysis of the ga">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/guide-to-darts.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="A Statistican&#39;s Guide to Playing Darts" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/guide-to-darts.png" alt="A Statistican&#39;s Guide to Playing Darts">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-12-08T00:00:00.000Z">2018-12-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    12 minutes read (About 2400 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                A Statistican&#39;s Guide to Playing Darts
+            
+        </h1>
+        <div class="content">
+            <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Darts is a game of incredible skill and precision. If however - like me - you lack the necessary coordination to shine at the sport, luck will have to suffice. Then, if things happen to go your way, all you are left to do is claim deliberateness. In fact, there is a truth to this for all players, newcomers and seasoned professionals alike. All abilities will have some natural variation between each throw giving rise to a probability distribution reflecting where the dart landed relative to where it was aimed. After all, no one is guaranteed to hit exactly where they wanted.</p>
+<p>This raises the question, if you want to maximise your score in a given throw, where is it best to aim? We start with the extremes. If you were some sort of superhuman darts-ninja guaranteed to hit exactly where you aim, there is no doubt that you would simply aim for the treble 20 on every throw. Ultimately, it’s the highest possible score you can get on the board and since you’re certain to hit it if you try, it would be foolish to aim anywhere else. On the contrary, suppose you are a complete darts rookie, playing with your off-hand during a magnitude 7.6 earthquake. You’d be quite chuffed if you even managed to get it on the board, never mind what score you get. Since you are so unlikely to do even this, to maximise your score you need to have the highest chance of just getting on the board. This will be achieved by aiming at the centre. We now have our two extremes, the perfect player should always aim for treble 20 whereas a hopeless player should aim for the centre. But this still leaves us to ask what the best strategy is for any player in between these edge-cases.</p>
+<h2 id="Modelling-the-Problem"><a href="#Modelling-the-Problem" class="headerlink" title="Modelling the Problem"></a>Modelling the Problem</h2><h3 id="The-Dartboard"><a href="#The-Dartboard" class="headerlink" title="The Dartboard"></a>The Dartboard</h3><p>We will be looking at the <a href="https://commons.wikimedia.org/wiki/File:Dartboard.svg" target="_blank" rel="noopener">regulation dartboard</a>, envisioned by Brian Gramlin in 1896. The numbers are ordered in such a way they they punish inaccuracy; if you aim for the highest score - 20 - and miss, you could easily end up with the lowest - 1. The standard radii for the rings according the British Darts Organisation are 6.4 mm, 16.0 mm, 99.0 mm, 107.0 mm, 162.0 mm and 170.0 mm with the radius of the whole board being 225 mm. These are the dimensions we’ll use for our model.</p>
+<h3 id="Throw-Distribution"><a href="#Throw-Distribution" class="headerlink" title="Throw Distribution"></a>Throw Distribution</h3><p>We will need to model the random nature of a dart throw by some sort of probability distribution. But what sort of distribution might we expect to see? A promising candidate would be modelling the horizontal and vertical displacement of the dart’s actual target from the intended one by two independent and identically distributed normal random variables. The normal distribution is a bell shaped curve which is often used for modelling errors so is highly suitable for this purpose. If we set the parameter $\mu$ to zero then the joint density function of the two random variables will be highest at the point where the player aims and then tail off as you get further away, equally so in all directions. This is the exact behaviour we would expect to see in the real world; no matter what your ability is at darts you’ll always be more likely to hit closer to where you were aiming than further. The standard deviation parameter, $\sigma$, will control how spread out the dart is likely to be from where it is intended. A good player would have a small standard deviation whereas a bad player would have a larger one resulting in a wider and flatter density curve. This is the same as saying that a good player is more likely to hit near to where they were aiming whilst a bad player has a higher likelihood to be further away.</p>
+<p><img src="/images/guide-to-darts/guide-to-darts_7_0.png" alt></p>
+<p>This model is not a perfect reflection of reality. However, what we lose in accuracy we gain in simplicity which will come important later when we start using this model for computations. A handful of critiques and improvements are:</p>
+<ul>
+<li>There is no reason to believe that the standard deviation for the horizontal and vertical errors should be the same. It is reasonable to imagine that they would be similar but since you are having to counteract the affect of gravity when considering the vertical accuracy of your shot, this added layer of complexity may make the standard deviation slightly higher.</li>
+<li>The normal distribution is perfectly symmetrical but it is most likely not the case that this be true for the distribution of errors of a real player. The left or right-handedness of the player may give the distribution for the horizontal error a skew in a particular direction and the influence of gravity may do the same for the vertical component.</li>
+<li>Lastly, our assumption of the independence of the vertical and horizontal errors may not be justified. Perhaps if you mess up your horizontal aim, say due to shaky hand, you may be more likely to also mess up the vertical. </li>
+</ul>
+<p>Despite these possible discrepancies, we continue in the belief that our basic model is as accurate a reflection of real life as we need for any non-pathological cases.</p>
+<h2 id="Forming-a-Strategy"><a href="#Forming-a-Strategy" class="headerlink" title="Forming a Strategy"></a>Forming a Strategy</h2><h3 id="Calculating-Scores"><a href="#Calculating-Scores" class="headerlink" title="Calculating Scores"></a>Calculating Scores</h3><p>To begin, we will need a function which can convert a pair of Cartesian coordinates representing the location a dart lands to the respective score at that point. Due to the pattern-less nature of the numbers’ order we will have to do this directly.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">calcScore &lt;- <span class="hljs-keyword">function</span>(x, y) &#123;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># concert to polar coordinates</span></span><br><span class="line">  r &lt;- sqrt(x^<span class="hljs-number">2</span> + y^<span class="hljs-number">2</span>)</span><br><span class="line">  <span class="hljs-keyword">if</span> (r == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">    theta &lt;- <span class="hljs-number">0</span></span><br><span class="line">  &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">    theta &lt;-  atan2(y, x)</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># transform so zero is on the boundary of 20 and 1 </span></span><br><span class="line">  <span class="hljs-comment"># and the angle increases as we go clockwise</span></span><br><span class="line">  phi &lt;- pi / <span class="hljs-number">2</span> - theta - pi / <span class="hljs-number">20</span></span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># find what region the angle is in; </span></span><br><span class="line">  <span class="hljs-comment"># e.g. region 1 is 0-18°, region 2 is 18°-36° etc.</span></span><br><span class="line">  region &lt;- findInterval(phi %% (<span class="hljs-number">2</span> * pi), </span><br><span class="line">                         seq(<span class="hljs-number">0</span>, by = pi/<span class="hljs-number">10</span>, length.out = <span class="hljs-number">20</span>))</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># find score for that region</span></span><br><span class="line">  regionScore &lt;- c(<span class="hljs-number">1</span>, <span class="hljs-number">18</span>, <span class="hljs-number">4</span>, <span class="hljs-number">13</span>, <span class="hljs-number">6</span>, <span class="hljs-number">10</span>, <span class="hljs-number">15</span>, <span class="hljs-number">2</span>, <span class="hljs-number">17</span>, <span class="hljs-number">3</span>,</span><br><span class="line">                    <span class="hljs-number">19</span>, <span class="hljs-number">7</span>, <span class="hljs-number">16</span>, <span class="hljs-number">8</span>, <span class="hljs-number">11</span>, <span class="hljs-number">14</span>, <span class="hljs-number">9</span>, <span class="hljs-number">12</span>, <span class="hljs-number">5</span>, <span class="hljs-number">20</span>)[region]</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># find which ring the dart is in</span></span><br><span class="line">  ring &lt;- findInterval(r, c(<span class="hljs-number">0</span>, <span class="hljs-number">6.4</span>, <span class="hljs-number">16</span>, <span class="hljs-number">99</span>, <span class="hljs-number">107</span>, <span class="hljs-number">162</span>, <span class="hljs-number">170</span>, <span class="hljs-literal">Inf</span>))</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># calculate final score</span></span><br><span class="line">  score &lt;- <span class="hljs-keyword">switch</span>(ring,</span><br><span class="line">                  <span class="hljs-number">50</span>,</span><br><span class="line">                  <span class="hljs-number">25</span>,</span><br><span class="line">                  regionScore,</span><br><span class="line">                  <span class="hljs-number">3</span> * regionScore,</span><br><span class="line">                  regionScore,</span><br><span class="line">                  <span class="hljs-number">2</span> * regionScore,</span><br><span class="line">                  <span class="hljs-number">0</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-keyword">return</span>(score)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<p>The best way to visualise this data is using a heat-map.</p>
+<p><img src="/images/guide-to-darts/guide-to-darts_17_0.png" alt></p>
+<h3 id="Calculating-Expectations"><a href="#Calculating-Expectations" class="headerlink" title="Calculating Expectations"></a>Calculating Expectations</h3><p>We can use this score function alongside the density function for the 2D normal distribution to find the expected score attained by aiming at any location on the board for a given standard deviation. To find this expected value we simply centre our normal distribution at the point that is aimed at, then integrate the product of the density function and the score function over the entire board. We then sweep the distribution over the whole board to get the expected value at each point. </p>
+<p>In a perfect world we would compute this integral directly and to the highest precision our computer can store. In reality this process is extremely time consuming. In my preparation for this post, I developed such a method and even with the use of time-saving short-cuts and tight coding the program took over an hour to run for some larger standard deviations. Since the end goal is to compute this for many standard deviations, this is not a feasible approach. </p>
+<p>Instead, I got out my pen and paper and went about finding an approximation method which would give only a negligibly different result to the true value but would be much more computable. I decided in the end to split dartboard up into a 361x361 grid (essentially a 1mm x 1mm grid). There was nothing special mathematically about these exact dimensions - they just worked well with the code - and after some long-winded analysis and a touch of brute force computations, I concluded that for standard deviations of at most 110 this method would be accurate to the integer, which for this use is all we need. This is quite a weak bound so in reality the method will be a lot closer to the true solution but in the worst possible case we know that it is at least that good. In practice, if your standard deviation is any more than 100mm then there is no doubt that you should be aiming for the centre of the board.</p>
+<p>We can package up this method in a neat little function so we can easily reuse it for any standard deviation.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">expectationMtrx &lt;- <span class="hljs-keyword">function</span>(sd) &#123;</span><br><span class="line">  <span class="hljs-comment"># values used to approximate integral</span></span><br><span class="line">  values &lt;- -<span class="hljs-number">180</span>:<span class="hljs-number">180</span></span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># compute values of 2D normal density at approximating points</span></span><br><span class="line">  density_mtrx &lt;- outer(values, values, <span class="hljs-keyword">function</span>(x, y)&#123;</span><br><span class="line">    dnorm(x, <span class="hljs-number">0</span>, sd) * dnorm(y, <span class="hljs-number">0</span>, sd)</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># compute scores at approximating points</span></span><br><span class="line">  score_mtrx &lt;- outer(values, values, calcScore)</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># pad with zeros on all sides</span></span><br><span class="line">  zero_mtrx &lt;- matrix(<span class="hljs-number">0</span>, nrow = <span class="hljs-number">361</span>, ncol = <span class="hljs-number">361</span>)</span><br><span class="line">  score_mtrx &lt;- direct.sum(direct.sum(zero_mtrx, score_mtrx), </span><br><span class="line">                           zero_mtrx)</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># matrix to hold expected values</span></span><br><span class="line">  expectationMatrix &lt;- matrix(<span class="hljs-number">0</span>, nrow = <span class="hljs-number">361</span>, ncol = <span class="hljs-number">361</span>)</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-comment"># sweep distribution matrix over the board</span></span><br><span class="line">  <span class="hljs-keyword">for</span> (i <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">361</span>) &#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (j <span class="hljs-keyword">in</span> <span class="hljs-number">1</span>:<span class="hljs-number">361</span>) &#123;</span><br><span class="line">      <span class="hljs-comment"># which subest of the score matrix to multiply with the density</span></span><br><span class="line">      score_mtrx.subset &lt;- score_mtrx[i + <span class="hljs-number">361</span> + values, j + <span class="hljs-number">361</span> + values]</span><br><span class="line">      </span><br><span class="line">      <span class="hljs-comment"># contibution to expected value at approximating point</span></span><br><span class="line">      contrib &lt;- sum(score_mtrx.subset * density_mtrx)</span><br><span class="line">      expectationMatrix[i, j] &lt;- contrib</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="hljs-keyword">return</span>(expectationMatrix)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Visualising-the-Expectations"><a href="#Visualising-the-Expectations" class="headerlink" title="Visualising the Expectations"></a>Visualising the Expectations</h2><h3 id="Static-visualisations"><a href="#Static-visualisations" class="headerlink" title="Static visualisations"></a>Static visualisations</h3><p>We can now call this function for any standard deviation up to 110 and get back a matrix giving the expected score we’d achieve for aiming at any location on the data board with that level of accuracy. Let’s generate these matrices for a selection of standard deviations and visualise the results.</p>
+<p><img src="/images/guide-to-darts/guide-to-darts_24_0.png" alt></p>
+<h3 id="Animated-visualisations"><a href="#Animated-visualisations" class="headerlink" title="Animated visualisations"></a>Animated visualisations</h3><p>These plots are interesting by themselves but don’t tell the whole story. What we really need is an animation to show how the heat-map changes as the standard deviation increases, and more importantly, how this affects the optimum location to aim and the expected score corresponding to it. We produce such an animation using the <code>gganimate</code> package. </p>
+<p><img src="/images/guide-to-darts/heatmap_animation.gif" alt><br>As we can see, the optimum location to aim for a low standard deviation is the treble 20, just as we expected. Once the standard deviation is above 16mm though, it becomes more effective to aim at the treble 19. As the standard deviation increases further, the optimum target sweeps inwards towards the bullseye. By a standard deviation of 100mm we are almost at the centre. If we continued increasing the standard deviation, we would find that the optimum target slowly approaches the exact centre of the board.</p>
+<h3 id="Tracking-the-optimum"><a href="#Tracking-the-optimum" class="headerlink" title="Tracking the optimum"></a>Tracking the optimum</h3><p>Let’s now forget the expected scores themselves and consider just the location of the optimum target for each standard deviation. We can map its path to get the following plot.</p>
+<p><img src="/images/guide-to-darts/guide-to-darts_34_0.png" alt></p>
+<p>This follows the behaviour that we described before, with the exact jump from treble 20 to treble 19 occurring at a standard deviation of 17mm. It can also be seen that the approach to the center slows as the standard deviation increases.</p>
+<h3 id="Tracking-the-optimum-score"><a href="#Tracking-the-optimum-score" class="headerlink" title="Tracking the optimum score"></a>Tracking the optimum score</h3><p>It is now sensible to ask what the optimum obtainable expected score is for each standard deviation. We can look at this using the following visualisation</p>
+<p><img src="/images/guide-to-darts/guide-to-darts_38_0.svg" alt></p>
+<p>It it evident from this plot, that the game of darts has a definite ‘skill elbow’. For small standard deviations, the expected score is extremely high but as soon as you start increasing this, the score drops off massively until it begins to stabilise at around 20mm. Then as you increase standard deviation more the expected optimum score only slightly reduces and will eventually tail off to zero. </p>
+<p>This shows that darts is a game where the difference between a terrible player and a mediocre player is not that severe, but the difference between that same mediocre player and a good player manifests itself savagely, creating a completely one-sided game.</p>
+<h2 id="Estimating-Your-Standard-Deviation"><a href="#Estimating-Your-Standard-Deviation" class="headerlink" title="Estimating Your Standard Deviation"></a>Estimating Your Standard Deviation</h2><p>This analysis is all well and good but without a way to calculate your own standard deviation it has no use in practice. I have therefore developed a test to estimate your standard deviation. This involves throwing 100 darts aimed exactly at the centre of the bullseye and recording how many of them lie within the outer bull ring (either the bullseye itself or the ring around it). It can be shown using an appropriate statistical transformation that the radius squared of two independent normal variables with mean zero and equal standard deviation $\sigma$ is distributed exponentially with rate parameter $\frac{1}{2\sigma^2}$. Using this, we can calculate for any standard deviation the probability that a throw aimed at the centre will land within the outer bull. We can then use this probability as a parameter for a binomial random variable representing the number of times we land inside the outer bull in 100 throws. By reversing this process, first estimating the binomial probability parameter from our sample and then using the cumulative density function of the exponential function, we can estimate the standard deviation for any given number of outer bull hits.</p>
+<p>If all of that seemed very complicated, don’t worry. Understanding the statistics behind where the standard deviations come from is not necessary for using the outcome of it in practice. The results of the above method can simply be read off from the following table.</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>$(document).ready( function () {$('#table0').DataTable();} );</script>
+<table id="table0" class="display">
+
+<thead>
+    <tr><th scope="col">hits</th><th scope="col">sd</th><th scope="col">x</th><th scope="col">y</th><th scope="col">z</th></tr>
+    <tr><th scope="col">&lt;int&gt;</th><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;int&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+    <tr><td>100</td><td> 0.0</td><td>  0</td><td> 102</td><td>60.0</td></tr>
+    <tr><td> 99</td><td> 5.3</td><td>  0</td><td> 102</td><td>58.0</td></tr>
+    <tr><td> 98</td><td> 5.7</td><td>  0</td><td> 102</td><td>52.5</td></tr>
+    <tr><td> 97</td><td> 6.0</td><td>  0</td><td> 102</td><td>47.2</td></tr>
+    <tr><td> 96</td><td> 6.3</td><td>  0</td><td> 103</td><td>42.9</td></tr>
+    <tr><td> 95</td><td> 6.5</td><td>  0</td><td> 103</td><td>39.5</td></tr>
+    <tr><td> 94</td><td> 6.7</td><td>  0</td><td> 103</td><td>36.6</td></tr>
+    <tr><td> 93</td><td> 6.9</td><td>  0</td><td> 103</td><td>33.9</td></tr>
+    <tr><td> 92</td><td> 7.1</td><td> -1</td><td> 103</td><td>31.6</td></tr>
+    <tr><td> 91</td><td> 7.3</td><td> -1</td><td> 103</td><td>29.5</td></tr>
+    <tr><td> 90</td><td> 7.5</td><td> -1</td><td> 103</td><td>27.5</td></tr>
+    <tr><td> 89</td><td> 7.6</td><td> -1</td><td> 104</td><td>25.8</td></tr>
+    <tr><td> 88</td><td> 7.8</td><td> -1</td><td> 104</td><td>24.3</td></tr>
+    <tr><td> 87</td><td> 7.9</td><td> -1</td><td> 105</td><td>22.9</td></tr>
+    <tr><td> 86</td><td> 8.1</td><td> -2</td><td> 105</td><td>21.7</td></tr>
+    <tr><td> 85</td><td> 8.2</td><td> -2</td><td> 106</td><td>20.6</td></tr>
+    <tr><td> 84</td><td> 8.4</td><td>-35</td><td>-100</td><td>19.8</td></tr>
+    <tr><td> 83</td><td> 8.5</td><td>-36</td><td>-100</td><td>19.0</td></tr>
+    <tr><td> 82</td><td> 8.6</td><td>-36</td><td>-100</td><td>18.4</td></tr>
+    <tr><td> 81</td><td> 8.8</td><td>-37</td><td>-101</td><td>17.8</td></tr>
+    <tr><td> 80</td><td> 8.9</td><td>-37</td><td>-101</td><td>17.3</td></tr>
+    <tr><td> 79</td><td> 9.1</td><td>-38</td><td>-101</td><td>16.9</td></tr>
+    <tr><td> 78</td><td> 9.2</td><td>-38</td><td>-101</td><td>16.5</td></tr>
+    <tr><td> 77</td><td> 9.3</td><td>-39</td><td>-100</td><td>16.1</td></tr>
+    <tr><td> 76</td><td> 9.5</td><td>-39</td><td>-100</td><td>15.8</td></tr>
+    <tr><td> 75</td><td> 9.6</td><td>-40</td><td> -99</td><td>15.6</td></tr>
+    <tr><td> 74</td><td> 9.7</td><td>-41</td><td> -97</td><td>15.3</td></tr>
+    <tr><td> 73</td><td> 9.9</td><td>-42</td><td> -96</td><td>15.1</td></tr>
+    <tr><td> 72</td><td>10.0</td><td>-43</td><td> -94</td><td>14.9</td></tr>
+    <tr><td> 71</td><td>10.2</td><td>-44</td><td> -92</td><td>14.7</td></tr>
+    <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+    <tr><td>30</td><td> 18.9</td><td>-20</td><td>-8</td><td>11.8</td></tr>
+    <tr><td>29</td><td> 19.3</td><td>-19</td><td>-8</td><td>11.8</td></tr>
+    <tr><td>28</td><td> 19.7</td><td>-18</td><td>-7</td><td>11.7</td></tr>
+    <tr><td>27</td><td> 20.2</td><td>-17</td><td>-7</td><td>11.7</td></tr>
+    <tr><td>26</td><td> 20.6</td><td>-16</td><td>-6</td><td>11.6</td></tr>
+    <tr><td>25</td><td> 21.1</td><td>-16</td><td>-6</td><td>11.5</td></tr>
+    <tr><td>24</td><td> 21.6</td><td>-15</td><td>-6</td><td>11.5</td></tr>
+    <tr><td>23</td><td> 22.1</td><td>-14</td><td>-5</td><td>11.4</td></tr>
+    <tr><td>22</td><td> 22.7</td><td>-14</td><td>-5</td><td>11.3</td></tr>
+    <tr><td>21</td><td> 23.3</td><td>-14</td><td>-5</td><td>11.3</td></tr>
+    <tr><td>20</td><td> 24.0</td><td>-13</td><td>-5</td><td>11.2</td></tr>
+    <tr><td>19</td><td> 24.6</td><td>-13</td><td>-5</td><td>11.1</td></tr>
+    <tr><td>18</td><td> 25.4</td><td>-13</td><td>-4</td><td>11.0</td></tr>
+    <tr><td>17</td><td> 26.2</td><td>-12</td><td>-4</td><td>11.0</td></tr>
+    <tr><td>16</td><td> 27.1</td><td>-12</td><td>-4</td><td>10.9</td></tr>
+    <tr><td>15</td><td> 28.1</td><td>-12</td><td>-4</td><td>10.8</td></tr>
+    <tr><td>14</td><td> 29.1</td><td>-12</td><td>-4</td><td>10.7</td></tr>
+    <tr><td>13</td><td> 30.3</td><td>-11</td><td>-4</td><td>10.6</td></tr>
+    <tr><td>12</td><td> 31.6</td><td>-11</td><td>-4</td><td>10.6</td></tr>
+    <tr><td>11</td><td> 33.1</td><td>-11</td><td>-4</td><td>10.5</td></tr>
+    <tr><td>10</td><td> 34.9</td><td>-11</td><td>-3</td><td>10.4</td></tr>
+    <tr><td> 9</td><td> 36.8</td><td>-11</td><td>-3</td><td>10.3</td></tr>
+    <tr><td> 8</td><td> 39.2</td><td>-11</td><td>-3</td><td>10.2</td></tr>
+    <tr><td> 7</td><td> 42.0</td><td>-11</td><td>-3</td><td>10.2</td></tr>
+    <tr><td> 6</td><td> 45.5</td><td>-11</td><td>-3</td><td>10.1</td></tr>
+    <tr><td> 5</td><td> 50.0</td><td>-11</td><td>-3</td><td>10.0</td></tr>
+    <tr><td> 4</td><td> 56.0</td><td>-11</td><td>-3</td><td> 9.9</td></tr>
+    <tr><td> 3</td><td> 64.8</td><td>-11</td><td>-3</td><td> 9.8</td></tr>
+    <tr><td> 2</td><td> 79.6</td><td>-11</td><td>-3</td><td> 9.7</td></tr>
+    <tr><td> 1</td><td>112.9</td><td>-11</td><td>-3</td><td> 9.6</td></tr>
+</tbody>
+</table>
+
+
+
+<p>If 100 throws seems like too many to bother with, you will get a similiar - though less precise - result by taking 25 or 50 throws and then multplying your number of hits by 4 or 2 respectively to simulate 100 throws.</p>
+<p>Recalling the plot of optimum expected score vs. standard deviation, we saw that you need a standard deviation of less than around 20mm to pass the skill elbow and become a good darts player. From the table above, we see that for this to be the case, you would be expected to hit the outer bull at least 28 times out of the 100 hits. Do this hold for you?</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/animation/">animation</a>, <a class="has-link-grey -link" href="/tags/sports/">sports</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/google-interview-question/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Efficiently Solving a Google Coding Interview Question Using Pure Mathematics</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/inaccuracy-of-accuracy/">
+                <span class="level-item">The Inaccuracy of Accuracy</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/guide-to-darts/';
+        this.page.identifier = 'guide-to-darts/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        27
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        39
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Introduction">
+        <span class="has-mr-6">1</span>
+        <span>Introduction</span>
+        </a></li><li>
+        <a class="is-flex" href="#Modelling-the-Problem">
+        <span class="has-mr-6">2</span>
+        <span>Modelling the Problem</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Dartboard">
+        <span class="has-mr-6">2.1</span>
+        <span>The Dartboard</span>
+        </a></li><li>
+        <a class="is-flex" href="#Throw-Distribution">
+        <span class="has-mr-6">2.2</span>
+        <span>Throw Distribution</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Forming-a-Strategy">
+        <span class="has-mr-6">3</span>
+        <span>Forming a Strategy</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Calculating-Scores">
+        <span class="has-mr-6">3.1</span>
+        <span>Calculating Scores</span>
+        </a></li><li>
+        <a class="is-flex" href="#Calculating-Expectations">
+        <span class="has-mr-6">3.2</span>
+        <span>Calculating Expectations</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Visualising-the-Expectations">
+        <span class="has-mr-6">4</span>
+        <span>Visualising the Expectations</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Static-visualisations">
+        <span class="has-mr-6">4.1</span>
+        <span>Static visualisations</span>
+        </a></li><li>
+        <a class="is-flex" href="#Animated-visualisations">
+        <span class="has-mr-6">4.2</span>
+        <span>Animated visualisations</span>
+        </a></li><li>
+        <a class="is-flex" href="#Tracking-the-optimum">
+        <span class="has-mr-6">4.3</span>
+        <span>Tracking the optimum</span>
+        </a></li><li>
+        <a class="is-flex" href="#Tracking-the-optimum-score">
+        <span class="has-mr-6">4.4</span>
+        <span>Tracking the optimum score</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Estimating-Your-Standard-Deviation">
+        <span class="has-mr-6">5</span>
+        <span>Estimating Your Standard Deviation</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/adventgate/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/adventgate.png" alt="#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-20T00:00:00.000Z">2019-12-20</time></div>
+                    <a href="/adventgate/" class="has-link-black-ter is-size-6">#AdventGate—The shocking secret Big Advent doesn&#39;t want you to know</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pymetrics-reenvisioned/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pymetrics-reenvisioned.png" alt="Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-08T00:00:00.000Z">2019-12-08</time></div>
+                    <a href="/pymetrics-reenvisioned/" class="has-link-black-ter is-size-6">Pymetrics Reenvisioned: Using statistics to balance risk and reward when faced with uncertainty</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Machine-Learning/">Machine Learning</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 11.67px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 11.67px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 10px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 10px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="A Statistican&#39;s Guide to Playing Darts" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

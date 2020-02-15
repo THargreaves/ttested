@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>A Statistican&#39;s Guide to Love - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Struggling to find &apos;the one&apos;? Perhaps statistics can help. In this post we introduce a pair of simple procedures which—when followed—can optimise your chances of finding love.">
+<meta name="keywords" content="lession,simulation,story,visualisation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Statistican&#39;s Guide to Love">
+<meta property="og:url" content="https://www.ttested.com/guide-to-love/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Struggling to find &apos;the one&apos;? Perhaps statistics can help. In this post we introduce a pair of simple procedures which—when followed—can optimise your chances of finding love.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/guide-to-love.jpg">
+<meta property="og:updated_time" content="2020-02-15T12:50:19.259Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Statistican&#39;s Guide to Love">
+<meta name="twitter:description" content="Struggling to find &apos;the one&apos;? Perhaps statistics can help. In this post we introduce a pair of simple procedures which—when followed—can optimise your chances of finding love.">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/guide-to-love.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="A Statistican&#39;s Guide to Love" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-14T00:00:00.000Z">2020-02-14</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1900 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                A Statistican&#39;s Guide to Love
+            
+        </h1>
+        <div class="content">
+            <blockquote class="colorquote info"><p>The Python code used for simulation and visualisation in this post can be found in the source notebook <a href="https://github.com/THargreaves/ttested/tree/master/content/guide-to-love" target="_blank" rel="noopener">here</a>.</p>
+</blockquote>
+
+
+
+
+
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>No-one ever said that finding true love was easy. And though for the lucky few, Valentine’s day can be a time filled with love and affection, for many people it can just be a harsh reminder of this fact (such a pessimist, I know). </p>
+<p>Perhaps, though, statistics can lend us a hand. It may seem that the world of love and romance lies far from the realms of probabilistic reasoning and yet, surprisingly, the field might have some useful ideas to contribute.</p>
+<p>Specifically, statistics is capable (under a few assumptions—which we’ll get to later) of offering a solution to the question: “How do I find <em>the one</em>?”. What makes this question so difficult to answer is that we are having to handle uncertainty. Until we end a relationship and move on, it’s impossible (at least whilst retaining morals) to see if there could be something better with someone else. In most cases, we don’t stress about this and simply settle for someone that makes us happy; blocking out any thoughts that there could be someone better. In pursuit of ‘the one’ however, this just won’t do. Thankfully, this inherent uncertainty is a challenge that statistics is well-equipped to tackle.</p>
+<h3 id="Modeling-the-Problem"><a href="#Modeling-the-Problem" class="headerlink" title="Modeling the Problem"></a>Modeling the Problem</h3><p>If we want to solve this problem using statistics, we’ll have to make some assumptions. Now, obviously, the more assumptions we implement, the less practical our statistical model becomes for actual match-making. But frankly, if you’re getting your dating advice from a mathematician, I think you’re far beyond the point of caring about real-world practicalities.</p>
+<p>Our main assumption is that it is possible to estimate how many people you would be able to date in your life if you were to never settle down. We will call this number $n$. In practice, it may be difficult or even impossible to come up with this number. By sacrificing some rigour, however, we can be happy in simply accepting a best guess. We also assume that these $n$ people have an objective ranking so that there is a clear ‘best’ person—<em>the one</em>.</p>
+<p>We then suppose that we are offered the chance to date each one of these $n$ people one at a time. After we get to know them, we make a choice: settle or move on. If we move on then there is no forgiveness; we can never return to that same person again. If we get to the $n$th person then we have no choice but to spend the rest of lives with them, for better or worse.</p>
+<p>Although these assumptions may not be indicative of real life—though a world where we never have to think about rejection doesn’t sound too bad—they are necessary to frame the problem in statistical terms. With the model out of the way, we are simply left to answer the question: what strategy will maximise our chances of settling with the best person? How can we find <em>the one</em>?</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>It turns out that the optimal strategy is surprisingly simple. It goes as follows:</p>
+<ul>
+<li>Take your best guess at $n$, the number of people you could possibly date in your life if you were never to settle down</li>
+<li>Divide $n$ by $e$ (known as Euler’s number and equal to roughly $2.718$) and round the result to the nearest whole number. Call this number $k$</li>
+<li>Date $k$ people, rejecting each one of them, keeping track of the best </li>
+<li>Continue to date the other $n-k$ people, settling only if you find someone better than everyone you’ve seen so far (or you reach the $n$th person)</li>
+</ul>
+<p>Admittedly, it’s a bit of a cruel strategy; you have to feel some remorse for the $k$ people rejected without a fighting chance. As the saying goes though, you’ve got to break a few hearts to make an omelette (well, it went something like that at least).</p>
+<p>Remarkably, it can be proved (and we will do so at the end of this post) that this is the unique optimal strategy that will maximise your chance of finding <em>the one</em>. Perhaps a better hypothetical talking point than an actually strategy for love but at least now you know.</p>
+<h3 id="Speed-Dating"><a href="#Speed-Dating" class="headerlink" title="Speed Dating"></a>Speed Dating</h3><p>But why should you trust that this is indeed the best strategy? Sure, I’ll provide a statistical proof at the end of this post but I’ve no doubt that it won’t be everyone’s cup of tea.</p>
+<p>Instead, I plan to prove this fact to you using some simulated speed dating. We look at values of $n$ ranging from 1 to 100, enough to verify my claim, and consider each possible cutoff $k$ from 0 (settling with the first person we meet) to $n-1$ (holding out for the last person). For each pair of $n$ and $k$ we will then simulate one million sets of $n$ people and try out the strategy for that specific $k$. We can then average over these one million simulations to see what proportion of the time we ended up with <em>the one</em>. In all, this equates to around $5.2$ billion dates. It takes my computer an hour or two to run all of these simulations, averaging around $700,000$ dates per second—a pace even the most decisive speed dater would struggle to match.</p>
+<p>We then produce a heat map showing the likelihood of finding <em>the one</em> for each value of $k$ (rescaled so that the highest probability becomes one). This leaves us with a plot like this.</p>
+<p><img src="/images/guide-to-love/guide-to-love_30_0.png" alt></p>
+<p>I’ve also included two lines. The purple line line tracks which value of $k$ was the best of the $n$ available based on our simulations. The black meanwhile shows the line $k=\frac{n}{e}$—the trend we’d expect the purple line to follow if the procedure above was indeed optimal. The fit isn’t perfect but that is expected with simulation; even with one million iterations there will still be a substantial amount of random noise to contend with. The important point is that the simulated line typically is very close to our predicted black line, offering strong evidence that the statement is indeed correct.</p>
+<p>In general, the noise introduced by simulation is worse for large $n$. On the other hand, the true validity of the optimal method improves as $n$ increases. For small $n$ (say, single digit values) using a cutoff of $\frac{n}{e}$ will perform well but will not quite be optimal. If your value of $n$ falls into this category then you are better off using the table below instead.</p>
+<p><img src="/images/guide-to-love/small_n.png" alt="$\frac{n}{e}$ vs. the truely optimal $k$"><br>It is also reasonable to ask the chances be of finding <em>the one</em> if we were to follow this strategy. It turns out that Euler’s number, $e$, makes another appearance here as the probability of ending up with the best match approaches $\frac{1}{e}$ or about $0.368$ as $n$ grows. Not terrible odds if you ask me.</p>
+<h3 id="A-Compromise"><a href="#A-Compromise" class="headerlink" title="A Compromise"></a>A Compromise</h3><p>Perhaps, though, you simply don’t believe in <em>the one</em> and would rather just maximise the expected value of the person you settle down with instead of aiming for nothing less than the best. If this is the case then you’re in luck; a small modification to the above method can solve this problem too.</p>
+<p>In this scenario, we will assign each person a value between $0$ and $1$ which represents what proportion of all possible partners would be less preferable to settle with. For example, a person with a value of $0.6$ would be preferred over $60%$ of other people. Our question now becomes, what strategy do we follow to maximise the expected value of the person we end up settling with.</p>
+<p>It turns out that the optimal strategy for this scenario is exactly the same as before except now we set $k=\sqrt{n}-1$ (after rounding) rather than $\frac{n}{e}$. As before, we can confirm this using simulation.</p>
+<p><img src="/images/guide-to-love/guide-to-love_46_0.png" alt></p>
+<h2 id="Prove-Your-Love"><a href="#Prove-Your-Love" class="headerlink" title="Prove Your Love"></a>Prove Your Love</h2><blockquote class="colorquote warning"><p>This section will likely only be of relevance to those who have an interest in pure mathematics.</p>
+</blockquote>
+
+
+
+<p>Before we bring things to a close, I wanted to offer a proof of the optimality of the procedure for maximising the chances of finding <em>the one</em>. A proof of the expected value optimising method can be found <a href="https://www.academia.edu/1433655/Skip_the_Square_Root_of_n_A_New_Secretary_Problem" target="_blank" rel="noopener">here</a> though it is slightly more involved.</p>
+<p>The proof for the former scenario is surprisingly short and elegant. First observe that the optimal strategy has to be one of the form “reject $k$ people then choose the next best” since we should never settle for someone who is not the best that we have seen so far, since this could never be the best option. Furthermore, as we have no knowledge of the distribution of the potential partners’ values it also makes no sense to reject a new best person after the first $k$.</p>
+<p>With this in mind we denote $P(k)$ to be the probability of settling with the best person after rejecting the first $k$. Then we have:</p>
+<p>$$<br>\begin{align}<br>P(k) &amp;= \sum_{i=1}^n \mathbb{P}(\textrm{person } i \textrm{ is selected and is the best})\\<br> &amp;\stackrel{\text{Bayes}}{=} \sum_{i=1}^n \mathbb{P}(\textrm{person } i \textrm{ is selected}|\textrm{person } i \textrm{ is the best})\cdot\mathbb{P}(\textrm{person } i \textrm{ is the best})\\<br> &amp;= \frac{1}{n}\sum_{i=1}^n \mathbb{P}(\textrm{person } i \textrm{ is selected}|\textrm{person } i \textrm{ is the best})\\<br> &amp;= \frac{1}{n}\sum_{i=k+1}^n \mathbb{P}(\textrm{person } i \textrm{ is selected}|\textrm{person } i \textrm{ is the best})\\<br>  &amp;= \frac{1}{n}\sum_{i=k+1}^n \frac{k}{i-1} \quad [\textrm{best of first } i-1 \textrm{ people is in first } k]\\<br>    &amp;= \frac{k}{n}\sum_{i=k+1}^n \frac{1}{i-1}\\<br>\end{align}<br>$$</p>
+<p>We now rearrange this so it becomes a Riemann sum.</p>
+<p>$$<br>P(k) = \frac{k}{n}\sum_{i = k+1}^{n}\frac{n}{i-1}\frac{1}{n}<br>$$</p>
+<p>We then let $n$ tend to infinity to obtain the following.</p>
+<p>$$<br>P(k) = \lim_{n\rightarrow\infty}\frac{k}{n}\sum_{i = k+1}^{n}\frac{n}{i-1}\frac{1}{n} = x \int_x^1 \frac{dt}{t} = -x\ln x<br>$$</p>
+<p>Here $x=\lim_{n\rightarrow\infty}\frac{k}{n}$ and $t=\lim_{n\rightarrow\infty}\frac{i-1}{n}$. It is not hard to verify that $x=\frac{1}{e}$ is the maximum of this function and so we optimise our odds of finding <em>the one</em> by setting $k=\frac{n}{e}$.</p>
+<p>For small $n$ this method will not hold and we are instead forced to use dynamic programming (which is how I obtained the table for $n&lt;10$ above).</p>
+<blockquote class="colorquote info"><p>If you have found this post interesting and would like to go deeper, it is best searching for this problem’s common name—the secetary problem.</p>
+</blockquote>
+
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/lession/">lession</a>, <a class="has-link-grey -link" href="/tags/simulation/">simulation</a>, <a class="has-link-grey -link" href="/tags/story/">story</a>, <a class="has-link-grey -link" href="/tags/visualisation/">visualisation</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/strange-timezones/">
+                <span class="level-item">An Analysis of Strange Timezones</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/guide-to-love/';
+        this.page.identifier = 'guide-to-love/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        29
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        40
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Introduction">
+        <span class="has-mr-6">1</span>
+        <span>Introduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Modeling-the-Problem">
+        <span class="has-mr-6">1.1</span>
+        <span>Modeling the Problem</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#The-Solution">
+        <span class="has-mr-6">2</span>
+        <span>The Solution</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Speed-Dating">
+        <span class="has-mr-6">2.1</span>
+        <span>Speed Dating</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Compromise">
+        <span class="has-mr-6">2.2</span>
+        <span>A Compromise</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Prove-Your-Love">
+        <span class="has-mr-6">3</span>
+        <span>Prove Your Love</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/guide-to-love/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-14T00:00:00.000Z">2020-02-14</time></div>
+                    <a href="/guide-to-love/" class="has-link-black-ter is-size-6">A Statistican&#39;s Guide to Love</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/strange-timezones/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/strange-timezones.jpg" alt="An Analysis of Strange Timezones">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T00:00:00.000Z">2020-01-25</time></div>
+                    <a href="/strange-timezones/" class="has-link-black-ter is-size-6">An Analysis of Strange Timezones</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 13.33px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lession/" style="font-size: 10px;">lession</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 13.33px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.33px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.67px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/guide-to-love/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-14T00:00:00.000Z">2020-02-14</time></div>
+                    <a href="/guide-to-love/" class="has-link-black-ter is-size-6">A Statistican&#39;s Guide to Love</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/strange-timezones/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/strange-timezones.jpg" alt="An Analysis of Strange Timezones">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T00:00:00.000Z">2020-01-25</time></div>
+                    <a href="/strange-timezones/" class="has-link-black-ter is-size-6">An Analysis of Strange Timezones</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/xkcd-mailer/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/xkcd-mailer.png" alt="Bank Holiday Bodge: Daily XKCD Mailer">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-01T00:00:00.000Z">2020-01-01</time></div>
+                    <a href="/xkcd-mailer/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Daily XKCD Mailer</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a> / <a class="has-link-grey -link" href="/categories/Computer-Science/Cloud-Computing/">Cloud Computing</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/parametric-snowflakes/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
+                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/coding-up-christmas/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
+                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">12</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 13.33px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lession/" style="font-size: 10px;">lession</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 13.33px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.33px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.67px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="A Statistican&#39;s Guide to Love" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

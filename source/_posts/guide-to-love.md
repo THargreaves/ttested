@@ -7,7 +7,7 @@ toc: true
 categories:
 - [Statistics, Probability]
 tags:
-- lession
+- lesson
 - simulation
 - story
 - visualisation

@@ -16,7 +16,7 @@
 <meta property="og:description" content="In a data-driven world, your analyses will only ever be as good as the metric you use to evaluate them. In this post, I make the claim that the de facto metric used in data science is unfit for purpos">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/inaccuracy-of-accuracy.jpg">
-<meta property="og:updated_time" content="2020-02-15T12:50:19.259Z">
+<meta property="og:updated_time" content="2020-04-05T11:00:36.751Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Inaccuracy of Accuracy">
 <meta name="twitter:description" content="In a data-driven world, your analyses will only ever be as good as the metric you use to evaluate them. In this post, I make the claim that the de facto metric used in data science is unfit for purpos">
@@ -180,7 +180,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 minutes read (About 2300 words)
+                    13 minutes read (About 2500 words)
                 </span>
                 
                 
@@ -210,45 +210,63 @@
 <p>We simply classify every patient as not having the illness. This is a preposterous idea and yet it will give us an accuracy of around 99.8%, far higher than the 99% accuracy we flaunted earlier. After all, we may never correctly diagnose a patient who <em>does</em> have the illness, but we will get every prediction correct whenever a patient <em>doesn’t</em> have the illness, and this accounts for the vast majority of observations. </p>
 <p>This, however, is not the behaviour we wish to capture. Correctly identifying the few people who have the illness so that they can seek medical assistance quickly, is far more important than requiring a handful of people to be checked over by their doctor when it wasn’t essential. In similar cases, such as fraud detection, we wish to obtain the same behaviour. It is vital that we detect the few true cases of fraud even if doing so results in a few incorrect guesses, which can be quickly disregarded after the necessary security checks have been completed.</p>
 <p>The conclusion we reach - quite paradoxically - is that for a large range of problems, if we want to build an ‘accurate’ model in the colloquial sense, using the statistical measurement of accuracy is no use. Maximising accuracy just can’t be guaranteed to reflect the problem we are trying to solve. But what can?</p>
-<h2 id="A-finer-look-at-the-problem"><a href="#A-finer-look-at-the-problem" class="headerlink" title="A finer look at the problem"></a>A finer look at the problem</h2><p>Let’s take a look at our diagnosis problem once more, but through a new lens: the confusion matrix. We take a sample of 1000 people from the population and use our naive model to predict whether they have the illness (that is, we predict that everyone is unaffected). We then compare our predicted classifications with the true value to get the following confusion matrix.</p>
+<h2 id="A-Finer-Look-at-the-Problem"><a href="#A-Finer-Look-at-the-Problem" class="headerlink" title="A Finer Look at the Problem"></a>A Finer Look at the Problem</h2><p>Let’s take a look at our diagnosis problem once more, but through a new lens: the confusion matrix. We take a sample of 1000 people from the population and use our naive model to predict whether they have the illness (that is, we predict that everyone is unaffected). We then compare our predicted classifications with the true value to get the following confusion matrix.</p>
 <pre><code>          Reference
 Prediction  No Yes
        No  998   2
        Yes   0   0</code></pre><p>This table shows that, of the 998 people who did in fact have the illness, we correctly predicted that all 998 of them were unaffected and of the 2 people who did, we incorrectly predicted that both of them did not have the illness. We calculate our accuracy by summing the number of correct predictions (the diagonal) and dividing by the total size of our sample (sum of all cells) giving the $\frac{998+0}{998+2+0+0} = 99.8%$ we stated before. </p>
-<p>In order to describe the confusion matrix better we will need some terminology to describe each cell.</p>
+<p>In order to generalise this confusion matrix for use with other problems, we will need some terminology to describe each cell.</p>
 <ul>
-<li>The upper-left corner gives the number of true negatives (TN). This is the number of patients that we correctly identified to <em>not have</em> the illness.</li>
-<li>The upper-right corner gives the number of false negatives (FN). This is the number of patients who did have the illness but for who we didn’t identify it.</li>
+<li>The upper-left corner gives the number of true negatives (TN). This is the number of patients that we correctly identified as <em>not having</em> the illness.</li>
+<li>The upper-right corner gives the number of false negatives (FN). This is the number of patients who did have the illness but for whom we didn’t identify it.</li>
 <li>The lower-left corner gives the number of false positives (FP). This is the number of patients who didn’t have the illness but our model predicted that they did.</li>
-<li>Lastly, the lower-right corner gives the number of true positives (TP). This is the number of people we correctly identified to <em>have</em> the illness.</li>
+<li>Lastly, the lower-right corner gives the number of true positives (TP). This is the number of people we correctly identified as <em>having</em> the illness.</li>
 </ul>
 <p>Then, for a general binary classification problem with a positive (P) and negative (N) class (these were “yes” and “no” respectively for our diagnosis problem), the confusion matrix will look like this.</p>
 <pre><code>          Reference
 Prediction N  P 
          N TN FN
-         P FP TP</code></pre><p>Remembering how we calculated the accuracy using the matrix diagonal before, we get the following formula for the statistical accuracy of our model in terms of the false/true, positive/negative value counts.</p>
+         P FP TP</code></pre><p>Remembering how we calculated the accuracy using the matrix diagonal before, we obtain the following formula for the statistical accuracy of our model in terms of the false/true, positive/negative value counts.</p>
 <p>$$\textrm{Accuracy} = \frac{\textrm{TN} + \textrm{TP}}{\textrm{TN} + \textrm{FN} + \textrm{FP} + \textrm{TP}}$$</p>
 <h2 id="Precision-and-Recall"><a href="#Precision-and-Recall" class="headerlink" title="Precision and Recall"></a>Precision and Recall</h2><p>Thinking back again to the diagnosis problem, let us contemplate why our use of statistical accuracy as a measure of success failed. The main issue was that what we really valued in our model was the ability to correctly identify ill patients (the positive class) more so than the avoidance of labelling some perfectly healthy patients as likely to be ill. This would not be as much of an issue if the two classes (ill and not ill) were in similar proportions. In that case, failing to correctly identify ill patients would have a noticeable effect on our accuracy. When, however, the positive class is dwarfed by the negative class (or vice versa) the accuracy metric will no longer be of much use.</p>
 <h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p>We have already seen that the accuracy metric fails spectacularly for our diagnosis problem. But there is a metric that works much better. It goes by the name of ‘recall’ and its formula is as follows.</p>
 <p>$$\textrm{Recall} = \frac{\textrm{TP}}{\textrm{TP} + \textrm{FN}}$$</p>
-<p>In words, we calculate this value by taking the number of cases in which we correctly identified the illness and divide that by the total number of people that did in fact have the illness. In our example above, since $\textrm{TP} = 0$, we get a precision of $0$. Whereas we gained an extremely high value of accuracy, the precision of our model is as low as it physically can be. It is clear that this metric can’t be duped by the rarity of the positive class.</p>
-<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>This handles the case where we wish to focus on the correct identification of the positive class; but what about the negative class? An example of such a scenario is the judicial system. The assumption of innocence shows that we care much more about ensuring an innocent person is not sent to prison, than making sure that all guilty persons are locked away. This suffers from the reverse of the issue that the diagnosis problem had. Here the positive class is likely to outsize the negative since it would be rare to bring someone to court without at least a reasonable amount of evidence against them. Because of this, if we were to evaluate our judicial system using statistical accuracy as our metric, we would get a good performance from the practice of immediately jailing anyone who enters the courtroom. Another example would be spam email detection; letting some spam get through is tolerable but hiding important emails in the junk folder is not. Thankfully, there is an alternative metric which counteracts this behaviour. It is called ‘precision’ (also known as sensitivity).</p>
+<p>In words, we calculate this value by taking the number of cases in which we correctly identified the illness and divide that by the total number of people that did in fact have the illness. This essentially asks how likely our model is to identify that a disease carrier is indeed affected. In our example above, since $\textrm{TP} = 0$ (we didn’t predict that any one was in the positive class so couldn’t possibly have a true positive), we have a recall of $0$. Whereas we gained an extremely high value of accuracy, the recall of our model is as low as it physically can be. It is clear that this metric can’t be duped by the rarity of the positive class.</p>
+<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>Recall is important for handling scenarios in which we wish to focus on the correct identification of the positive class; but what about the negative class? An example of such a scenario is the judicial system. The assumption of innocence shows that we care much more about ensuring an innocent person is not sent to prison, than making sure that all guilty persons are locked away. This suffers from the reverse of the issue that the diagnosis problem had. Here the positive class is likely to outsize the negative since it would be rare to bring someone to court without at least a reasonable amount of evidence against them. Because of this, if we were to evaluate our judicial system using statistical accuracy as our metric, we would obtain a strong performance from the practice of immediately jailing anyone who enters the courtroom. Another example would be spam email detection; letting some spam get through is tolerable but hiding important emails in the junk folder is not. Thankfully, there is an alternative metric which counteracts this behaviour. It is called ‘precision’.</p>
 <p>$$\textrm{Precision} = \frac{\textrm{TP}}{\textrm{TP} + \textrm{FP}}$$</p>
-<p>This is very similar to recall, but rather than dividing the number of true positive cases by the total number of <em>actual</em> positives, we instead divide by the total number of positives we <em>predicted</em>. In other words, it is asking what proportion of the observations we predicted to be positive were actually positive. </p>
-<p>There are many other statistical measurements used to evaluate binary classification models such as specificity, fall-out, and false discovery rate. These are described in intricate detail on the Wikipedia page for <a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" target="_blank" rel="noopener">sensitivity and specificity</a>.</p>
-<h3 id="The-precision-recall-spectrum"><a href="#The-precision-recall-spectrum" class="headerlink" title="The precision-recall spectrum"></a>The precision-recall spectrum</h3><p>Although these metrics may seem like miraculous solutions to all accuracy-related issues they do have their own drawbacks. These both tackle particular types of problems well - precision is very good at ensuring you don’t inaccurately identify too many negative class members, and recall makes sure that you correctly identify a good proportion of the positive class members. However, the success of one can lead to the failure of the other - precision does not care whether you are correctly identifying the positive class members, and recall isn’t bothered whether you erroneously identify a large amount of negative class members. They do their own jobs well, but do not focus on anything else.</p>
-<p>They exist on a spectrum; succeeding in one opens you up to the possibility of failure in the other. If you know that the type of problem you are trying to tackle will be solved better by using a specific one of these then go ahead. But, if you want something in the middle of this spectrum - combining their behaviour - there is another option.</p>
-<h2 id="The-textrm-F-1-Score"><a href="#The-textrm-F-1-Score" class="headerlink" title="The $\textrm{F}_1$ Score"></a>The $\textrm{F}_1$ Score</h2><p>When you want to reflect the combination of the behaviour of two metrics, a common strategy is to take their mean. Which mean? That very much depends on the context. In this context the best course of action is to use the harmonic mean. In doing this we define the $\textrm{F}_1$ score of a model.</p>
-<p>$$\textrm{F}_1 = \frac{2}{\frac{1}{\textrm{Precision}}+\frac{1}{\textrm{Recall}}}\left(=\frac{2 \times\textrm{Precision}\times\textrm{Recall}}{\textrm{Precision}+\textrm{Recall}}\right)$$</p>
-<p>This method gives a very good balance between precision and recall. Whenever either of precision or recall get two small, the denominator will grow massively, forcing the $\textrm{F}_1$ score to shrink to near zero. More importantly, unlike with the arithmetic and geometric mean, having a small value of one of precision and recall is very hard (and in some cases impossible) to fix just by adjusting the other value. You are forced to fix the issue at hand to improve your score. Furthermore, since precision and recall are restricted to the range $[0,1]$ so will their harmonic mean, $\textrm{F}_1$. This metric will account for a perfect balance of precision and recall, no matter the split of the positive and negative class quantities, and still return a value that we can process in a similar way to accuracy. This is exactly the behaviour we want in our metric.</p>
-<p>Notice that when one of precision or recall is zero, then the $\textrm{F}_1$ score is undefined. Therefore we need at least one correctly identified positive case in order to have a valid $\textrm{F}_1$ score. This seems resonable; if your model doesn’t get a single positive prediction right, it is barely even a model. There is also a convention (which you are free to use as long as you don’t mind angering the pure mathematicians) that whenever the $\textrm{F}_1$ score is undefined, we say that its value is zero. This uses the false assumption that division of a positve number by zero yields $+\infty$ but is preferred since it allows our metric to function for all confusion matrices with accurate limiting behaviour.</p>
-<blockquote class="colorquote info"><p>For those interested, by replacing the references to precision and recall in the formula for the $\textrm{F}_1$ score with their definitions, it can be shown that it takes a value equal to the accuracy of a model whenever the true positive and true negative values are the same</p>
+<p>This is very similar to recall, but rather than dividing the number of true positive cases by the total number of <em>actual</em> positives, we instead divide by the total number of positives we <em>predicted</em>. In other words, it is asking what proportion of the observations we predicted to be positive were actually positive. In other words, a model with high precision is more likely to be correct when it says that an observation falls in the positive class.</p>
+<blockquote class="colorquote info"><p><strong>Precision for the diagnosis problem</strong></p>
+<p>In the diagnosis example—since we don’t ever predict a positive class—our precision isn’t even defined since we end up dividing by zero in the formula above. This make it clear that our model is not at all suitable for purpose, even though its accuracy looked promising.</p>
 </blockquote>
 
 
-<h2 id="Why-this-matters"><a href="#Why-this-matters" class="headerlink" title="Why this matters"></a>Why this matters</h2><p>As discussed in great depth by Virginia Eubank’s book <a href="https://virginia-eubanks.com/books/" target="_blank" rel="noopener">Automating Equality</a>, we are beginning to live in a world where automated systems - rather than humans - control a large proportion of the way we live; be it socially, economically, or politically. In a perfect world, we would have all of these algorithms thoroughly audited, but that is currently far from the case. Until we get to that stage (of which Cathy O’Neil, the author of <a href="https://weaponsofmathdestructionbook.com/" target="_blank" rel="noopener">Weapons of Math Destruction</a>, is building excellent foundations for through her new <a href="http://www.oneilrisk.com/" target="_blank" rel="noopener">algorithmic auditing and risk consulting company</a>) the next best thing we can do is start using a metric that does a decent job of reflecting our goals as data scientists.</p>
+<p>There are many other statistical measurements used to evaluate binary classification models such as specificity, fall-out, and false discovery rate. These are described in intricate detail on the Wikipedia page for <a href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" target="_blank" rel="noopener">sensitivity and specificity</a>.</p>
+<h3 id="The-Precision-recall-Spectrum"><a href="#The-Precision-recall-Spectrum" class="headerlink" title="The Precision-recall Spectrum"></a>The Precision-recall Spectrum</h3><p>Although these metrics may seem like miraculous solutions to all accuracy-related issues, they do have their own drawbacks. These both tackle particular types of problems well - precision is useful for ensuring you don’t inaccurately identify too many negative class members, and recall makes sure that you only identify positive class members when you have enough confidence. However, the success of one can lead to the failure of the other - precision does not care whether you are correctly identifying the positive class members, and recall isn’t bothered whether you erroneously identify a large amount of negative class members. They do their own jobs well, but do not focus on anything else.</p>
+<p>They exist on a spectrum; succeeding in one opens you up to the possibility of failure in the other. If you know that the type of problem you are trying to tackle will be solved better by using a specific one of these then go ahead. But, if you want something in the middle of this spectrum - combining their behaviour - there is another option.</p>
+<h2 id="The-textrm-F-1-Score"><a href="#The-textrm-F-1-Score" class="headerlink" title="The $\textrm{F}_1$ Score"></a>The $\textrm{F}_1$ Score</h2><p>When you want to reflect the combination of the behaviour of two metrics, a common strategy is to take their mean. But which mean? That very much depends on the context. In this case, the best course of action is to use the <a href="https://www.mathsisfun.com/numbers/harmonic-mean.html" target="_blank" rel="noopener">harmonic mean</a>. In doing this we define the $\textrm{F}_1$ score of a model.</p>
+<p>$$\textrm{F}_1 = \frac{2}{\frac{1}{\textrm{Precision}}+\frac{1}{\textrm{Recall}}}\left(=\frac{2 \times\textrm{Precision}\times\textrm{Recall}}{\textrm{Precision}+\textrm{Recall}}\right)$$</p>
+<p>This method offers an effective balance between precision and recall. Whenever either of precision or recall get two small, the denominator will grow massively, forcing the $\textrm{F}_1$ score to shrink to near zero. More importantly, unlike with the arithmetic and geometric mean, having a small value of one of precision and recall is extremely difficult (and in some cases impossible) to fix just by adjusting the other value; you are forced to fix the issue at hand to improve your score. Furthermore, since precision and recall are restricted to the range $[0,1]$ so will their harmonic mean, $\textrm{F}_1$. This metric will account for a perfect balance of precision and recall, no matter the split of the positive and negative class quantities, and still return a value that we can process in a similar way to accuracy. This is exactly the behaviour we want in our metric.</p>
+<blockquote class="colorquote info"><p><strong>Relation to accuracy</strong></p>
+<p>By replacing the references to precision and recall in the formula for the $\textrm{F}_1$ score with their definitions, it can be shown that metric takes a value equal to the accuracy of a model in the case of balanced classes. It follows, that there is little reason to use accuracy over the $\textrm{F}_1$ score even when the classes are reasonably balanced.</p>
+</blockquote>
+
+
+<p>Notice that when one of precision or recall is zero, then the $\textrm{F}_1$ score is undefined. Therefore we need at least one correctly identified positive case in order to have a valid $\textrm{F}_1$ score. This seems resonable; if your model doesn’t get a single positive prediction right, it is barely even a model.</p>
+<blockquote class="colorquote warning"><p><strong>Defining the extremes</strong></p>
+<p>There is also a convention (which you are free to use as long as you don’t mind angering the pure mathematicians) that whenever the $\textrm{F}_1$ score is undefined, we say that its value is zero. This uses the false assumption that division of a positve number by zero yields $+\infty$ but is preferred since it allows our metric to function for all confusion matrices with accurate limiting behaviour.</p>
+</blockquote>
+
+
+<blockquote class="colorquote success"><p><strong>Going further</strong></p>
+<p>The $\textrm{F}_1$ score is actually just one member of a family of metrics called the $\textrm{F}_\beta$ scores where $\beta$ can take any real value $\beta&gt;0$. The $\textrm{F}_1$ score is simply the special case where $\beta = 1$. The general definition is similar.</p>
+<p>$$\textrm{F}_\beta = \frac{\left(1 + \beta^2\right) \cdot \textrm{Precision}\cdot\textrm{Recall}}{\beta^2 \cdot \textrm{Precision}+\textrm{Recall}}$$</p>
+<p>The parameter $\beta$ in this metric allows you control the tradeoff between recall and precision, by setting it such that you value recall $\beta$ is a much as precision. When $\beta=1$ we are simply left with the case where we value recall and precision an equal amount (a sensible default for most cases).</p>
+</blockquote>
+
+
+<h2 id="Why-This-Matters"><a href="#Why-This-Matters" class="headerlink" title="Why This Matters"></a>Why This Matters</h2><p>As discussed in great depth by Virginia Eubank’s book <a href="https://virginia-eubanks.com/books/" target="_blank" rel="noopener">Automating Equality</a>, we are beginning to live in a world where automated systems - rather than humans - control a large proportion of the way we live; be it socially, economically, or politically. In a perfect world, we would have all of these algorithms thoroughly audited, but that is currently far from the case. Until we get to that stage (of which Cathy O’Neil, the author of <a href="https://weaponsofmathdestructionbook.com/" target="_blank" rel="noopener">Weapons of Math Destruction</a>, is building excellent foundations for through her new <a href="http://www.oneilrisk.com/" target="_blank" rel="noopener">algorithmic auditing and risk consulting company</a>) the next best thing we can do is start using a metric that does a decent job of reflecting our goals as data scientists.</p>
 <p>The use of statistical accuracy is pervasive throughout the data science community. Every Kaggle competition, machine learning showcase, and PR campaign, relies on it almost in entirety. For many of the budding data scientists who may not come from a rich statistical background, this can be a great danger. It builds bad habits and avoids the discussion of important topics surrounding data ethics. The field is still young and hopefully we will have a chance to right this wrong at least to some extent, before it becomes too ingrained in the standard process.</p>
-<p>Is it finally time to concede, and admit the inherent inaccuracy of ‘accuracy’?</p>
+<p><em>Is it finally time to concede, and admit the inherent inaccuracy of accuracy?</em></p>
 
         </div>
         
@@ -361,7 +379,7 @@ Prediction N  P
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        29
+                        31
                     </p>
                 </div>
             </div>
@@ -381,7 +399,7 @@ Prediction N  P
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        40
+                        39
                     </p>
                 </div>
             </div>
@@ -403,9 +421,9 @@ Prediction N  P
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#A-finer-look-at-the-problem">
+        <a class="is-flex" href="#A-Finer-Look-at-the-Problem">
         <span class="has-mr-6">1</span>
-        <span>A finer look at the problem</span>
+        <span>A Finer Look at the Problem</span>
         </a></li><li>
         <a class="is-flex" href="#Precision-and-Recall">
         <span class="has-mr-6">2</span>
@@ -419,17 +437,17 @@ Prediction N  P
         <span class="has-mr-6">2.2</span>
         <span>Precision</span>
         </a></li><li>
-        <a class="is-flex" href="#The-precision-recall-spectrum">
+        <a class="is-flex" href="#The-Precision-recall-Spectrum">
         <span class="has-mr-6">2.3</span>
-        <span>The precision-recall spectrum</span>
+        <span>The Precision-recall Spectrum</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#The-textrm-F-1-Score">
         <span class="has-mr-6">3</span>
         <span>The $\textrm{F}_1$ Score</span>
         </a></li><li>
-        <a class="is-flex" href="#Why-this-matters">
+        <a class="is-flex" href="#Why-This-Matters">
         <span class="has-mr-6">4</span>
-        <span>Why this matters</span>
+        <span>Why This Matters</span>
         </a></li></ul>
         </div>
     </div>
@@ -445,6 +463,44 @@ Prediction N  P
         <h3 class="menu-label">
             Recent
         </h3>
+        
+        <article class="media">
+            
+            <a href="/ditch-mnist/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ditch-mnist.jpg" alt="Is it Time to Ditch the MNIST Dataset?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T23:00:00.000Z">2020-04-05</time></div>
+                    <a href="/ditch-mnist/" class="has-link-black-ter is-size-6">Is it Time to Ditch the MNIST Dataset?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/excel-abuse-peaceable-queens/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/excel-abuse-peaceable-queens.png" alt="Excel Abuse: Peaceable Queens">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T00:00:00.000Z">2020-03-22</time></div>
+                    <a href="/excel-abuse-peaceable-queens/" class="has-link-black-ter is-size-6">Excel Abuse: Peaceable Queens</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -503,44 +559,6 @@ Prediction N  P
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/parametric-snowflakes/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
-                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/coding-up-christmas/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
-                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -591,7 +609,7 @@ Prediction N  P
                 <span class="level-item">Data Science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
@@ -599,7 +617,7 @@ Prediction N  P
                 <span class="level-item">Best Practice</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
@@ -663,7 +681,7 @@ Prediction N  P
                 <span class="level-item">Operational Research</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
@@ -717,7 +735,7 @@ Prediction N  P
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 13.33px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lession/" style="font-size: 10px;">lession</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 13.33px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.33px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.67px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 14.29px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 11.43px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.57px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.43px;">problem-solving</a> <a href="/tags/python/" style="font-size: 15.71px;">python</a> <a href="/tags/r/" style="font-size: 17.14px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.86px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 12.86px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
     </div>
 </div>
 
@@ -742,6 +760,44 @@ Prediction N  P
         
         <article class="media">
             
+            <a href="/ditch-mnist/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ditch-mnist.jpg" alt="Is it Time to Ditch the MNIST Dataset?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T23:00:00.000Z">2020-04-05</time></div>
+                    <a href="/ditch-mnist/" class="has-link-black-ter is-size-6">Is it Time to Ditch the MNIST Dataset?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/excel-abuse-peaceable-queens/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/excel-abuse-peaceable-queens.png" alt="Excel Abuse: Peaceable Queens">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T00:00:00.000Z">2020-03-22</time></div>
+                    <a href="/excel-abuse-peaceable-queens/" class="has-link-black-ter is-size-6">Excel Abuse: Peaceable Queens</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/guide-to-love/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
@@ -797,44 +853,6 @@ Prediction N  P
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/parametric-snowflakes/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/parametric-snowflakes.png" alt="Bank Holiday Bodge: Parametric Snowflakes">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-26T00:00:00.000Z">2019-12-26</time></div>
-                    <a href="/parametric-snowflakes/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Parametric Snowflakes</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/coding-up-christmas/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/gallery/thumbnails/coding-up-christmas.png" alt="Bank Holiday Bodge: Coding up Christmas">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-25T00:00:00.000Z">2019-12-25</time></div>
-                    <a href="/coding-up-christmas/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: Coding up Christmas</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
 
@@ -885,7 +903,7 @@ Prediction N  P
                 <span class="level-item">Data Science</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">12</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
@@ -893,7 +911,7 @@ Prediction N  P
                 <span class="level-item">Best Practice</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
@@ -957,7 +975,7 @@ Prediction N  P
                 <span class="level-item">Operational Research</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/Statistics/">
@@ -1011,7 +1029,7 @@ Prediction N  P
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/animation/" style="font-size: 16.67px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 10px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.67px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 13.33px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lession/" style="font-size: 10px;">lession</a> <a href="/tags/lesson/" style="font-size: 10px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 10px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.33px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.67px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.67px;">python</a> <a href="/tags/r/" style="font-size: 18.33px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 13.33px;">shiny</a> <a href="/tags/simulation/" style="font-size: 13.33px;">simulation</a> <a href="/tags/solver/" style="font-size: 10px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.33px;">story</a> <a href="/tags/tidyverse/" style="font-size: 13.33px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.67px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 14.29px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 11.43px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.57px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.43px;">problem-solving</a> <a href="/tags/python/" style="font-size: 15.71px;">python</a> <a href="/tags/r/" style="font-size: 17.14px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.86px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 12.86px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
     </div>
 </div>
 

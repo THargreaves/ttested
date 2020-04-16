@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>The Look-and-Say Sequence: A Tribute to John Conway - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="One week ago today, we lost one of the most inspirational mathematicians of this generation. In this post, we take a brief look at the incredible legacy that John Conway left behind. On top of that we">
+<meta name="keywords" content="python,story,number-theory">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Look-and-Say Sequence: A Tribute to John Conway">
+<meta property="og:url" content="https://www.ttested.com/tribute-to-conway/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="One week ago today, we lost one of the most inspirational mathematicians of this generation. In this post, we take a brief look at the incredible legacy that John Conway left behind. On top of that we">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/tribute-to-conway.jpg">
+<meta property="og:updated_time" content="2020-04-16T18:10:13.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Look-and-Say Sequence: A Tribute to John Conway">
+<meta name="twitter:description" content="One week ago today, we lost one of the most inspirational mathematicians of this generation. In this post, we take a brief look at the incredible legacy that John Conway left behind. On top of that we">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/tribute-to-conway.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="The Look-and-Say Sequence: A Tribute to John Conway" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/tribute-to-conway.jpg" alt="The Look-and-Say Sequence: A Tribute to John Conway">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-04-17T23:00:00.000Z">2020-04-18</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 2000 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                The Look-and-Say Sequence: A Tribute to John Conway
+            
+        </h1>
+        <div class="content">
+            <p>One week ago today, we lost one of the most inspirational mathematicians of this generation.</p>
+<p>After a lifetime of incredible achievement, <a href="https://en.wikipedia.org/wiki/John_Horton_Conway" target="_blank" rel="noopener">John Conway</a> died on Saturday, 11th April 2020. This left many people—from the mathematically avid to those with merely a passing interest—only to reminisce about both the amazing leaps forwards he made in his work, but more importantly how he brought out the beauty and charm in areas of mathematics that previously seemed bland.</p>
+<p>Conway was a unique character with many a story to his name. Some of these tales are so wonderful that I don’t dare mention them myself for fear of butchering the narrative. Instead, I would like to point readers towards this <a href="https://www.numberphile.com/podcast/john-conway-tribute" target="_blank" rel="noopener">short episode</a> of the Numberphile Podcast in which many respected mathematicians and acquaintances of Conway share their memories of his life. Conway was as close as you could get to the mathematical equivalent of a rock star, with the stage presence, devoted fans, and involvement in crazy anecdotes to match, so please do have a listen.</p>
+<p>Conway wasn’t just an inspirational and amusing figure, but a talented and insightful mathematician. Despite being best known for his “<a href="https://bitstorm.org/gameoflife/" target="_blank" rel="noopener">Game of Life</a>“—a zero player game with simple rules, from which immense complexity and beauty emerges, and ironically one which he didn’t think much of himself—Conway made fascinating novel discoveries across many areas of mathematics. Be it, geometry, number theory, combinatorics, or group theory, Conway contributed incredible ideas to the mathematical community, a few highlights being his work with surreal numbers, moonshine theory, and the icosians. </p>
+<blockquote class="colorquote success"><p>Even if I only plan to mention Conway’s Game of Life in passing, I can’t help but share Randall Munroe’s touching short animation, paying tribute to Conway in his <a href="https://xkcd.com/2293/" target="_blank" rel="noopener">latest xkcd post</a>.</p>
+</blockquote>
+
+
+<p>As a form of tribute to Conway, I wanted to discuss a particular discovery he made in his career that still fascinates me to this day. It concerns the ‘look-and-say sequence’. The next section of this post will be used to quickly introduce this sequence and share some Python code that can be used to generate its terms (don’t worry if you can’t code—this will be short and incidental). We will then discuss Conway’s relevance to this sequence, and close with an interesting puzzle to ponder, for which I’m yet to obtain a solution.</p>
+<h2 id="The-Look-and-Say-Sequence"><a href="#The-Look-and-Say-Sequence" class="headerlink" title="The Look-and-Say Sequence"></a>The Look-and-Say Sequence</h2><p>The beauty of the look-and-say sequence is how simple it is to define. You don’t need any mathematical background and little thought is required to find the next term. You simply ‘look-and-say’.</p>
+<p>The sequence starts plainly with a single digit 1:</p>
+<p><code>1</code></p>
+<p>We look at this and say what we see. That is, “I can see one one”. Then, all we have to do is write down what we said—“one, one”:</p>
+<p><code>1 1</code></p>
+<p>That’s it, the second term of the sequence consists of two numbers, both of which are ones. We now say this term out loud. That is “I can see two ones”. We ignore the plural and focus on the key part of what we said—“two, one”, our next term:</p>
+<p><code>2 1</code></p>
+<p>Repeating this one more time we get “I can see one two, and one one”—“one, two, one, one”:</p>
+<p><code>1 2 1 1</code></p>
+<p>And one more for good measure. We read “one one, one two, and two ones” giving us:</p>
+<p><code>1 1 1 2 2 1</code></p>
+<p>If we were to continue this sequence a few more times we would obtain the following terms:</p>
+<p><code>3 1 2 2 1 1</code></p>
+<p><code>1 3 1 1 2 2 2 1</code></p>
+<p><code>1 1 1 3 2 1 3 2 1 1</code></p>
+<p>We could go on forever if we wanted to, though I think you get the point. And frankly, writing these all out by hand is labourious and prone to mistakes. Instead, it would be useful if we could leverage computing power to generate these for us. Thankfully this can be done with little effort using the Python script below (if you don’t care for coding, don’t worry, we’ll move promptly past this).</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> time <span class="hljs-keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">look_and_say</span><span class="hljs-params">(n)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""Generate the look-and-say sequence up to term n.</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">    Returns a list of sequence members and elapsed times.</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    sequence = [[<span class="hljs-number">1</span>]]</span><br><span class="line">    elapsed = [<span class="hljs-number">0</span>]</span><br><span class="line">    start = time()</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(n<span class="hljs-number">-1</span>):</span><br><span class="line">        next_elem = []</span><br><span class="line">        run_val = sequence[i][<span class="hljs-number">0</span>]</span><br><span class="line">        run_len = <span class="hljs-number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment"># loop through rest of sequence with dummy value at end</span></span><br><span class="line">        <span class="hljs-keyword">for</span> val <span class="hljs-keyword">in</span> sequence[i][<span class="hljs-number">1</span>:] + [<span class="hljs-number">-1</span>]:</span><br><span class="line">            <span class="hljs-keyword">if</span> val != run_val:</span><br><span class="line">                next_elem.extend([run_len, run_val])</span><br><span class="line">                run_len = <span class="hljs-number">1</span></span><br><span class="line">                run_val = val</span><br><span class="line">            <span class="hljs-keyword">else</span>:</span><br><span class="line">                run_len += <span class="hljs-number">1</span></span><br><span class="line"></span><br><span class="line">        sequence.append(next_elem)</span><br><span class="line">        elapsed.append(time() - start)</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> sequence, elapsed</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote class="colorquote info"><p>From this point onwards, there will be no more code included in the post directly. If, however, you wish to see the source code used to produce the graphics in this piece, you can find the corresponding notebook <a href="https://github.com/THargreaves/ttested/tree/master/content/tribute-to-conway" target="_blank" rel="noopener">here</a>.</p>
+</blockquote>
+
+
+<p>Whether this code makes sense to you or not makes no difference. The important idea is we can use this to quickly generate some more terms. Here are the next 10 terms from where we got to before (<code>1 1 1 3 2 1 3 2 1 1</code>):</p>
+<pre><code>3 1 1 3 1 2 1 1 1 3 1 2 2 1
+
+1 3 2 1 1 3 1 1 1 2 3 1 1 3 1 1 2 2 1 1
+
+1 1 1 3 1 2 2 1 1 3 3 1 1 2 1 3 2 1 1 3 2 1 2 2 2 1
+
+3 1 1 3 1 1 2 2 2 1 2 3 2 1 1 2 1 1 1 3 1 2 2 1 1 3 1 2 1 1 3 2 1 1
+
+1 3 2 1 1 3 2 1 3 2 1 1 1 2 1 3 1 2 2 1 1 2 3 1 1 3 1 1 2 2 2 1 1 3 1 1 1 2 2 1 1 3 1 2 2 1
+
+1 1 1 3 1 2 2 1 1 3 1 2 1 1 1 3 1 2 3 1 1 2 1 1 1 3 1 1 2 2 2 1 1 2 1 3 2 1 1 3 2 1 3 2 2 1 1 3 3 1 2 2 2 1 1 3 1 1 2 2 1 1
+
+3 1 1 3 1 1 2 2 2 1 1 3 1 1 1 2 3 1 1 3 1 1 1 2 1 3 2 1 1 2 3 1 1 3 2 1 3 2 2 1 1 2 1 1 1 3 1 2 2 1 1 3 1 2 1 1 1 3 2 2 2 1 2 3 1 1 3 2 2 1 1 3 2 1 2 2 2 1
+
+1 3 2 1 1 3 2 1 3 2 2 1 1 3 3 1 1 2 1 3 2 1 1 3 3 1 1 2 1 1 1 3 1 2 2 1 1 2 1 3 2 1 1 3 1 2 1 1 1 3 2 2 2 1 1 2 3 1 1 3 1 1 2 2 2 1 1 3 1 1 1 2 3 1 1 3 3 2 1 1 1 2 1 3 2 1 1 3 2 2 2 1 1 3 1 2 1 1 3 2 1 1
+
+1 1 1 3 1 2 2 1 1 3 1 2 1 1 1 3 2 2 2 1 2 3 2 1 1 2 1 1 1 3 1 2 2 1 2 3 2 1 1 2 3 1 1 3 1 1 2 2 2 1 1 2 1 1 1 3 1 2 2 1 1 3 1 1 1 2 3 1 1 3 3 2 2 1 1 2 1 3 2 1 1 3 2 1 3 2 2 1 1 3 3 1 1 2 1 3 2 1 2 3 1 2 3 1 1 2 1 1 1 3 1 2 2 1 1 3 3 2 2 1 1 3 1 1 1 2 2 1 1 3 1 2 2 1</code></pre><p>As you can see, these get big, fast. In fact, let’s create two plots to visualise this growth. The first will show the how the length of each term of the sequence is increasing and the second will show how long it takes us to compute terms up to that point.</p>
+<p><img src="/images/tribute-to-conway/tribute-to-conway_31_0.png" alt></p>
+<p>Reading off the graph, we see that the 70th term of our sequence was composed of over one hundred million digits. Thank god we decided to switch to Python! On top of that, it took the script (which is reasonably efficient) over a minute to reach this point.</p>
+<p>Both of these graphs are clear examples of exponential growth. That is, the length of a a term in the sequence can be approximated by taking the length of the previous term and multiplying it by some fixed scale factor (likewise for the computation time). What exactly is this scale factor though? This is where our friend Conway can offer a hand.</p>
+<h2 id="Conway’s-Constant"><a href="#Conway’s-Constant" class="headerlink" title="Conway’s Constant"></a>Conway’s Constant</h2><p>Enter: John Conway.</p>
+<p>As we eluded to in the introduction, Conway was not a complacent man when it came to mathematics, and one of his numerous discoveries was that of Conway’s constant. This number is of interest to us because it is exactly the value of the scale factor related to the look-and-see problem.</p>
+<p>This in itself is not necessarily interesting—many people solve mathematical problems just like this all the time; why is this particular solution so special? Well, the real wonder of Conway’s constant comes from seeing the crazy way in which it is defined. In short, Conway’s constant is the unique positive value $x$ such that to the following expression is equal to zero.</p>
+<p><img src="/images/tribute-to-conway/conways-constant.svg" alt="The 71 degree polynomial that gives rise to Conway&#39;s constant"><br>This is a monsterous equation, making it notable in itself that Conway managed to find it and prove its relation to the look-and-say puzzle. What fascinates mathematicians about this equation is the question of ‘why?’—Why is this the solution?</p>
+<p>Why is the highest power 71? Why is there no 70th term? Why are the coefficents the values they are? Why does this even relate to the look-and-say problem? These are all incredibly difficult questions whose answers largely come down to ‘just cos’. It almost feels like the look-and-see problem is some sort of cosmic joke the universe is playing on us. Normally when you solve a problem with this sort of beauty and structure the answer comes out to be something stunningly simple: perhaps some multiple of the famous constants $e$, $pi$, or $\phi$, or at the very least the solution to an equation of degree 2 or 3 with a pattern to the coefficients. But degree 71 with no clear pattern to the coefficients? That’s something special.</p>
+<p>And frankly, I don’t believe this could be more fitting. Conway was an odd yet utterly wonderful man, both unusual and iconoclastic, yet full of ideas with such beauty and fascination. His constant seems to barely differ. And just as the mathematical laws governing this constant will live on, so will Conway, and his weird but wonderful ways, in our memories.</p>
+<h2 id="An-Intriguing-Pattern"><a href="#An-Intriguing-Pattern" class="headerlink" title="An Intriguing Pattern"></a>An Intriguing Pattern</h2><p>I don’t think Conway would have liked a soppy ending, but rather closing by revealing new avenue of thought to persue, so this is what I will do. When I was coding up the look-say-generator above, I noticed an interesting pattern emerging.</p>
+<p>First, it’s worth noting that it is impossible for a term in the look and say sequence to contain a digit greater than three. The argument is the same for all numbers over three so we will focus on proving this for just four. The argument is rather simple, involving backtracking through the sequence. Suppose our sequence contained a number four at some point. Then, in the previous term there must have been a subsequence such as <code>1 1 1 1</code> or the same with <code>2</code>/<code>3</code>. This would only arise if we had said “one, one, and one, one” or the equivalent. That is, we must have had <code>1 1</code> in the term before that. But this would be read as <code>2 1</code>, not <code>1 1 1 1</code> and so we don’t in fact obtain a four.</p>
+<p>With that out of the way, we can move towards the pattern I discovered. This concerned the proportions that the digits <code>1</code>, <code>2</code>, and <code>3</code> shared as the sequence progressed. For example in the sixth term (3 1 2 2 1 1), the split is $\left(\frac{1}{2},\frac{1}{3},\frac{1}{6}\right)$. What is the long term behaviour of this distribution? I expected it to be semi-chaotic, but was instead surprised to find that the proportions eventually converged sharply:</p>
+<p><img src="/images/tribute-to-conway/tribute-to-conway_48_0.png" alt></p>
+<p>As we can see, once we pass the 20th or so term, the digit proportions rapidly converge to what seems to be $\left(\frac{99}{200},\frac{8}{25},\frac{37}{200}\right)$ or something close by at the least. This leaves us with one more ‘why?’ to address.</p>
+<p>Of the many articles I have read about the look-and-say sequence, none make explicit mention of this phenomenon, and nothing particularly obvious jumps out at me regarding these ratios. I haven’t had the time to delve into the problem properly as I wanted to release this post in a timely manner but I will explore this pattern further at some point. And if do come across an interesting explanation, I will write a follow up post. That is, if I never mention this problem again, I either failed to reach a solution or the solution turned out too be dull to write about (and I would prefer it if we just assume the latter).</p>
+<p>If any of my more mathematical readers want to have a crack at this problem by themselves, I would be interested to hear about a solution if one is obtained. For now, all I can offer is what my gut instinct says, and hope that this shows promise: perhaps modeling the limiting terms of the problem as a Markov chain and attempting to find a stationary distribution could provide a reasonable explanation. Furthermore, perhaps Conway’s constant has something to do with these peculiar ratios—it would seem fitting that this oddity comes from that source after all.</p>
+<p>Either way, I hope this post has made clear what an amazing man Conway was, and the shear wonder that his theorems and ideas brought to the mathematical world. He has been an inspiration to myself and many other mathematicians, and for that reason, he will be sorely missed.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/number-theory/">number-theory</a>, <a class="has-link-grey -link" href="/tags/python/">python</a>, <a class="has-link-grey -link" href="/tags/story/">story</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/ditch-mnist/">
+                <span class="level-item">Is it Time to Ditch the MNIST Dataset?</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/tribute-to-conway/';
+        this.page.identifier = 'tribute-to-conway/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        32
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        40
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Look-and-Say-Sequence">
+        <span class="has-mr-6">1</span>
+        <span>The Look-and-Say Sequence</span>
+        </a></li><li>
+        <a class="is-flex" href="#Conway’s-Constant">
+        <span class="has-mr-6">2</span>
+        <span>Conway’s Constant</span>
+        </a></li><li>
+        <a class="is-flex" href="#An-Intriguing-Pattern">
+        <span class="has-mr-6">3</span>
+        <span>An Intriguing Pattern</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/tribute-to-conway/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/tribute-to-conway.jpg" alt="The Look-and-Say Sequence: A Tribute to John Conway">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-17T23:00:00.000Z">2020-04-18</time></div>
+                    <a href="/tribute-to-conway/" class="has-link-black-ter is-size-6">The Look-and-Say Sequence: A Tribute to John Conway</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/ditch-mnist/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ditch-mnist.jpg" alt="Is it Time to Ditch the MNIST Dataset?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T23:00:00.000Z">2020-04-05</time></div>
+                    <a href="/ditch-mnist/" class="has-link-black-ter is-size-6">Is it Time to Ditch the MNIST Dataset?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/excel-abuse-peaceable-queens/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/excel-abuse-peaceable-queens.png" alt="Excel Abuse: Peaceable Queens">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T00:00:00.000Z">2020-03-22</time></div>
+                    <a href="/excel-abuse-peaceable-queens/" class="has-link-black-ter is-size-6">Excel Abuse: Peaceable Queens</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/guide-to-love/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-14T00:00:00.000Z">2020-02-14</time></div>
+                    <a href="/guide-to-love/" class="has-link-black-ter is-size-6">A Statistican&#39;s Guide to Love</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/strange-timezones/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/strange-timezones.jpg" alt="An Analysis of Strange Timezones">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T00:00:00.000Z">2020-01-25</time></div>
+                    <a href="/strange-timezones/" class="has-link-black-ter is-size-6">An Analysis of Strange Timezones</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">13</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 13.75px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.25px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.25px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.5px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.25px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 11.25px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.25px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.75px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.25px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.25px;">python</a> <a href="/tags/r/" style="font-size: 17.5px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.5px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.5px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.25px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.75px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.5px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.25px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/tribute-to-conway/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/tribute-to-conway.jpg" alt="The Look-and-Say Sequence: A Tribute to John Conway">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-17T23:00:00.000Z">2020-04-18</time></div>
+                    <a href="/tribute-to-conway/" class="has-link-black-ter is-size-6">The Look-and-Say Sequence: A Tribute to John Conway</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/ditch-mnist/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ditch-mnist.jpg" alt="Is it Time to Ditch the MNIST Dataset?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-04T23:00:00.000Z">2020-04-05</time></div>
+                    <a href="/ditch-mnist/" class="has-link-black-ter is-size-6">Is it Time to Ditch the MNIST Dataset?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/excel-abuse-peaceable-queens/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/excel-abuse-peaceable-queens.png" alt="Excel Abuse: Peaceable Queens">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-22T00:00:00.000Z">2020-03-22</time></div>
+                    <a href="/excel-abuse-peaceable-queens/" class="has-link-black-ter is-size-6">Excel Abuse: Peaceable Queens</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/guide-to-love/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/guide-to-love.jpg" alt="A Statistican&#39;s Guide to Love">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-02-14T00:00:00.000Z">2020-02-14</time></div>
+                    <a href="/guide-to-love/" class="has-link-black-ter is-size-6">A Statistican&#39;s Guide to Love</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/strange-timezones/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/strange-timezones.jpg" alt="An Analysis of Strange Timezones">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-25T00:00:00.000Z">2020-01-25</time></div>
+                    <a href="/strange-timezones/" class="has-link-black-ter is-size-6">An Analysis of Strange Timezones</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">13</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 13.75px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.25px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.25px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.5px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 10px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.25px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 11.25px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.25px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 18.75px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 10px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.25px;">problem-solving</a> <a href="/tags/python/" style="font-size: 16.25px;">python</a> <a href="/tags/r/" style="font-size: 17.5px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.5px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.5px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.25px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 13.75px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.5px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.25px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="The Look-and-Say Sequence: A Tribute to John Conway" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

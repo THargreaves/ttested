@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Hiding in the shadow of the central limit theorm is a lesser-know, but still fascinating aspect of statistics. Read this post to what this is and how we can use it.">
+<meta name="keywords" content="lesson,normal-distribution">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin">
+<meta property="og:url" content="https://www.ttested.com/gibrats-law/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Hiding in the shadow of the central limit theorm is a lesser-know, but still fascinating aspect of statistics. Read this post to what this is and how we can use it.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/gibrats-law.jpg">
+<meta property="og:updated_time" content="2021-03-21T09:37:43.813Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin">
+<meta name="twitter:description" content="Hiding in the shadow of the central limit theorm is a lesser-know, but still fascinating aspect of statistics. Read this post to what this is and how we can use it.">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/gibrats-law.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/gibrats-law.jpg" alt="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-05-07T23:00:00.000Z">2020-05-08</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    13 minutes read (About 2500 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin
+            
+        </h1>
+        <div class="content">
+            <blockquote class="colorquote info"><p>The post was originally posted on <a href="https://www.warwickdatascience.com/" target="_blank" rel="noopener">Warwick Data Science Society</a>‘s <a href="https://research.warwickdatascience.com/" target="_blank" rel="noopener">Research Blog</a>. You can find the source at <a href="https://research.warwickdatascience.com/gibrats-law/" target="_blank" rel="noopener">this link</a>.</p>
+</blockquote>
+
+
+
+
+
+
+
+
+<p>Testing, testing. One, two, three. Can everyone hear me alright?</p>
+<p>Wonderful. Hello and welcome to the Warwick Data Science Society Research Blog. It’s so nice to see you.</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Testing-and-Tediosity"><a href="#Testing-and-Tediosity" class="headerlink" title="Testing and Tediosity"></a>Testing and Tediosity</h3><p>Testing is boring. Everyone knows that they <em>should</em> test the solutions they produce, yet reality often fails to live up to this ideal. We check a few obvious things, run through the logic in our head, and convince ourselves that nothing could ever go wrong…and then it does just that.</p>
+<p>Sometimes this is okay. For small, individual projects, it’s not the end of the world if your code base comes collapsing down on you; a few hours of bodging and everything should be stable again (all be it with code now so messy that you’d want to consider cryongenics). For larger projects, and especially those of collaborative nature, this just won’t do.</p>
+<p>That is a long way to say, this post is a test, but hopefully not a boring one. To ensure that the testing of this site is performed thoroughly, I decided to write this post to ensure that everything is behaving as expected. I hope it can also act as a template for other keen researchers—whether they are currently a member of WDSS or merely interested in getting involved—to contribute their own work. </p>
+<p>The philosophy of this post is to write about a topic that is actually (well, hopefully) of some interest to people, and do so in a natural way. None of this testing through enumerating corner-cases; let’s use the site for what it’s made for in practice and share some interesting insights along the way.</p>
+<p>With that in mind, I wish to introduce to you: Gibrat’s law. Don’t be disheartened if you haven’t come across this term before,—most haven’t. This is likely because the rule is overshadowed by it’s far more infamous twin, the central limit theorem. If you’ve not come across this second term either, don’t fret. You may want to watch <a href="https://www.youtube.com/watch?v=JNm3M9cqWyc" target="_blank" rel="noopener">this short video</a> by <a href="https://www.khanacademy.org/" target="_blank" rel="noopener">Khan Academy</a> as a preliminary, but we’ll introduce both of these ideas either way.</p>
+<blockquote class="colorquote info"><p>As a matter of fact, the <a href="https://en.wikipedia.org/wiki/Gibrat%27s_law" target="_blank" rel="noopener">Wikipedia article for Gibrat’s Law</a> is only made up of a few paragraphs with the link to the law’s creator, Robert Gibrat, directing you to a yet non-existant page. We seem to be diving head first into the rabbit hole today.</p>
+</blockquote>
+
+
+<h2 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h2><blockquote class="colorquote warning"><p>If you are already familiar with central limit theorem, you may wish to skip to the <a href="#from-sums-to-products">next section</a>.</p>
+</blockquote>
+
+
+<h3 id="The-Central-Limit-Theorem"><a href="#The-Central-Limit-Theorem" class="headerlink" title="The Central Limit Theorem"></a>The Central Limit Theorem</h3><p>We’ll start with the central limit theorem. There are many ways of explaining or defining this phenomenon, each striking a subtle balance between statistical rigor and clarity of explanation. We will favor the latter, ensuring to remember that we should keep it too ourselves if we wish to avoid the disapproving gaze of the pure probability theorists.</p>
+<p>This simplified description goes as follows: </p>
+<ul>
+<li>Consider a sequence of independent random variables</li>
+<li>Take the sum of these values</li>
+<li>Regardless of whether the original variables were normally distributed, the distribution of this sum will tend towards a <a href="https://www.mathsisfun.com/data/standard-normal-distribution.html" target="_blank" rel="noopener">normal distribution</a> as the number of variables increases</li>
+</ul>
+<p>To clarify this notion, let’s look an example. One of the simplest would be an experiment involving tossing multiple fair coins. We consider each coin flip to be an independent random variable taking value zero if the result is tails, and likewise one for heads. We can then say that the total number of heads is the sum of these random variables. It would follow from the central limit theorem that the total number of heads should therefore tend to a normal distribution as the number of total coin tosses gets large. Let’s simulate this experiment for different numbers of coins and see this process in action.</p>
+<p><img src="/images/gibrats-law/gibrats-law_23_0.png" alt></p>
+<p>Just as we expected, the more coins we toss, the closer the resulting distribution of heads resembles the classic bell shape of the normal distribution. Indeed, once we use around one hundred or more tosses, we can almost model the number of heads as a continuous variable.</p>
+<h3 id="The-Importance-of-the-CLT"><a href="#The-Importance-of-the-CLT" class="headerlink" title="The Importance of the CLT"></a>The Importance of the CLT</h3><p>It’s all well and good that the theory works, but why should we care?</p>
+<p>The real power of the central limit theorem presents itself when we want to perform statistical analysis or tests on unfriendly distributions. The normal distribution has some incredibly delightful properties and has been studied in great extent, so working with it is often straightforward. On the other hand, there are many distributions which are not so cooperative, and that’s even assuming we know the distribution of whatever we are trying to model. Thankfully, the central limit theorem allows us to circumvent these issues by assuring us that as long as our process can be modeled as the sum of independent random variables (which is a surprisingly common property), we can approximate its distribution as normal and apply all of the standard techniques we know and love.</p>
+<p>For example, the number of visitors to a website in a given time period is unlikely to have an underlying normal distribution governing the process. This could make it difficult to analyze data related to this, however the central limit theorem offers a workaround. The rough conceptual notion behind this approach is to divide our time period up into smaller and smaller intervals and consider how many people visit the website in each of those. We can assume that these are reasonably independent and so our total visitor count becomes the sum of many independent random variables and so the central limit theorem holds. A small caveat of this specific result is that we require the number of visitors to the site in the time period to be reasonably large (&gt;20 visitors is typically fine), but as long as this holds, we can perform analysis just as if our data was normally distributed.</p>
+<blockquote class="colorquote success"><p>We can even go one step further. Since translating or scaling a normal distribution does not change its normality, it is possible to approximate many situations using the standard normal distrubtion (mean 0, variance 1) by applying appropriate transformations. This makes our lives even simpler and offers some elegance in the process.</p>
+</blockquote>
+
+
+<h2 id="From-Sums-to-Products"><a href="#From-Sums-to-Products" class="headerlink" title="From Sums to Products"></a>From Sums to Products</h2><p>This leads us nicely onto Gibrat’s law. In our rough definition of the central limit theorem above, we described taking numerous independent random variables and computing their sum. Gibrat’s law begins in a similar vein but goes on to consider the product of these values instead. Because of this alteration, we can no longer expect the aggregation to approach a normal distribution as the number of variables grows large. Instead we tend towards a related distribution—the log-normal distribution.</p>
+<p>As the name eludes to, a random variable following log-normal distribution can be defined by its logarithm being normally distributed. The converse of this framing is that whenever we take a normal random variable and take its exponential, the result will follow a log-normal distribution. Because of this, a log-normal random variable only takes strictly positive values with a density curve along the lines of the following.</p>
+<p><img src="/images/gibrats-law/gibrats-law_34_0.png" alt></p>
+<p>Just as with our coin-tossing experiment for the central limit theorem, we can validate our belief in Gibrat’s law using another simulation. We’ll introduce an explicit example of Gibrat’s law in the final section of the post and for now look an a more esoteric example. In particular, we will consider numerous independent random variables, uniformly-distributed on the interval $(0.5, 1)$. We then take the product of the first $n$ these variables and look at the probability distribution of this value. Using Gibrat’s law we would expect this product to approach a log-normal as $n$ becomes large, with a density tending in shape towards the curves shown above. A few simulations shows exactly that.</p>
+<p><img src="/images/gibrats-law/gibrats-law_37_0.png" alt></p>
+<blockquote class="colorquote success"><p>The example shown here is, admittedly, rather abstract. Despite this, it is still simple to frame it in terms of a real world problem (though perhaps not one of upmost importance). For example, we could imagine the product of independent uniform random variables modeling the process of repeatedly cutting a piece of string at a randomly chosen point along its length and retaining the longer part.</p>
+</blockquote>
+
+
+<p>It is worth noting that just as there is no one normal distribution, but rather many of various shapes and sizes, parameterized by their mean ($\mu$) and variance ($\sigma^2$), the same is true for the log-normal distribution. In fact, we parameterize a log-normal distribution not by its own mean and variance, but by the mean and variance of the resulting normal distribution we obtain when taking logarithms.</p>
+<p>This relationship between the two distributions offers us much of the same power the central limit theorem displays for Gibrat’s law too. Yes, taking the product of the independent random variables in its definition doesn’t give us the normal distribution we so desire directly, but with a simple logarithmic transformation we can get there. Further, because taking the logarithm of a random variable is a simple transformation with some desirable properties, we are able to utilize many of the tools we have developed for manipulating and analyzing the normal distribution with log-normal distribution. This in turn makes Gibrat’s law an incredibly powerful tool for simplifying statistical analysis. One question remains though: when does it hold? What sort of scenarios can be modeled as a product of independent random variables? This brings us neatly to the final section of this post in which we will look into just that, and confirm Gibrat’s law in action.</p>
+<h2 id="Verifying-the-Law"><a href="#Verifying-the-Law" class="headerlink" title="Verifying the Law"></a>Verifying the Law</h2><p>So far we’ve discussed some interesting ideas, but I think it’s time to pull things back from the land of statistical theory into the real world. Where would we expect to find Gibrat’s law in our lives?</p>
+<p>The key insight needed to answer this question is to understand the underlying mechanism of Gibrat’s law; it’s all above the multiplication of random variables. Specifically, we take the previous product and multiply it by some new random amount. Another way of looking at this is that these random variables represent the growth rate of some quantity. Now, this is not a fixed growth rate as you would have say with interest rates or nuclear decay, but rather a stochastic growth rate.</p>
+<p>To simplify this notion, all we are looking for is systems that evolve by a growth rate proportional to their current size with some added variation captured by the random nature of the variables. An example of such a system (and incidentally the original inspiration for the law) is that of modeling the growth of a firm. In a simple model, we can ignore the impacts of overarching market changes and catastrophic economic events and instead suggest that the growth of a company is roughly proportional to its current size with some added noise. Obviously, this model is primitive and its assumptions do not hold exactly, but it is close enough to believe that the distribution of the size of firms would indeed be log-normally distributed.</p>
+<p>Another example could be the distribution of the population sizes for various countries or cities. There are clear troubles with modeling such a system using Gibrat’s law, but overall it is not unreasonable to suggest that the population growth of a city is largely dependent on its current size, with some added stochasticity. Don’t take my word for it though! Instead, let’s quickly gather some data to verify this result for ourselves.</p>
+<h3 id="Sourcing-Data"><a href="#Sourcing-Data" class="headerlink" title="Sourcing Data"></a>Sourcing Data</h3><p>After some searching, I decided that the best data source to investigate the validity of Gibrat’s law for use with population data is <a href="https://en.wikipedia.org/wiki/List_of_cities_in_the_United_Kingdom" target="_blank" rel="noopener">this Wikipedia article</a> containing the populations of all sovereign states and dependencies. I then scraped relevant columns from the main table of this page, resulting in a dataset for which ten randomly chosen rows are shown below.</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>$(document).ready( function () {$('#table0').DataTable();} );</script>
+<table id="table0" class="display">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>City</th>
+      <th>Population</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>5</th>
+      <td>Manchester</td>
+      <td>503127</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>Southampton</td>
+      <td>236882</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>York</td>
+      <td>198051</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>Chelmsford</td>
+      <td>168310</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>Dundee</td>
+      <td>153990</td>
+    </tr>
+    <tr>
+      <th>51</th>
+      <td>Bath</td>
+      <td>88859</td>
+    </tr>
+    <tr>
+      <th>53</th>
+      <td>Hereford</td>
+      <td>58896</td>
+    </tr>
+    <tr>
+      <th>56</th>
+      <td>Stirling</td>
+      <td>34790</td>
+    </tr>
+    <tr>
+      <th>57</th>
+      <td>Lichfield</td>
+      <td>32219</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>City of London</td>
+      <td>7375</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h3 id="Visualizing-the-Results"><a href="#Visualizing-the-Results" class="headerlink" title="Visualizing the Results"></a>Visualizing the Results</h3><p>We can now plot a histogram of the populations for these cities. On top of this, we overlay a log-normal distribution with parameters chosen to best fit (using maximum likelihood estimation) to see how well the densities match.</p>
+<p><img src="/images/gibrats-law/gibrats-law_53_0.png" alt></p>
+<p>Now, before you say anything, I know. It’s not perfect. But, I hope we can agree that there is definitely <em>something</em> there. It’s also quite easy to explain why the match isn’t exact. For a start, we only had data for 69 cities so it’s no surprise that the histogram is so jagged. On top of this, city populations is one of the more difficult applications of Gibrat’s law due to the many factors that influence their size that aim to violate the assumptions of the rule.</p>
+<p>Despite these shortcomings, it is clear that Gibrat’s law has value to it either as a conceptual or statistical tool. It should certainly be the case that the validity of the law in any particular scenario should be tested thoroughly before resting too heavy on the results, but as a tool to guide you in the right direction, it is is invaluable.</p>
+<p>As eluded to above, the example of population data is more difficult than most applications of Gibrat’s law due to the numerous and influential externalities. I didn’t want to shy away from this case, especially when it is an example that has clear real-world implications for modeling. It therefore follows that in many more simplistic and controlled cases, Gibrat’s law shines even brighter. For example, it has been of great benefit in my work at AstraZeneca in forming suitable priors for energy distributions in statistical models. Without knowledge of this law it may have taken me more time to discover that the log-normal distribution was a natural and accurate model for these quanta.</p>
+<p>If anything, this post does not offer anything of immediate practical use. That is not to say however that there isn’t an important message. That is, remember Gibrat’s law—it’s there more than you think, and your awareness of it is vital for optimum efficiency in your statistical work. I hope you found this post of some insight, and I look forward to sharing more ideas and research as this blog developments.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/lesson/">lesson</a>, <a class="has-link-grey -link" href="/tags/normal-distribution/">normal-distribution</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/ai-not-as-smart/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">AI is Not as Smart as You May Think (but That&#39;s No Reason Not to Be Worried)</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/tribute-to-conway/">
+                <span class="level-item">The Look-and-Say Sequence: A Tribute to John Conway</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/gibrats-law/';
+        this.page.identifier = 'gibrats-law/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Data Scientist
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>AstraZeneca</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        36
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        19
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Introduction">
+        <span class="has-mr-6">1</span>
+        <span>Introduction</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Testing-and-Tediosity">
+        <span class="has-mr-6">1.1</span>
+        <span>Testing and Tediosity</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Background">
+        <span class="has-mr-6">2</span>
+        <span>Background</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Central-Limit-Theorem">
+        <span class="has-mr-6">2.1</span>
+        <span>The Central Limit Theorem</span>
+        </a></li><li>
+        <a class="is-flex" href="#The-Importance-of-the-CLT">
+        <span class="has-mr-6">2.2</span>
+        <span>The Importance of the CLT</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#From-Sums-to-Products">
+        <span class="has-mr-6">3</span>
+        <span>From Sums to Products</span>
+        </a></li><li>
+        <a class="is-flex" href="#Verifying-the-Law">
+        <span class="has-mr-6">4</span>
+        <span>Verifying the Law</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Sourcing-Data">
+        <span class="has-mr-6">4.1</span>
+        <span>Sourcing Data</span>
+        </a></li><li>
+        <a class="is-flex" href="#Visualizing-the-Results">
+        <span class="has-mr-6">4.2</span>
+        <span>Visualizing the Results</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/polish-countdown/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/polish-countdown.jpg" alt="A Polish Approach to Countdown">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T00:00:00.000Z">2020-12-09</time></div>
+                    <a href="/polish-countdown/" class="has-link-black-ter is-size-6">A Polish Approach to Countdown</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Combinatorics/">Combinatorics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/ai-not-as-smart/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ai-not-as-smart.jpg" alt="AI is Not as Smart as You May Think (but That&#39;s No Reason Not to Be Worried)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-01T23:00:00.000Z">2020-10-02</time></div>
+                    <a href="/ai-not-as-smart/" class="has-link-black-ter is-size-6">AI is Not as Smart as You May Think (but That&#39;s No Reason Not to Be Worried)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/gibrats-law/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/gibrats-law.jpg" alt="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T23:00:00.000Z">2020-05-08</time></div>
+                    <a href="/gibrats-law/" class="has-link-black-ter is-size-6">Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/tribute-to-conway/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/tribute-to-conway.jpg" alt="The Look-and-Say Sequence: A Tribute to John Conway">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-17T23:00:00.000Z">2020-04-18</time></div>
+                    <a href="/tribute-to-conway/" class="has-link-black-ter is-size-6">The Look-and-Say Sequence: A Tribute to John Conway</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/sentiment-of-shakespeare/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/sentiment-of-shakespeare.jpg" alt="Bank Holiday Bodge: The Sentiment of Shakespeare">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-12T23:00:00.000Z">2020-04-13</time></div>
+                    <a href="/sentiment-of-shakespeare/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: The Sentiment of Shakespeare</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 14.29px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.43px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 10px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.86px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/polish-countdown/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/polish-countdown.jpg" alt="A Polish Approach to Countdown">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-12-09T00:00:00.000Z">2020-12-09</time></div>
+                    <a href="/polish-countdown/" class="has-link-black-ter is-size-6">A Polish Approach to Countdown</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Combinatorics/">Combinatorics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/ai-not-as-smart/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/ai-not-as-smart.jpg" alt="AI is Not as Smart as You May Think (but That&#39;s No Reason Not to Be Worried)">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-01T23:00:00.000Z">2020-10-02</time></div>
+                    <a href="/ai-not-as-smart/" class="has-link-black-ter is-size-6">AI is Not as Smart as You May Think (but That&#39;s No Reason Not to Be Worried)</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/gibrats-law/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/gibrats-law.jpg" alt="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-07T23:00:00.000Z">2020-05-08</time></div>
+                    <a href="/gibrats-law/" class="has-link-black-ter is-size-6">Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/tribute-to-conway/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/tribute-to-conway.jpg" alt="The Look-and-Say Sequence: A Tribute to John Conway">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-17T23:00:00.000Z">2020-04-18</time></div>
+                    <a href="/tribute-to-conway/" class="has-link-black-ter is-size-6">The Look-and-Say Sequence: A Tribute to John Conway</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/sentiment-of-shakespeare/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/sentiment-of-shakespeare.jpg" alt="Bank Holiday Bodge: The Sentiment of Shakespeare">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-04-12T23:00:00.000Z">2020-04-13</time></div>
+                    <a href="/sentiment-of-shakespeare/" class="has-link-black-ter is-size-6">Bank Holiday Bodge: The Sentiment of Shakespeare</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a> / <a class="has-link-grey -link" href="/categories/Data-Science/Visualisation/">Visualisation</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">15</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">6</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 14.29px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 10px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 10px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 11.43px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 10px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 12.86px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Gibrat&#39;s Law: The Central Limit Theorem&#39;s Forgotten Twin" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2021 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

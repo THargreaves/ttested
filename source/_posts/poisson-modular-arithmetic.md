@@ -36,7 +36,7 @@ However, before we get to that, I would like to take a quick detour to look into
 
 The result from above tells us that the probability that a Poisson random variable is even is given by $\frac{1}{2}\left(1 + e^{-2\lambda}\right)$. This expression is notable for the fact that it is always strictly greater than $\frac{1}{2}$, meaning that the Poisson distribution has a preference for even numbers regardless of the value of $\lambda$. 
 
-I found this to be quite a surprising result and so have spent some time trying to build some intuition as to why this is true. The best explanation that I could come up with involves the characterisation of the Poisson distribution as the limit of a binomial distribution with $np_n \to \lambda$ (known as the [Law of Rare Events](https://en.wikipedia.org/wiki/Poisson_limit_theorem)). Using this result, it is sufficient to show that the binomial distribution has a preference for even numbers for $p < \frac{1}{2}$ (for $p > \frac{1}{2}$ the opposite will hold by the symmetry $X \to n - X$).
+I found this to be quite a surprising result and so have spent some time trying to build intuition as to why this is true. The best explanation that I could come up with involves the characterisation of the Poisson distribution as the limit of a binomial distribution with $np_n \to \lambda$ (known as the [Law of Rare Events](https://en.wikipedia.org/wiki/Poisson_limit_theorem)). Using this result, it is sufficient to show that the binomial distribution has a preference for even numbers for $p < \frac{1}{2}$ (for $p > \frac{1}{2}$ the opposite will hold by the symmetry $X \to n - X$).
 
 A nifty way to see this is to label the successes and failures of the underlying Bernoulli trials ($X_i$) as $+1$ and $-1$, respectively. It then follows that,
 
@@ -133,13 +133,13 @@ Finally, by considering the symmetry of the trigonometric functions, we obtain,
 
 $$
 \sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)
-= \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right).
+= 2 \cdot \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right).
 $$
 
 Note that we are now summing over half the terms, since the other half are complex conjugates. Putting this all together, we have,
 
 $$
-\mathbb{P}(X \equiv 0 \bmod d) = \frac{1}{d} \left[1 + e^{-\lambda}\sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right].
+\mathbb{P}(X \equiv 0 \bmod d) = \frac{1}{d} \left[1 + 2 e^{-\lambda}\sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right].
 $$
 
 As far as I can tell, this only has a closed form for the case $d = 3$, in which case we have,
@@ -199,11 +199,11 @@ print("Analytic Closed Form:", _poisson_multiple_three(mu))
 
 
 
-For even $d$ we simply have to take care over how we treat $\zeta^\frac{d}{2}$ since it has no complex conjugate in the sum to cancel with. I will leave this as an exercise for the reader..
+For even $d$ we simply have to take care over how we treat $\zeta^\frac{d}{2}$ since it has no complex conjugate in the sum to cancel with. I will leave this as an exercise for the reader.
 
 ## General Remainders
 
-It remains to consider how we can generalise our approach to compute $\mathbb{P}(X \equiv r \bmod d)$ for $r \neq 0$. This change we need to make is fairly simple, so I'll leave the algebraic details for the reader to verify. The key idea is that by replacing
+It remains to consider how we can generalise our approach to compute $\mathbb{P}(X \equiv r \bmod d)$ for $r \neq 0$. The change we need to make is fairly simple, so I'll leave the algebraic details for the reader to verify. The key idea is that by replacing
 
 $$\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) $$
 

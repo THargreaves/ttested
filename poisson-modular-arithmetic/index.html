@@ -16,7 +16,7 @@
 <meta property="og:description" content="Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distributi">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/poisson-modular-arithmetic.png">
-<meta property="og:updated_time" content="2023-05-02T19:38:52.377Z">
+<meta property="og:updated_time" content="2023-05-02T19:52:50.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Poisson Distribution Meets Modular Arithmetic">
 <meta name="twitter:description" content="Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distributi">
@@ -200,7 +200,7 @@
 <p>Naturally, this led me to think about the generalisation of the problem: what is $\mathbb{P}(X \equiv 0 \bmod d)$ for any $d \in \mathbb{N}$? The rest of this blog post will be dedicated to answering this question, before providing some brief comments about how this result can be extended to any remainder.</p>
 <p>However, before we get to that, I would like to take a quick detour to look into the $d=2$ case in a bit more depth.</p>
 <h2 id="Tangent-Parity-Preference"><a href="#Tangent-Parity-Preference" class="headerlink" title="Tangent: Parity Preference"></a>Tangent: Parity Preference</h2><p>The result from above tells us that the probability that a Poisson random variable is even is given by $\frac{1}{2}\left(1 + e^{-2\lambda}\right)$. This expression is notable for the fact that it is always strictly greater than $\frac{1}{2}$, meaning that the Poisson distribution has a preference for even numbers regardless of the value of $\lambda$. </p>
-<p>I found this to be quite a surprising result and so have spent some time trying to build some intuition as to why this is true. The best explanation that I could come up with involves the characterisation of the Poisson distribution as the limit of a binomial distribution with $np_n \to \lambda$ (known as the <a href="https://en.wikipedia.org/wiki/Poisson_limit_theorem" target="_blank" rel="noopener">Law of Rare Events</a>). Using this result, it is sufficient to show that the binomial distribution has a preference for even numbers for $p &lt; \frac{1}{2}$ (for $p &gt; \frac{1}{2}$ the opposite will hold by the symmetry $X \to n - X$).</p>
+<p>I found this to be quite a surprising result and so have spent some time trying to build intuition as to why this is true. The best explanation that I could come up with involves the characterisation of the Poisson distribution as the limit of a binomial distribution with $np_n \to \lambda$ (known as the <a href="https://en.wikipedia.org/wiki/Poisson_limit_theorem" target="_blank" rel="noopener">Law of Rare Events</a>). Using this result, it is sufficient to show that the binomial distribution has a preference for even numbers for $p &lt; \frac{1}{2}$ (for $p &gt; \frac{1}{2}$ the opposite will hold by the symmetry $X \to n - X$).</p>
 <p>A nifty way to see this is to label the successes and failures of the underlying Bernoulli trials ($X_i$) as $+1$ and $-1$, respectively. It then follows that,</p>
 <p>$$<br>\begin{align}<br>1 - 2 \cdot \mathbb{P}\left(\sum_{i=1}^n X_i \text{ is even}\right) &amp;= \mathbb{E}\left(X_1 \cdot \ldots \cdot X_n\right) \\<br>&amp;= \mathbb{E}\left(X_1\right) \cdot \ldots \cdot \mathbb{E}\left(X_n\right)  \quad \text{[independence]} \\<br>&amp;= (2p - 1)^n<br>\end{align}<br>$$</p>
 <p>and so,</p>
@@ -227,9 +227,9 @@
 <p>Noting that the term involving $\sin$ is the polar form of a complex number we can write,</p>
 <p>$$<br>\begin{align}<br>&amp;\sum_{k=1}^{d - 1} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \exp\left(\lambda\sin\left(\frac{2\pi k}{d}\right)i\right) = \\<br>&amp;\sum_{k=1}^{d - 1} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \left[\cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right) + i \sin\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right] \\<br>\end{align}<br>$$</p>
 <p>Finally, by considering the symmetry of the trigonometric functions, we obtain,</p>
-<p>$$<br>\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)<br>= \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right).<br>$$</p>
+<p>$$<br>\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)<br>= 2 \cdot \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right).<br>$$</p>
 <p>Note that we are now summing over half the terms, since the other half are complex conjugates. Putting this all together, we have,</p>
-<p>$$<br>\mathbb{P}(X \equiv 0 \bmod d) = \frac{1}{d} \left[1 + e^{-\lambda}\sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right].<br>$$</p>
+<p>$$<br>\mathbb{P}(X \equiv 0 \bmod d) = \frac{1}{d} \left[1 + 2 e^{-\lambda}\sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right].<br>$$</p>
 <p>As far as I can tell, this only has a closed form for the case $d = 3$, in which case we have,</p>
 <p>$$<br>\mathbb{P}(X \equiv 0 \bmod 3) = \frac{1 + 2 e^{-\frac{3\lambda}{2}}\cos\left(\frac{\sqrt{3}\lambda}{2}\right)}{3}.<br>$$</p>
 <p>Either way, we have a reduced a sum over an infinite series to a sum over a finite series, which is much more tractable. If anyone has any clever ideas on how this can be reduced to a closed form, I would be interested to hear—please get in touch or leave a comment.</p>
@@ -242,8 +242,8 @@ Monte Carlo Approximation: 0.158391 (±0.00037)
 
 TEST 2: mu = 1.5, d = 3
 Analytic Sum Form: 0.35219456292556717
-Analytic Closed Form: 0.35219456292556717</code></pre><p>For even $d$ we simply have to take care over how we treat $\zeta^\frac{d}{2}$ since it has no complex conjugate in the sum to cancel with. I will leave this as an exercise for the reader..</p>
-<h2 id="General-Remainders"><a href="#General-Remainders" class="headerlink" title="General Remainders"></a>General Remainders</h2><p>It remains to consider how we can generalise our approach to compute $\mathbb{P}(X \equiv r \bmod d)$ for $r \neq 0$. This change we need to make is fairly simple, so I’ll leave the algebraic details for the reader to verify. The key idea is that by replacing</p>
+Analytic Closed Form: 0.35219456292556717</code></pre><p>For even $d$ we simply have to take care over how we treat $\zeta^\frac{d}{2}$ since it has no complex conjugate in the sum to cancel with. I will leave this as an exercise for the reader.</p>
+<h2 id="General-Remainders"><a href="#General-Remainders" class="headerlink" title="General Remainders"></a>General Remainders</h2><p>It remains to consider how we can generalise our approach to compute $\mathbb{P}(X \equiv r \bmod d)$ for $r \neq 0$. The change we need to make is fairly simple, so I’ll leave the algebraic details for the reader to verify. The key idea is that by replacing</p>
 <p>$$\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) $$</p>
 <p>with</p>
 <p>$$<br>\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) \zeta^{-rk},<br>$$</p>

@@ -1,6 +1,6 @@
 ---
 title: "The Poisson Distribution Meets Modular Arithmetic"
-date: '2023-04-02'
+date: '2023-05-02'
 excerpt: "Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distribution of the Poisson random variable modulo a divisor."
 thumbnail: /gallery/thumbnails/poisson-modular-arithmetic.png
 toc: true

@@ -2,25 +2,25 @@
 <html lang="en">
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-<title>Excel Abuse: Peaceable Queens - T-Tested | Blogging about all things data</title>
+<title>Terminal Velocity in a Vacuum - T-Tested | Blogging about all things data</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-    <meta name="description" content="Microsoft Excel is a powerful tool for solving problems in many disiplines. It does, however, have its limitations; there are simply some problems that should not be solved in Excel. This is the first">
-<meta name="keywords" content="excel,solver,linear-programming">
+    <meta name="description" content="It is commonly claimed that an object dropped in a vacuum will continue to accelerate indefinitely, reaching arbitrarily high speeds. In fact, even in a vacuum, a falling object has a maximum speed it">
+<meta name="keywords" content="no-coding">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Excel Abuse: Peaceable Queens">
-<meta property="og:url" content="https://www.ttested.com/excel-abuse-peaceable-queens/index.html">
+<meta property="og:title" content="Terminal Velocity in a Vacuum">
+<meta property="og:url" content="https://www.ttested.com/terminal-velocity/index.html">
 <meta property="og:site_name" content="T-Tested | Blogging about all things data">
-<meta property="og:description" content="Microsoft Excel is a powerful tool for solving problems in many disiplines. It does, however, have its limitations; there are simply some problems that should not be solved in Excel. This is the first">
+<meta property="og:description" content="It is commonly claimed that an object dropped in a vacuum will continue to accelerate indefinitely, reaching arbitrarily high speeds. In fact, even in a vacuum, a falling object has a maximum speed it">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/excel-abuse-peaceable-queens.png">
-<meta property="og:updated_time" content="2023-09-05T14:00:22.698Z">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/terminal-velocity.jpg">
+<meta property="og:updated_time" content="2023-09-05T14:00:22.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Excel Abuse: Peaceable Queens">
-<meta name="twitter:description" content="Microsoft Excel is a powerful tool for solving problems in many disiplines. It does, however, have its limitations; there are simply some problems that should not be solved in Excel. This is the first">
-<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/excel-abuse-peaceable-queens.png">
+<meta name="twitter:title" content="Terminal Velocity in a Vacuum">
+<meta name="twitter:description" content="It is commonly claimed that an object dropped in a vacuum will continue to accelerate indefinitely, reaching arbitrarily high speeds. In fact, even in a vacuum, a falling object has a maximum speed it">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/terminal-velocity.jpg">
 
 
 
@@ -103,7 +103,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="Excel Abuse: Peaceable Queens" height="28">
+                <img src="/images/logo.png" alt="Terminal Velocity in a Vacuum" height="28">
             
             </a>
         </div>
@@ -162,7 +162,7 @@
     
     <div class="card-image">
         <span class="image is-7by1">
-            <img class="thumbnail" src="/gallery/thumbnails/excel-abuse-peaceable-queens.png" alt="Excel Abuse: Peaceable Queens">
+            <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
         </span>
     </div>
     
@@ -170,17 +170,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2020-03-22T00:00:00.000Z">2020-03-22</time>
+                <time class="level-item has-text-grey" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    11 minutes read (About 2100 words)
+                    6 minutes read (About 1100 words)
                 </span>
                 
                 
@@ -189,71 +189,53 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Excel Abuse: Peaceable Queens
+                Terminal Velocity in a Vacuum
             
         </h1>
         <div class="content">
-            <p>I understand why people use Excel. I really do.</p>
-<p>As a user of Python and R, amongst several other programming languages, I often find it frustrating that so many people gravitate towards Excel regardless of the nature of the problem they are trying to solve. For simple accounting, visualisation, and data entry I think that Excel is the perfect tool. As the scale and complexity of applications begin to grow, however, it starts to feel that the comfort people find in Excel ends up being more of a burden than a blessing.</p>
-<p>In my work, I have seen many complicated and expansive software tools productionised using Excel. On top of this, the lack of portablity between Excel versions, the difficulty of maintaining and documenting such applications, and the inivitable performance limits that a user runs into, have repeatedly made themselves clear. All of this hassle makes me wonder whether it would just be easier for the developers of these products to learn a new, more suitable toolset. It may take a while to learn, say Python, to a competent level, but after seeing the frustration Excel can cause, maybe this is a worthy investment for the long-run.</p>
-<p>I say this and yet, I’ve never truely given Excel a full evaluation; I’ve never attempted to throw some of the more complicated projects I come across at the program and see how it copes. This is going to change, however. So that I can feel entirely justified in nudging developers away from Excel towards more formal toolsets, I have decided to start a new series in which I aim to push Excel to its limits to see if (more likely, when) it breaks and how the development of such complicated applications manifests itself. </p>
-<p>In this first installment, we will look at a mathematical puzzle known as the peaceable queens problem. Can Excel solve this problem? If so, how monsterous will the solution become? Read on to find out.</p>
-<h2 id="The-Peaceable-Queens-Problem"><a href="#The-Peaceable-Queens-Problem" class="headerlink" title="The Peaceable Queens Problem"></a>The Peaceable Queens Problem</h2><p>The peaceable queens problem is relatively obscure in the world of mathematics, but presents an interesting challenge just about suitable for solving in Excel. It concerns a chessboard of dimensions $m\times n$ where $m,n$ are arbritary positive integers. The goal of the problem is to find the maximum integer $z$ such that $z$ black queens and $z$ white queens can coexist on the chessboard without attacking each other.</p>
-<p>For example, in the case where $m,n=4$ we have a $4\times4$ chessboard. The diagram below first shows an invalid (non-peaceable) solution. This is followed by a valid solution (all queens coexist) that is not optimal (at least one queen of each colour can be added whilst maintaining peace). The final board shows one of many optimal solutions featuring two queens of each colour. You can try as hard as you’d like to find an arrangement with three queens of each colour, but trust me, you’ll be searching for a while!<br><img src="/images/excel-abuse-peaceable-queens/4x4-example.png" alt></p>
-<blockquote class="colorquote warning"><p>Note that we require any solution to have the same number of black and white queens. Hence, even if we can add more queens of just one colour to an existing solution, this has no value to us.</p>
+            <h2 id="Recap-Terminal-Velocity"><a href="#Recap-Terminal-Velocity" class="headerlink" title="Recap: Terminal Velocity"></a>Recap: Terminal Velocity</h2><blockquote class="colorquote info"><p>If you’re already familar with the mechanics of free fall in a non-constant gravitational field, feel free to skip to the final (third) section.</p>
 </blockquote>
 
-
-<p>The above gives a solution (though admittedly, not a proven one) for a specific case. What about general $m,n$? Before we create an Excel spreadsheet to solve this problem, let’s see what mathematicians have found out using general methods.</p>
-<h3 id="The-State-of-the-Art"><a href="#The-State-of-the-Art" class="headerlink" title="The State of the Art"></a>The State of the Art</h3><p>I came across this problem when looking at the <a href="oeis.org">Online Encyclopedia of Integer Sequences</a> (OEIS). This site consists of an immense collection of sequences of integers (e.g. the Fibonacci sequence, the prime numbers). The <a href="https://oeis.org/A250000" target="_blank" rel="noopener">250,000th</a> of which just so happens to be the sequence of optimal values of $z$ in the peaceable queens problem for square chessboards of increasing sizes. For example, the fourth entry in the sequence corresponds to the chessboard of size $4\times4$ and so has a value of $2$ as we saw above.</p>
-<p>The earliest known reference to this problem was by <a href="https://www.austinmacauley.com/author/ainley-stephen" target="_blank" rel="noopener">Stephen Ainley</a> in his <a href="https://www.goodreads.com/book/show/15195509-mathematical-puzzles" target="_blank" rel="noopener">1977 book of mathematical puzzles</a>. Ainley found layouts for square chessboards up to size $30\times30$, only one of which ($27\times27$) has since been improved upon. There is reason to believe that many of these solutions are indeed optimal, yet we have only proved this for results up to $15\times15$. Therefore if we can solve the problem for chessboards of size anywhere near $15\times15$ we will have achieved a lot.</p>
-<blockquote class="colorquote success"><p>Although we do not currently have optimality proofs for $n&gt;16$, reasonable lower and upper bounds do exist. You can read more about these in the [sequence]’s(<a href="https://oeis.org/A250000" target="_blank" rel="noopener">https://oeis.org/A250000</a>) comments section.</p>
+<p>Most people who studied Physics at a high school level should be familiar with notion of terminal velocity. It is the effective “speed limit” for a specfic object falling in a fluid (usually air). This occurs because the drag force (e.g. air resistance) on an object increases with speed, until it is equal to the force of gravity. At this point, the net force on the object is zero, and it stops accelerating. The object is now at terminal velocity.</p>
+<p>Mathematically, the gravitational force on an object of mass $m$ is given by,</p>
+<p>$$F_g = mg,$$</p>
+<p>where $g$ is the acceleration due to gravity (roughly $9.81 \mathrm{m/s^2}$ on Earth). Importantly, this force is independent of the object’s speed. On the other hand, an <a href="https://en.wikipedia.org/wiki/Spherical_cow" target="_blank" rel="noopener">idealised</a> form of the drag force is given by,</p>
+<p>$$F_d = \frac{1}{2} \rho C_D A \times v^2.$$</p>
+<p>There are a lot of constants in this expression which are not required for our purposes (full details can be found <a href="https://www.grc.nasa.gov/www/k-12/rocket/drageq.html" target="_blank" rel="noopener">here</a>). Instead the important thing is that the drag force is proportional to the square of the object’s speed $v$, meaning that it will keep increasing as we accelerate until it is equal to the gravitational force. At this point, the net force on the object is zero, and it stops accelerating, and we remain at this terminal velocity indefinitely.</p>
+<p>It is worth noting that drag is a mechanical force. That is, rather than being generated by a force field (such as with gravitational or electromagnetic field), it is generated by the interaction and contact between the atoms of the object and those of the fluid it is travelling through. This means that in a vacuum, there is no drag force, and so there is no terminal velocity.</p>
+<p>This may lead one to conclude that an object dropped in a vacuum will continue to accelerate indefinitely, reaching arbitrarily high speeds (or more accurately arbitrarly close to the speed of light if we account for relativistic effects). In fact, it was an educational YouTube video suggesting this that was the exact inspiration for me writing this post. As intuitive as this may seem, it is not true: even in a vacuum, a falling object has a maximum speed it can reach.</p>
+<p>That said, there is some truth to the original claim. Specifically, if the object is given an arbitrary large intitial velocity, the absense of drag does mean that it will not lose this speed and drop to a lower terminal velocity. In fact, it will continue to accelerate, though it will still be unable to reach an arbitrarily high speed.</p>
+<h2 id="Recap-Newton’s-Law-of-Universal-Gravitation"><a href="#Recap-Newton’s-Law-of-Universal-Gravitation" class="headerlink" title="Recap: Newton’s Law of Universal Gravitation"></a>Recap: Newton’s Law of Universal Gravitation</h2><p>The expression for gravitational force we used above is actually only an approximation that holds for objects near the surface of the Earth, built on the assumption that over short distances, the graviational force on an object is roughly constant. In reality, this is far from the truth.</p>
+<p>Going forwards, lets consider an asteroid of mass $m$ falling towards a planet of mass $M$ from an initial stationary position. The gravitational force on the asteroid is dependent on the current distance $r$ (for radius) between the asteroid and the planet,</p>
+<p>$$<br>F_g = \frac{GMm}{r^2},<br>$$</p>
+<p>where $G$ is the universal gravitational constant ($\approx 6.67 \times 10^{-11} \mathrm{N \cdot m^2 \cdot kg^{-2}}$). This relation is known as Newton’s law of universal gravitation.</p>
+<p>In English, this says that the gravitational force is inversely proportional to the square of the distance between the two objects. That is, the further away the asteroid is, the weaker the gravitational force. It is clear that this is much more sensible expression for gravitational force compared to the distance-independent approximation we used above. Otherwise, we would expect that the gravitational pull from the Earth would be the same whether we were standing on the surface or on the moon, which is certainly not the case.</p>
+<h2 id="Terminal-Velocity-in-a-Vacuum"><a href="#Terminal-Velocity-in-a-Vacuum" class="headerlink" title="Terminal Velocity in a Vacuum"></a>Terminal Velocity in a Vacuum</h2><p>By applying a sprinkling of calculus, we can use this expression for gravitational force to derive an expression for the velocity of the asteroid as a function of its distance from the planet.</p>
+<blockquote class="colorquote info"><p><strong>Mathematical Derivation</strong></p>
+<p>The motion of the asteroid is governed by the differential equation,</p>
+<p>$$<br>\frac{d^2r}{dt^2} = \frac{GM}{r^2}.<br>$$</p>
+<p>We multiply both sides by $\frac{dr}{dt}$ and integrate with respect to $t$. The left hand side gives,</p>
+<p>$$<br>\int_0^t \frac{d^2r}{dt^2} \frac{dr}{dt} dt =<br>\int_0^t \frac{dv}{dt} v<br>= \int_0^v v dv<br>= \frac{1}{2} v^2,<br>$$</p>
+<p>whilst the right hand side gives,</p>
+<p>$$<br>\int_0^t \frac{GM}{r^2} \frac{dr}{dt} dt =<br>GM \int_R^r \frac{1}{r^2} dr =<br>GM \left(\frac{1}{r} - \frac{1}{R}\right).<br>$$</p>
+<p>Equating the two sides (noting that $v(0) = 0$) and rearranging gives the expression for $v(r)$ below.</p>
 </blockquote>
 
-
-<h3 id="A-Mathematical-Formulation"><a href="#A-Mathematical-Formulation" class="headerlink" title="A Mathematical Formulation"></a>A Mathematical Formulation</h3><p>Before we jump into our Excel-based solution, we will have to reframe the problem in a mathematical setting. Specifically, we can describe the problem as an <a href="https://en.wikipedia.org/wiki/Integer_programming" target="_blank" rel="noopener">Integer Programming Problem</a>. It’s not worth sweating over the details of this and so if you don’t care for the maths, you can skip the rest of this section. The important takeaway is that the problem can be thought of as this special integer programming formulation, the likes of which Excel is equipped to solve.</p>
-<hr>
-
-<p>Specifically, for $i\in[m]$, $j\in[n]$ we let $b_{ij}$, $w_{ij}$ represent be the binary indictors of whether there is a black or white queen in the square $(i,j)$, respectively. Our goal then becomes to maximise</p>
-<p>$$z := \sum_{i=1}^m\sum_{j=1}^n b_{ij}$$</p>
-<p>subject to</p>
-<p>$$\sum_{i=1}^m\sum_{j=1}^n b_{ij} = \sum_{i=1}^m\sum_{j=1}^n w_{ij}$$</p>
-<p>and</p>
-<p>$$b_{i_1j_1}+w_{i_2j_2}\leq 1 \quad \forall ((i_1, j_1), (i_2, j_2))\in M$$</p>
-<p>where $M$ is the set of all ordered pairs of squares that share a line (row, column or diagonal) of the board. </p>
-<blockquote class="colorquote info"><p>It is clear to see that this formulation involves $2mn$ variables. Counting the number of constraints is more challenging. We will have $2mn$ binary constraints plus one more to enforce an equal number of black and white queens. Then we are left with constraints for peacability, of which there will be $|M|$. For each $(i_1, j_1)\in[m]\times[n]$ there are $(m-1) + (n-1) + 2(\text{min}(m, n) - 1)$ squares $(i_2, j_2)\in[m]\times[n]$ that share a line with $(i_1, j_1)$ (you can just count them; don’t overthink it) and so |M| = $mn(m-1 + n-1 + 2(\text{min}(m, n) - 1))$. It is clear that this dominates the number of constraints and so overall we have $\mathcal{O}(mn\text{max}(m, n))$ constraints. For $m=n$ we see that the number of constraints is $\mathcal{O}(n^3)$—not great!</p>
+<p>Suppose that the asteroid begins its descent at a distance of $R$ from the planet’s centre. Then, the velocity $v$ of the asteroid at a distance $r$ from the planet’s centre is given by,</p>
+<p>$$<br>v(r) = \sqrt{2GM} \sqrt{\frac{1}{r} - \frac{1}{R}}.<br>$$</p>
+<p>At first glance, this expression seems to suggest an unbounded velocity is possible. Indeed, as the distance $r$ of the asteroid tends to zero, the velocity does tend to infinity. Importantly, though, this is not the distance from the planet’s surface, but from its centre. In reality, the planet has a non-zero radius $\rho$, and so the asteroid will never reach a distance of zero from the planet’s centre. Instead, when it collides with the planet it will have a velocity of,</p>
+<p>$$<br>v_\textrm{final} = \sqrt{2GM} \sqrt{\frac{1}{\rho} - \frac{1}{R}}.<br>$$</p>
+<p>Therefore, even when we consider the most extreme case of an asteroid falling from an infinite distance away ($R = \infty$), it will still have a finite velocity of,</p>
+<p>$$<br>v_\textrm{final} = \sqrt{\frac{2GM}{\rho}},<br>$$</p>
+<p>when it collides with the planet. Although not a terminal velocity in the traditional sense, this is still a maximum velocity that the asteroid can reach: a terminal velocity in a vacuum, if you will.</p>
+<blockquote class="colorquote info"><p><strong>Mathematical Tangent</strong></p>
+<p>By using the identity,</p>
+<p>$$<br>\int \sqrt{\frac{x}{c - x}} dx = c \tan^{-1} \left( \sqrt{\frac{x}{c-x}} \right) - \sqrt{x(c - x)},<br>$$</p>
+<p>one can show that the collision will occur at time,</p>
+<p>$$<br>T = \sqrt{\frac{R}{2GM}} \left[R \tan^{-1} \left( \sqrt{\frac{R}{\rho} - 1} \right) - \sqrt{\rho(R - \rho)}\right].<br>$$</p>
+<p>As $\rho \to 0$, this becomes,</p>
+<p>$$<br>T = \frac{\pi}{2} \sqrt{\frac{R^3}{2GM}}<br>$$</p>
 </blockquote>
-
-
-<blockquote class="colorquote success"><p>This formulation turns out to be sub-optimal, but for our purposes it will do. See <a href="https://oeis.org/A250000/a250000.pdf" target="_blank" rel="noopener">here</a> for a more detailed analysis of the problem.</p>
-</blockquote>
-
-
-<h2 id="Excel-Abuse"><a href="#Excel-Abuse" class="headerlink" title="Excel Abuse"></a>Excel Abuse</h2><blockquote class="colorquote info"><p>You can download the final spreadsheet from <a href="https://www.ttested.com/files/files/PeaceableQueens.xlsm">this link</a>. Note that you will need to enable content as the worksheet depends on macros.</p>
-</blockquote>
-
-
-<p>With the maths out of the way, we can move onto solving the problem using Excel. As suggested above, Excel has a built-in add-on for solving many types of optimisation problems such as integer programming problems. Since we can formulate the peaceable queens problem in this way, we’re in a good position to solve it. The only issue is that Excel requires a lot of structural and formula overhead to start the solver (i.e. we must populate the worksheet with a lot of relevant information). In my first draft I did this by hand for the $3\times3$ case, but this takes a long time so is not suitable for a general solution. Instead we can leverage VBA, a scripting language for controlling Excel, to automatically generate such content.</p>
-<h3 id="Creating-a-Solution"><a href="#Creating-a-Solution" class="headerlink" title="Creating a Solution"></a>Creating a Solution</h3><p>I began by creating a user interface consisting of two dimension inputs, two buttons, and a static colour key.</p>
-<p><img src="/images/excel-abuse-peaceable-queens/user-controls.png" alt="User interface for the peaceable queens solver"></p>
-<p>The dimension inputs have data validation restricting values to be integers in the range 2–3 (more on this later). Once these are set to the desired values, clicking the ‘Solve Problem’ button will populate the sheet with the information Excel’s solver requires and then begin solving the problem. After a few seconds a dialog box will appear to notify the user that a solution has been obtained.</p>
-<p><img src="/images/excel-abuse-peaceable-queens/solver-dialog.png" alt="Completion dialog and cells used for solving"></p>
-<blockquote class="colorquote info"><p>Note that when a solution is found it has also been proven to be optimal. There may be other valid solutions but they will have at most the same number of queens.</p>
-</blockquote>
-
-
-<p>A solution can then be read off from the green boxes, the orange cells showing the optimal value of $z$ found. The box titled ‘Blacks’ corresponds to the positions of the black queens (a square has value one if and only if there is a black queen there) and likewise for the ‘Whites’.</p>
-<p><img src="/images/excel-abuse-peaceable-queens/solution.png" alt="A solution for the $3\times3$ case"></p>
-<p>We have a solution…for the $3\times3$ case that is. Unfortunately, the built-in Excel solver does not scale well. Due to this, Microsoft have put limits on the number of variables (100) and constraints (200) you are able to use for an optimisation problem. For the $3 \times 3$ and smaller cases, we do not surpass these limits yet for $3 \times 4$ and larger we do. Therefore, although our solution works in theory, it has little us in practice.</p>
-<h3 id="Going-Further"><a href="#Going-Further" class="headerlink" title="Going Further"></a>Going Further</h3><p>The limitations of the built-in solver are rather disappointing. Thankfully, a workaround comes in the form of <a href="https://www.solver.com/" target="_blank" rel="noopener">FrontlineSolvers</a>‘ suite of 3rd-party Excel solver plugins. Unfortunately, this software is equipped hefty price tag of a few thousand dollars. Luckily for us, there is a free 15-day trial. I signed up for this (no card required), installed the software, and let it loose on some larger problems. This raised the size of the largest possible board to around $10\times10$. This is still not limited by the implemented approach but rather that the trial version has its own (though admittedly, large) variable and constraint limits too. My back-of-the-envelope calculation suggests that the full version of this solver (with no limits and access to solving algorithms optimised for sparse systems) could result in solutions for boards up to $12\times12$ and perhaps $13\times13$ with some patience. This is incredible considering that no approach to the problem is yet to surpass $15\times15$.</p>
-<blockquote class="colorquote warning"><p>Adapting the workbook to use FrontlineSolvers’ solver is simple. First install the trial version of the solver. Then open the existing workbook, disable protection and remove data validation from the dimension cells. Click the ‘Solve Problem’ button as before. This populate the spreadsheet but will not find a solution (since this surpasses the default solver’s limits). The sheet will now be protected so disable this again. Navigate to the ‘AnalyticSolver’ tab in the top ribbon and select ‘Model’. This will open a sidebar, and selecting the green play button will solve the problem.</p>
-</blockquote>
-
-
-<p>The largest solution I found was for the $10\times10$ board. This took a few hours of my computer’s intense labour to discover and subsequently prove optimality. Thankfully there is no NSPCMP (National Society for the Prevention of Cruelty to Microsoft Products) so I got away with this abuse. The resulting layout is as follows.</p>
-<p><img src="/images/excel-abuse-peaceable-queens/10x10.png" alt="An optimal $10\times10$ solution featuring $14$ queens of each colour"></p>
-<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>I don’t want this post to drag on so I will refrain from offering a solution using a more appropriate tool such as Python or R for comparison. Note though, that even though this solution does technically work, it is clunkly, ugly, and would require several thousands of dollars worth of spare cash to implement asl a permanent solution (though why you’d have a regular need for find peaceable arrangements of queens, I do not know). An equivalent tool using a formal language could easily be much faster, portable, and—most importantly—completely free for any scale your computer can handle. </p>
-<p>Solving this problem was fun but the conclusion only confirms my initial beliefs—if the problem is this complex, save Excel the abuse.</p>
 
         </div>
         
@@ -261,7 +243,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/excel/">excel</a>, <a class="has-link-grey -link" href="/tags/linear-programming/">linear-programming</a>, <a class="has-link-grey -link" href="/tags/solver/">solver</a>
+                    <a class="has-link-grey -link" href="/tags/no-coding/">no-coding</a>
                 </div>
             </div>
         </div>
@@ -278,17 +260,10 @@
 <div class="card card-transparent">
     <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/ditch-mnist/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">Is it Time to Ditch the MNIST Dataset?</span>
-            </a>
-        </div>
-        
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/guide-to-love/">
-                <span class="level-item">A Statistican&#39;s Guide to Love</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/poisson-modular-arithmetic/">
+                <span class="level-item">The Poisson Distribution Meets Modular Arithmetic</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -304,8 +279,8 @@
         
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://www.ttested.com/excel-abuse-peaceable-queens/';
-        this.page.identifier = 'excel-abuse-peaceable-queens/';
+        this.page.url = 'https://www.ttested.com/terminal-velocity/';
+        this.page.identifier = 'terminal-velocity/';
     };
     (function() {
         var d = document, s = d.createElement('script');  
@@ -408,34 +383,18 @@
                 Catalogue
             </h3>
             <ul class="menu-list"><li>
-        <a class="is-flex" href="#The-Peaceable-Queens-Problem">
+        <a class="is-flex" href="#Recap-Terminal-Velocity">
         <span class="has-mr-6">1</span>
-        <span>The Peaceable Queens Problem</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#The-State-of-the-Art">
-        <span class="has-mr-6">1.1</span>
-        <span>The State of the Art</span>
+        <span>Recap: Terminal Velocity</span>
         </a></li><li>
-        <a class="is-flex" href="#A-Mathematical-Formulation">
-        <span class="has-mr-6">1.2</span>
-        <span>A Mathematical Formulation</span>
-        </a></li></ul></li><li>
-        <a class="is-flex" href="#Excel-Abuse">
+        <a class="is-flex" href="#Recap-Newton’s-Law-of-Universal-Gravitation">
         <span class="has-mr-6">2</span>
-        <span>Excel Abuse</span>
-        </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Creating-a-Solution">
-        <span class="has-mr-6">2.1</span>
-        <span>Creating a Solution</span>
+        <span>Recap: Newton’s Law of Universal Gravitation</span>
         </a></li><li>
-        <a class="is-flex" href="#Going-Further">
-        <span class="has-mr-6">2.2</span>
-        <span>Going Further</span>
-        </a></li><li>
-        <a class="is-flex" href="#Conclusion">
-        <span class="has-mr-6">2.3</span>
-        <span>Conclusion</span>
-        </a></li></ul></li></ul>
+        <a class="is-flex" href="#Terminal-Velocity-in-a-Vacuum">
+        <span class="has-mr-6">3</span>
+        <span>Terminal Velocity in a Vacuum</span>
+        </a></li></ul>
         </div>
     </div>
 </div>
@@ -1033,7 +992,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="Excel Abuse: Peaceable Queens" height="28">
+                    <img src="/images/logo.png" alt="Terminal Velocity in a Vacuum" height="28">
                 
                 </a>
                 <p class="is-size-7">

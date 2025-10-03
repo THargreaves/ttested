@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Streamlining Your Data Science Workflow With Magrittr - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="The Tidyverse is here to stay so why not make the most out of it? The `magrittr` package extends the basic piping vocabulary of the core Tidyverse to facilitate the production of more intuitive, reada">
+<meta name="keywords" content="r,tutorial,tidyverse,magrittr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Streamlining Your Data Science Workflow With Magrittr">
+<meta property="og:url" content="https://www.ttested.com/streamlining-with-magrittr/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="The Tidyverse is here to stay so why not make the most out of it? The `magrittr` package extends the basic piping vocabulary of the core Tidyverse to facilitate the production of more intuitive, reada">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/streamlining-with-magrittr.jpg">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Streamlining Your Data Science Workflow With Magrittr">
+<meta name="twitter:description" content="The Tidyverse is here to stay so why not make the most out of it? The `magrittr` package extends the basic piping vocabulary of the core Tidyverse to facilitate the production of more intuitive, reada">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/streamlining-with-magrittr.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Streamlining Your Data Science Workflow With Magrittr" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/streamlining-with-magrittr.jpg" alt="Streamlining Your Data Science Workflow With Magrittr">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-20T23:00:00.000Z">2018-10-21</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Data-Science/">Data Science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Data-Science/Best-Practice/">Best Practice</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 2000 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Streamlining Your Data Science Workflow With Magrittr
+            
+        </h1>
+        <div class="content">
+            <p>Packages required for this post:</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">suppressPackageStartupMessages(<span class="hljs-keyword">library</span>(dplyr)) <span class="hljs-comment"># manipulating data</span></span><br><span class="line"><span class="hljs-keyword">library</span>(ggplot2) <span class="hljs-comment"># data visualisation</span></span><br><span class="line"><span class="hljs-keyword">library</span>(magrittr) <span class="hljs-comment"># piping (to be elaborated on throughout the post)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<pre><code>Warning message:
+&quot;package &apos;ggplot2&apos; was built under R version 3.6.1&quot;</code></pre><h1 id="Getting-to-know-magrittr"><a href="#Getting-to-know-magrittr" class="headerlink" title="Getting to know magrittr"></a>Getting to know magrittr</h1><p><em>Magrittr</em> (pronounced with a sophisticated French accent, as per the introductory vignette) is an incredibly powerful R package that forms the foundation of the <a href="https://www.tidyverse.org/" target="_blank" rel="noopener">tidyverse</a>. In my personal opinion, it is one of the most underrated packages in the R ecosystem. Without its existence, my productivity in R would be severely hampered.</p>
+<p>The most fundamental tool this package offers is called the  “pipe” operator, <code>%&gt;%</code>. The purpose of this operator is to take the value on the left hand side (LHS) and pass it into whatever function call is on the right hand side (RHS) as the first argument. In other words, if you write something along the lines of <code>x %&gt;% f()</code>, this will be evaluated as <code>f(x)</code>. More generally if your function already has some filled parameters as in <code>x %&gt;% f(y, z)</code>, this is evaluated as <code>f(x, y, z)</code>. This lets you produce chunks of code called “pipelines” which use multiple pipe operators to create a continual flow of functions, the output of one being passed on to the next such as in this example.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># data manipulation without magrittr</span></span><br><span class="line">cars_subset &lt;- filter(mtcars, mpg &gt; <span class="hljs-number">15</span>)</span><br><span class="line">cars_grouped &lt;- group_by(cars_subset, cyl)</span><br><span class="line">cars_aggregate &lt;- summarise(cars_grouped, mean = mean(disp))</span><br><span class="line">cars_sort &lt;- arrange(cars_aggregate, desc(mean))</span><br><span class="line">cars_sort</span><br></pre></td></tr></table></figure>
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>$(document).ready( function () {$('#table0').DataTable();} );</script>
+<table id="table0" class="display">
+
+<thead>
+    <tr><th scope="col">cyl</th><th scope="col">mean</th></tr>
+    <tr><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+    <tr><td>8</td><td>320.0500</td></tr>
+    <tr><td>6</td><td>183.3143</td></tr>
+    <tr><td>4</td><td>105.1364</td></tr>
+</tbody>
+</table>
+
+
+
+
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># data manipulation with magrittr</span></span><br><span class="line">mtcars %&gt;% </span><br><span class="line">  filter(mpg &gt; <span class="hljs-number">15</span>) %&gt;%</span><br><span class="line">  group_by(cyl) %&gt;%</span><br><span class="line">  summarise(mean = mean(disp)) %&gt;%</span><br><span class="line">  arrange(desc(mean))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<script>$(document).ready( function () {$('#table1').DataTable();} );</script>
+<table id="table1" class="display">
+
+<thead>
+    <tr><th scope="col">cyl</th><th scope="col">mean</th></tr>
+    <tr><th scope="col">&lt;dbl&gt;</th><th scope="col">&lt;dbl&gt;</th></tr>
+</thead>
+<tbody>
+    <tr><td>8</td><td>320.0500</td></tr>
+    <tr><td>6</td><td>183.3143</td></tr>
+    <tr><td>4</td><td>105.1364</td></tr>
+</tbody>
+</table>
+
+
+
+<p>As you can see, we get the exact same result in either. However, there is no question that the second method, using <em>magrittr</em>, is easier to follow and is far simply to write due to its reduced code duplication. Using <em>magrittr</em> lets you avoid the use of any temporary variables such as <code>cars_grouped</code> and <code>cars_sort</code> and lets you produce one long pipeline with each function leading naturally into the next. Furthermore, using the pipe operator makes your code far more interpretable to anyone less tech-savvy. The pipeline is written in the same way that you would describe the data manipulation process: take the data, filter it for certain MPG, group by number of cylinders, find the mean of each group, arrange the rows using this mean in descending order and print the output. If you’ve never seen <em>magrittr</em> before, I hope that this example confirms its place in your data science tool-kit.</p>
+<p>Anyone familiar with the use of tidyverse packages, though, will most likely recognise this operator. This is because it is included in the packages <code>dplyr</code> and <code>tidyr</code> - tidyverse packages for data manipulation and tidying respectively- and most likely others too. Paradoxically, this inclusion is in fact unfavourable for <em>magrittr</em>‘s full adoption as it leads many people to believe that this is as far as piping in R reaches, but that is far from the truth. Using the <em>magrittr</em> package directly (as opposed to through another tidyverse package), gives you access to several other pipe operator variants which offer you even more power over your workflow. Furthermore there are plenty of tricks involving <em>magrittr</em> that many people are unaware of. In this blog post, I wish to give a thorough introduction to the main features of the package through the use of practical examples. I hope that I can convince you that <em>magrittr</em> is truly one of the most important packages in the R ecosystem for the productive developer.</p>
+<h1 id="Further-pipe-operators"><a href="#Further-pipe-operators" class="headerlink" title="Further pipe operators"></a>Further pipe operators</h1><blockquote class="colorquote info"><p>All printing has been disabled in this post to avoid adding unnecessary baggage. All of the examples are self-contained however so if you which to see their output, you can simply copy the chunks to your own R session and run them, provided you have dplyr and magrittr installed and loaded.</p>
+</blockquote>
+
+
+<p>Alongside the standard piping operator <code>%&gt;%</code>, <em>magrittr</em> offers three related operators which offer similar functionality but with slightly different execution. These may not be used as frequently as %&gt;% but they are still extremely important to have familiarity with for the special cases in which they can be effectively utilised.</p>
+<h3 id="The-compound-assingment-operater"><a href="#The-compound-assingment-operater" class="headerlink" title="The compound assingment operater"></a>The compound assingment operater</h3><p>The first additional operator we look as is called the compound pipe operator. This is implemented using <code>%&lt;&gt;%</code>. The effect of this is very similar to <code>%&gt;%</code>, except rather than simply piping the LHS into the first argument of the RHS and evaluating it, the result of this process is then assigned to the LHS as its new value. This is essentially shorthand for <code>x &lt;- x %&gt;% f()</code>, which is instead being replaced with <code>x %&lt;&gt;% f()</code>. This can be combined with multiple instances of the regular pipe to create pipelines designed to manipulate an existing object. Here is an example use of the compound assignment operator using the iris data set.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iris_sample &lt;- iris[sample(nrow(iris), <span class="hljs-number">30</span>), ]</span><br><span class="line">iris_sample %&lt;&gt;% filter(Species != <span class="hljs-string">"setosa"</span>) %&gt;%</span><br><span class="line">  select(Sepal.Length, Sepal.Width) %&gt;%</span><br><span class="line">  arrange(Sepal.Length, Sepal.Width)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="The-tee-operator"><a href="#The-tee-operator" class="headerlink" title="The tee operator"></a>The tee operator</h3><p>The tee operator, <code>%T&gt;%</code>, is also rather similar in function to the standard pipe, except rather than returning the result of evaluating the RHS, it instead returns the LHS. For example if you were to run <code>x %T&gt;% f</code>, R would run <code>f(x)</code> but will return <code>x</code> instead of <code>f(x)</code>. This is useful for when the function you are piping into is used for its side-effects (e.g. plotting, printing) rather than the value it returns. This then lets you carry on your pipeline rather than having to halt abruptly when a function doesn’t return a useful value. An example use of this is generating a plot mid-pipeline as shown here.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sample(<span class="hljs-number">1</span>:<span class="hljs-number">100</span>, size = <span class="hljs-number">50</span>) %&gt;%</span><br><span class="line">  cbind(sample(<span class="hljs-number">1</span>:<span class="hljs-number">100</span>, size = <span class="hljs-number">50</span>)) %<span class="hljs-literal">T</span>&gt;%</span><br><span class="line">  plot() %&gt;% <span class="hljs-comment"># plot is used for its side-effect</span></span><br><span class="line">  colMeans() %&gt;% <span class="hljs-comment"># the result of cbind is passed into here</span></span><br><span class="line">  diff()</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="A-word-of-warning"><a href="#A-word-of-warning" class="headerlink" title="A word of warning"></a>A word of warning</h4><p>Despite the many amazing things <em>magrittr</em> can do to help you supercharge your R productivity, it does have its idiosyncrasies. The most prevalent of which is that it doesn’t play well with <em>ggplot2</em>. This is due to the operator precedence (think BIDMAS/PEMDAS but for all operators R uses such as <code>&amp;</code>, <code>!</code>, <code>$</code>, etc.) that R employs, which evaluates the <em>magrittr</em> pipe operators before the <em>ggplot2</em> plus operator (which is actually just a specific method of the S3 class for binary addition). This means that if we write some code like the following, with the goal of taking some data, plotting it, and then carrying on with data manipulation we receive an error.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iris %<span class="hljs-literal">T</span>&gt;%</span><br><span class="line">  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) +</span><br><span class="line">    geom_point() %&gt;%</span><br><span class="line">  filter(Petal.Length &lt; <span class="hljs-number">2</span>) %&gt;%</span><br><span class="line">  head()</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<pre><code>Warning message in eval(expr, envir, enclos):
+&quot;Error in UseMethod(&quot;filter_&quot;) : 
+no applicable method for &apos;filter_&apos; applied to an object of class 
+&quot;c(&apos;LayerInstance&apos;, &apos;Layer&apos;, &apos;ggproto&apos;, &apos;gg&apos;)&quot;&quot;</code></pre><p>This is because the R interpreter will evaluate</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">geom_point() %&gt;%</span><br><span class="line">  filter(Petal.Length &lt; <span class="hljs-number">2</span>) %&gt;%</span><br><span class="line">  head()</span><br></pre></td></tr></table></figure>
+
+
+<p>first. Which gives an error since <code>filter</code> has no idea what to do when it is passed a ggplot object as its first argument rather than a data frame. To avoid this issue we have to explicitly tell the interpreter to evaluate the plus operator before the pipe operators using bracketing. Note, that since auto-printing is disabled inside brackets, we have to explicitly tell R to print the ggplot object using <code>print</code>.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">iris %<span class="hljs-literal">T</span>&gt;%</span><br><span class="line">  &#123;print(ggplot(., aes(x = Sepal.Length, y = Sepal.Width)) +</span><br><span class="line">    geom_point())&#125; %&gt;%</span><br><span class="line">  filter(Petal.Length &lt; <span class="hljs-number">2</span>) %&gt;%</span><br><span class="line">  head()</span><br></pre></td></tr></table></figure>
+
+
+<p>This somewhat diminishes the clarity <em>magrittr</em> is designed to introduce to your code but I would argue that is still more elegant than creating a temporary variable or having code duplication, one pipeline leading to the plot, the other to the further data manipulation functions. Furthermore, if you are familiar with this behaviour and its typical solution, it isn’t as off-putting as on first glance. To learn more about operator precedence in R, use <code>?Syntax</code> in the console.</p>
+<h3 id="The-exposition-operator"><a href="#The-exposition-operator" class="headerlink" title="The exposition operator"></a>The exposition operator</h3><p>Finally, the last <em>magrittr</em> pipe we have to discuss is the exposition operator. Of the three additional pipe operators, this is the one most unlike <code>%&gt;%</code>. As the name perhaps suggests, it it used to expose the names contained within the LHS object to the RHS. This lets you use the names directly in the RHS without having to prefix them with the likes of <code>object$</code>. For example, if you wanted to evaluate in the form <code>f(x$a, x$b, x$c)</code>, you could use the exposition operator to write this as <code>x %$% f(a, b, c)</code>. This is really useful when the function on your RHS does not have a <code>data</code> argument in the way that <code>lm</code> or <code>aggregate</code> do. Here is an example of its use.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Orange %&gt;%</span><br><span class="line">  filter(Tree == <span class="hljs-number">1</span>) %$%</span><br><span class="line">  cor(age, circumference)</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Tips-and-tricks-to-supercharge-your-magrittr-usage"><a href="#Tips-and-tricks-to-supercharge-your-magrittr-usage" class="headerlink" title="Tips and tricks to supercharge your magrittr usage"></a>Tips and tricks to supercharge your magrittr usage</h1><h3 id="Piping-as-a-later-argument"><a href="#Piping-as-a-later-argument" class="headerlink" title="Piping as a later argument"></a>Piping as a later argument</h3><p>So far, we have only considered pipes in which the LHS is used as the first argument of the RHS function. The flexibility of <em>magrittr</em> means that this isn’t the only way we can do things. What the pipe operators will in fact do is use the LHS as the first <em>unspecified</em> parameter. This means that if you want to use the LHS input as the 3rd argument of a function, all you have to do is give values for the first two parameters using named values. For example if we wanted choose a random number from a uniform distribution on $[0,1]$ and use this as the variance for a sample of normal variables, we would do this as follows.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">runif(n = <span class="hljs-number">1</span>) %&gt;%</span><br><span class="line">  rnorm(n = <span class="hljs-number">20</span>, mean = <span class="hljs-number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Using-placeholders"><a href="#Using-placeholders" class="headerlink" title="Using placeholders"></a>Using placeholders</h3><p><em>Magrittr</em>‘s plasticity doesn’t even end there! The package also lets you make use of what are called “place-holders”. These are implemented using the period symbol and will be replaced with the LHS input when they are evaluated. For example the code <code>x %&gt;% f(5, nrow(.), .^2)</code> will be evaluated as <code>f(5, nrow(x), x^2)</code>. This lets you completely remove any duplication of <code>x</code> in the RHS function call. This method can be extended to very complex scenarios by using curly braces to enclose a series of statements such as in this example.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sample(<span class="hljs-number">1</span>:<span class="hljs-number">10</span>, size = <span class="hljs-number">5</span>) %&gt;%</span><br><span class="line">&#123; </span><br><span class="line">  <span class="hljs-keyword">if</span> (sum(.) &gt; <span class="hljs-number">25</span>)</span><br><span class="line">    max(.)</span><br><span class="line">  <span class="hljs-keyword">else</span> min(.)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>Using place-holders also allows you to use <em>magrittr</em> with not only functions, but expressions to. You simply write out the expression as normal, replacing any instance of RHS with a period and then enclose it in curly braces. For example we can use this to normalise a random sample of integers.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sample(<span class="hljs-number">1</span>:<span class="hljs-number">100</span>, size = <span class="hljs-number">10</span>, replace = <span class="hljs-literal">FALSE</span>) %&gt;%</span><br><span class="line">  &#123;(. - min(.)) / (max(.) - min(.))&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Pipes-and-binary-operators"><a href="#Pipes-and-binary-operators" class="headerlink" title="Pipes and binary operators"></a>Pipes and binary operators</h3><p>The last feature of <em>magrittr</em> that I wish to discuss is how it can be used with binary operators. In fact, there is a way to force <em>magrittr</em> to work with such operators using standard R code. This uses the trick that operators can be called in a similar style to functions by enclosing them in single quotes and giving them two arguments to be used as the right and left hand side of the operator. For example we can write <code>4 + 5</code> as <code>`r &#39;\x60+\x60(4, 5)&#39;`</code> or <code>x[4]</code> as <code>`r &#39;\x60[\x60(x, 4)&#39;`</code>. You can then pipe into these functions using <em>magrittr</em>.</p>
+<p>This is a far from an ideal solution so its lucky that the package offers a set of helper functions called “aliases” designed to make this process easier. Examples of such functions include <code>extract()</code>, <code>add()</code> and <code>divide_by</code> though there are plenty more. You can find a whole list of them by using <code>?extract</code> after <em>magrittr</em> is loaded. Here is an example use.</p>
+<figure class="highlight r hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">matrix(runif(<span class="hljs-number">100</span>, max = <span class="hljs-number">10</span>), nrow = <span class="hljs-number">10</span>) %&gt;%</span><br><span class="line">  mod(<span class="hljs-number">10</span>) %&gt;% <span class="hljs-comment"># alias for `%%`</span></span><br><span class="line">  multiply_by_matrix(t(.)) %&gt;% <span class="hljs-comment"># alias for `%*%`</span></span><br><span class="line">  equals(t(.)) %&gt;% <span class="hljs-comment"># alias for `==`</span></span><br><span class="line">  all()</span><br><span class="line"><span class="hljs-comment"># should return TRUE as any matrix multiplied by its transpose is symmetric</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/magrittr/">magrittr</a>, <a class="has-link-grey -link" href="/tags/r/">r</a>, <a class="has-link-grey -link" href="/tags/tidyverse/">tidyverse</a>, <a class="has-link-grey -link" href="/tags/tutorial/">tutorial</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/t9-layout/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Rethinking the T9 Typing Layout</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/binomial-recursion/">
+                <span class="level-item">Binomial Recursion</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/streamlining-with-magrittr/';
+        this.page.identifier = 'streamlining-with-magrittr/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Getting-to-know-magrittr">
+        <span class="has-mr-6">1</span>
+        <span>Getting to know magrittr</span>
+        </a></li><li>
+        <a class="is-flex" href="#Further-pipe-operators">
+        <span class="has-mr-6">2</span>
+        <span>Further pipe operators</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-compound-assingment-operater">
+        <span class="has-mr-6">2.1</span>
+        <span>The compound assingment operater</span>
+        </a></li><li>
+        <a class="is-flex" href="#The-tee-operator">
+        <span class="has-mr-6">2.2</span>
+        <span>The tee operator</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#A-word-of-warning">
+        <span class="has-mr-6">2.2.1</span>
+        <span>A word of warning</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#The-exposition-operator">
+        <span class="has-mr-6">2.3</span>
+        <span>The exposition operator</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Tips-and-tricks-to-supercharge-your-magrittr-usage">
+        <span class="has-mr-6">3</span>
+        <span>Tips and tricks to supercharge your magrittr usage</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Piping-as-a-later-argument">
+        <span class="has-mr-6">3.1</span>
+        <span>Piping as a later argument</span>
+        </a></li><li>
+        <a class="is-flex" href="#Using-placeholders">
+        <span class="has-mr-6">3.2</span>
+        <span>Using placeholders</span>
+        </a></li><li>
+        <a class="is-flex" href="#Pipes-and-binary-operators">
+        <span class="has-mr-6">3.3</span>
+        <span>Pipes and binary operators</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Streamlining Your Data Science Workflow With Magrittr" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

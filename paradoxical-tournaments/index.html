@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Paradoxical Tournaments - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Deciding the winner of a round-robin tournament is no simple task. The most naïve approach can easily be faltered by the existence of $k$-paradoxical tournaments. But what are these tournaments and wh">
+<meta name="keywords" content="no-coding,lesson,graph-theory,probabilistic-method">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paradoxical Tournaments">
+<meta property="og:url" content="https://www.ttested.com/paradoxical-tournaments/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Deciding the winner of a round-robin tournament is no simple task. The most naïve approach can easily be faltered by the existence of $k$-paradoxical tournaments. But what are these tournaments and wh">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/paradoxical-tournaments.png">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paradoxical Tournaments">
+<meta name="twitter:description" content="Deciding the winner of a round-robin tournament is no simple task. The most naïve approach can easily be faltered by the existence of $k$-paradoxical tournaments. But what are these tournaments and wh">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/paradoxical-tournaments.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Paradoxical Tournaments" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/paradoxical-tournaments.png" alt="Paradoxical Tournaments">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-22T23:00:00.000Z">2019-08-23</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Mathematics/Combinatorics/">Combinatorics</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    22 minutes read (About 4300 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Paradoxical Tournaments
+            
+        </h1>
+        <div class="content">
+            <blockquote class="colorquote info"><p>All graphs in this post are drawn using the R <code>igraph</code> package. The original code can be found on the <a href="https://github.com/THargreaves/ttested" target="_blank" rel="noopener">GitHub repository</a> for this site.</p>
+</blockquote>
+
+
+<h2 id="A-Paradoxical-Problem"><a href="#A-Paradoxical-Problem" class="headerlink" title="A Paradoxical Problem"></a>A Paradoxical Problem</h2><p>Suppose that you are organising a tournament in which $n$ each take turns to play one another exactly once. This is known as a round robin tournament. We can represent this visually using a complete oriented graph on $n$ vertices where a directed edge from vertex $v$ to $w$ means that player $v$ won the game against $w$. </p>
+<p>We should probably roughly define the terms that we just used. A complete graph on $n$ vertices is one where there is an edge between every distinct pair of vertices. Further, an oriented graph is a directed graph in which only one of the directed edges $(x,y)$ or $(y,x)$ appear in the edge set. Hence a complete oriented graph is a graph in which every distinct vertex pair has exactly one directed edge between them.</p>
+<p>The important thing is that for any tournament, we can find a graphical representation in the style of the following.</p>
+<p><img src="/images/paradoxical-tournaments/paradoxical-tournaments_6_0.svg" alt="A graph corresponding to a tournament where player 0 beats both player 1 and 2, player 1 beats player 2, and player 3 beats everyone they played."></p>
+<blockquote class="colorquote info"><p>The term ‘round robin’ is an 18th century anglicisation of the French ‘ruban rond’ which literally translates as ‘round ribbon’<sup><a href="https://www.bartleby.com/81/14554.html" target="_blank" rel="noopener">[src]</a></sup>. The original French term referred to the act of signing petitions in a circular order around a round ribbon, hence disguising the ringleaders. Its relation to tournaments came later into use at the closing of the 19th century<sup><a href="https://www.etymonline.com/word/round%20robin" target="_blank" rel="noopener">[src]</a></sup>.</p>
+</blockquote>
+
+
+<blockquote class="colorquote warning"><p>We use zero indexing for our vertices as this makes it easier to represent the graphs algebraically.</p>
+</blockquote>
+
+
+<p>Given a tournament, we need a way to decide who the winner is. A naïve approach would be to look for a player who beats every other player and then crown them the victor. In the example above, this would be player 3. When this can be done, there is no denying that the selected champion is deserving; it is only possible for one player to beat everyone else since each pair of players only compete a single time, hence this player will have won the most games. The problem is, that this dominating player cannot always be found. In fact, it is not difficult at all to construct a counter-example. The smallest $n$ we need to do this is 3, as shown here.</p>
+<p>The mathematical term for such a violating tournament is a <em>paradoxical tournament</em>.</p>
+<h3 id="Generalisation"><a href="#Generalisation" class="headerlink" title="Generalisation"></a>Generalisation</h3><p>Another way of thinking about this is that a paradoxical tournament satisfies the property that for every subset of 1 player (i.e. any player), there exists another player that beats every player in that subset (i.e. beats that player). This rewording leads us into thinking about how we can generalise the notion of a paradoxical tournament. We start by renaming a paradoxical tournament as a 1-paradoxical tournament, since the subsets we were considering above only had one player in each of them. </p>
+<p>We can then define a $k$-paradoxical tournament to be a tournament in which for every subset of $k$ players, we can find another player outside of that subset that beat every player in that subset.</p>
+<h3 id="2-paradoxical-Tournaments"><a href="#2-paradoxical-Tournaments" class="headerlink" title="2-paradoxical Tournaments"></a>2-paradoxical Tournaments</h3><p>For small tournaments, this notion is redundant. For any tournament with 6 or fewer players, it’s impossible to have a 2-or-higher-paradoxical tournament as we will prove in a moment. When a seventh player joins, however, everything can start to fall apart and we can find our first 2-paradoxical tournament. Here is the graphical representation of an example that I came up with.</p>
+<p>You can verify this for yourself. I’ll look at a few cases now as an example. Let’s start with the 2-subset (0, 1) — both these players were beaten by player 4. Likewise, consider the subset (2, 6) — we can see that player 5 is the common victor. Similar checks can be done for all subsets.</p>
+<blockquote class="colorquote success"><p>This also proves that there are 2-paradoxical tournaments of for any number of players greater than 7. Simply take the graph above and repeatedly add a new vertex that is beaten by all existing vertices until you attain the desired number of players.</p>
+</blockquote>
+
+
+<blockquote class="colorquote info"><p><strong>Technical Note</strong></p>
+<p>There is a beautiful underlying structure to the graph above. The edge set is given by </p>
+<p>$${(v, (v + d) \textrm{ mod } 7):v \in {0,\ldots, 6}, d \in {1, 2, 4}}$$</p>
+<p>Therefore the vertices beating a given vertex $v$ are</p>
+<p>$${(v - d) \textrm{ mod } 7:d \in {1, 2, 4}}$$</p>
+<p>Following on from this, if we wish to find a vertex, $u$, beating both $v$ and $w$, we seek a value</p>
+<p>$$u \in V \cap W$$</p>
+<p>where</p>
+<p>$$V = {(v - d_v) \textrm{ mod } 7:d_v \in {1, 2, 4}}$$</p>
+<p>and </p>
+<p>$$W = {(w - d_w) \textrm{ mod } 7:d_w \in {1, 2, 4}}$$</p>
+<p>In other words, $u$ will be a solution to </p>
+<p>$$v - d_v = w - d_w \quad (\textrm{mod } 7) \quad d_v, d_w \in {1, 2, 4} $$</p>
+<p>That is</p>
+<p>$$d_v - d_w = v - w  \quad (\textrm{mod } 7) \quad d_v, d_w \in {1, 2, 4} $$</p>
+<p>But $(v-w) \textrm{ mod } 7$ is just some integer between zero and six. It is therefore not hard to verify that this equation can be satisfied by choosing $d_v$ and $d_w$ wisely. For example, if $(v-w) \textrm{ mod } 7 = 5$, we would choose $d_v = 2$ and $d_w = 4$. This is not a constructive proof but it does show that the above tournament is indeed 2-paradoxical.</p>
+</blockquote>
+
+
+<p>That’s great! We know that we can find a 2-paradoxical tournament with seven players, but what about proving that this is the smallest such example. As can be the nature of many graph theory problems, proving lack of existence can be much tougher than finding a clever example. Never-the-less, here is the simplest proof I could come up with, aided by the following graphic.</p>
+<p>The method I intend to use to solve this problem is proof by exhaustion. Perhaps there is a more elegant and concise path of attack but if so, it eludes me. If any reader has a better suggestion of how this can be proved, please get in touch.</p>
+<p>We start with graph A in which we arbitrarily orient the three edges between players 0 and 1, 2 and 3, 4 and 5. We can do this without loss of generality since the players are indistinguishable so we could simply re-label at this point. We could continue to arbitrarily orient edges such as the one between vertices 1 and 3 since we could then switch the labels of the pairs $(0,1)$ and $(2,3)$ to enforce generality, but this ends up making the case analysis more complicated. </p>
+<p>We now choose a vertex which will beat the 2-subset ${0, 1}$. Since the pairs $(2,3)$ and $(4, 5)$ are indistinguishable, without loss of generality we can choose this dominating vertex to either by 2 or 3.</p>
+<p>In the case where we choose vertex 2, we are left with graph B. At this point, we are done since it is impossible for any vertex to beat both players 2 and 4. This is because 2 beats all players but 4 and 5 and the only possible saviour, player 5, beats player 4. We can now turn our attention to the other more complicated case.</p>
+<p>If we had instead chosen vertex 3, we would reach graph C. Unfortunately, we cannot stop here as there is still plenty of choice over how we orient our edges. We now consider the two subset ${2, 3}$ and try to find a vertex that can beat both of them. Since player 3 beats both player 0 and 1, we are only left with the choice of player 4 or 5.</p>
+<p>Suppose we select vertex 4, this gives rise to graph D. We are lucky this time and we can immediately handle this case. This is because there is no player that could possibly beat both players 3 and 4. Indeed player 3 beats both of players 0 and 1, and player 4 does the same for 2 and 5.</p>
+<p>If we had instead chosen vertex 5, we would be left with graph E. Every choice we make is now forced, but we still have to make a few additions before we reach a contradiction. </p>
+<p>First we need a vertex which beats both players 3 and 4. This can only be player 2 so we add a yellow edge to denote this. We next observe that the only vertex that can beat both players 0 and 2 is player 5 and so we add the purple edge. Lastly, we spot that the only player that can beat both players 4 and 5 is player 1, giving rise to the addition of the last 2 pink edges.</p>
+<p>After all additions have been made, we attain graph F. At this point we observe that no player can beat both players 1 and 5, and so we are done. </p>
+<blockquote class="colorquote success"><p>This also proves that no 2-paradoxical tournament exists for less than 6 players and that no $k$-paradoxical tournament exists for 6 players for any $k\geq2$. I will leave the reader to ponder why these statements are in fact true.</p>
+</blockquote>
+
+
+<h2 id="Diving-Deep"><a href="#Diving-Deep" class="headerlink" title="Diving Deep"></a>Diving Deep</h2><p>Now that we have investigated the behaviour of 1-and-2-paradoxical tournaments, we can turn our attention to larger $k$. </p>
+<p>When researching the more general case, it surprised me how little material on this topic is available online. All Wikipedia has to say on the topic is a single paragraph within the page on general tournaments in graph theory. Further, my two favourite combinatorics textbooks—<a href="https://www.amazon.co.uk/Combinatorics-Graph-Theory-Undergraduate-Mathematics/dp/0387797106" target="_blank" rel="noopener">Combinatorics and Graph Theory (Harris)</a> and <a href="https://www.amazon.co.uk/Foundations-Combinatorics-Applications-Dover-Mathematics/dp/0486446034" target="_blank" rel="noopener">Foundations of Combinatorics with Applications (Bender, Williamson)</a>—make no mention of it. There are a handful of research papers on the topic, though these prefer the name Schutte tournament to paradoxical, yet these are quite dense. My plan is to walk through some strategies on how we can handle general $k$-paradoxical tournaments and try to produce a coherent introductory guide to their study.</p>
+<h3 id="A-Brute-Force-Strategy"><a href="#A-Brute-Force-Strategy" class="headerlink" title="A Brute Force Strategy"></a>A Brute Force Strategy</h3><p>I am not the type to shy away from leveraging computation to solve a difficult problem. This, however, is far from a suitable problem for using brute force. </p>
+<p>Consider the 7-player tournament above. It just so happens to be 2-paradoxical but that is only because it was carefully chosen. What if we were to approach the problem by generating all possible tournaments and checking whether they were 2-paradoxical or, more generally, $k$-paradoxical?</p>
+<p>For our 7 player example there are 21 edges. You are welcome to count them but a simpler method to come up with this number is to note that each edge can be constructed by picking one of the 7 vertices to start on and then choosing one of the 6 remaining vertices to connect it to. This gives us 42 possible edges but since the edge ${0,1}$ is the same as ${1,0}$, we need to divide by two to get the true number.</p>
+<p>We then have a choice of two orientations for each edge, and so the total number of tournaments is $2^{21} = 2097152$. That is a lot of cases to check, and for each one, proving whether or not a given tournament is $k$-paradoxical is no easy feat. On a powerful computer it would most likely be tractable to find the smallest 2-paradoxical tournament but for larger $k$ we stand no chance.</p>
+<p>For a general tournament on $n$ vertices, we can use the argument above to show that there are $\frac{n(n-1)}{2}$ possibilities. We could reduce this slightly by using some symmetry arguments but we will not be able to change the fact that this is $O(n^2)$. Therefore when we exponent this we get something of the order $O(2^{n^2})$ which will quickly become intractable for larger n.</p>
+<p>For example, by the time we have a tournament with 25 players, there will be more possibilities than atoms in the observable universe. We will later see that this would be enough to find a 3-paradoxical tournament but not 4-paradoxical. We need a new strategy</p>
+<h3 id="A-Constructive-Approach"><a href="#A-Constructive-Approach" class="headerlink" title="A Constructive Approach"></a>A Constructive Approach</h3><p>The next thing we will look at is constructive method for finding an upper bound on the smallest tournament that is $k$-paradoxical. This was formulated by Graham and Spencer in 1971<sup><a href="https://www.cambridge.org/core/journals/canadian-mathematical-bulletin/article/constructive-solution-to-a-tournament-problem/F6DDB2DE033EE8AD7B5E9BE0EBEDE0D6" target="_blank" rel="noopener">[src]</a></sup> and is known as a Paley tournament. </p>
+<p>In order to look into that we need to take a short tangent into the world of number theory. </p>
+<p>We say that an integer $a$ is a quadratic residue modulo $n$ if an $x$ exists such that $a\equiv x^2 (\textrm{mod } n)$. Let $p$ be a prime such that $p \equiv 3 , (\textrm{mod } 4)$. We define the edges of a tournament with vertex set ${0, 1, \ldots, p-1}$ by directing an edge from $i$ to $j$ if and only if $i-j$ is a quadratic residue of $p$. It can be shown that since $p \equiv 3 , (\textrm{mod } 4)$, exactly one of $i$ and and $p-i$ is a quadratic residue of $p$ and so the tournament is well-defined.</p>
+<p>Graham and Spencer proved that whenever $p$ is chosen such that $p &gt; k^2 2^{2k-2}$ and $p \equiv 3 , (\textrm{mod } 4)$ as before, then the Paley tournament produced be the process above is $k$-paradoxical. </p>
+<p>The first prime satisfying $p &gt; k^2 2^{2k-2}$ and $p \equiv 3 ,(\textrm{mod } 4)$ for $k = 2$ is $19$ and for $k=3$ it is $151$ These are certainly not optimum solutions but they do offer an upper bound. More precisely, the bound has $O(k^2 4^{k})$ players.</p>
+<p>The proof of this requires a strong knowledge of number theory and we’ve already way too far from home (combinatorics) so I will direct any curious reader to the <a href="https://www.cambridge.org/core/services/aop-cambridge-core/content/view/F6DDB2DE033EE8AD7B5E9BE0EBEDE0D6/S0008439500057842a.pdf/constructive_solution_to_a_tournament_problem.pdf" target="_blank" rel="noopener">original paper</a> on the topic.</p>
+<h4 id="Tightening-Bounds"><a href="#Tightening-Bounds" class="headerlink" title="Tightening Bounds"></a>Tightening Bounds</h4><p>We can use the idea of quadratic residues to construct smaller examples. The above theorem will be of no use if we don’t satisfy its conditions but we can use the concept to construct good ‘guesses’ for paradoxical tournaments and then verify them using computation.</p>
+<p>The quadratic residues of 7 are ${1,2,4}$. If you recall from above, these were the sizes of steps that we connected together in to construct the 2-paradoxical tournament above. Meanwhile, the quadratic residues of 19 are ${1, 4, 5, 6, 7, 9, 11, 16, 17}$ so if for each vertex $v$ we add a directed edge from $v$ to $(v + 1) \textrm{ mod } 19, \ldots, (v + 17) \textrm{ mod } 19$ we obtain the following graph which so happens to be 3-paradoxical.</p>
+<p>Perhaps not so easy to verify, but this is indeed 3-paradoxical. It also turns out to be the minimal such tournament<sup><a href="https://www.jstor.org/stable/pdf/3612854.pdf" target="_blank" rel="noopener">[src]</a></sup>. </p>
+<h3 id="Probabilistic-Methods"><a href="#Probabilistic-Methods" class="headerlink" title="Probabilistic Methods"></a>Probabilistic Methods</h3><p>As we just saw, the bounds obtained using the constructive method are very weak. Perhaps we could do better if we relax the need to find an explicit example. This is where probabilistic methods come in; we can use some stochastic magic to show that, even though we may not be able to find it, at least on tournament of a certain size $n$ is $k$-paradoxical. This method is based on a paper by Erdős published in 1963<sup><a href="https://www.renyi.hu/~p_erdos/1963-08.pdf" target="_blank" rel="noopener">[src]</a></sup>.</p>
+<p>Before we reach a final value of n for which we can be sure that a $k$-paradoxical tournament exists, we need to proof an intermediate theorem:</p>
+<blockquote><p><strong>Theorem</strong></p>
+<p>Let $k,n\in\mathbb{N}$, with $k\geq2$ and ${n \choose k}(1-2^{-k})^{n-k}&lt;1$.</p>
+<p>Then there exists a $k$-paradoxical tournament with $n$ vertices.</p>
+</blockquote>
+
+
+<p>The proof of this has a distinctly probabilistic flavour to it. First we consider a random tournament on $n$ vertices where $n$ is chosen such that the assumptions of the theorem hold. We then fix a subset of size $k$, $K$, and let $A_K$ denote the random event that there is no vertex beating all elements in $K$. </p>
+<p>Since edges are oriented independently and uniformly, the probability of any specific vertex beating every vertex in $K$ is $2^{-k}$. There the probability of such a vertex <em>not</em> beating every vertex in $K$ is $1-2^{-k}$. Using independence again we see that the probability of no vertex beating all elements in $K$, $\mathbb{P}(A_K)$ is $(1-2^{-k})^{n-k}$, as there are $n-k$ vertices not in $K$ each of which has probability $1-2^{-k}$ of satisfying the property. </p>
+<p>Now by sub-additivity (also know as Boole’s inequality) we have that</p>
+<p>$$\mathbb{P}\left(\bigcup_{|K|=k}A_K\right) \leq \sum_{|K|=k} \mathbb{P}(A_K) = {n \choose k} (1-2^{-k})^{n-k}$$</p>
+<p>Where the last step comes from the fact that there are $n \choose k$ ways to choose a k-subset from $n$ vertices. Therefore, by the assumption of the theorem we have</p>
+<p>$$\mathbb{P}\left(\bigcup_{|K|=k}A_K\right) \lt 1$$</p>
+<p>Since the probability of the event $\bigcup_{|K|=k}A_K$ is less than one, its complement, $\bigcap_{|K|=k}A_K^C$ must occur with non-zero probability. It follows that there must at least one tournament on the $n$ vertices which satisfies $\bigcap_{|K|=k}A_K^C$, that is, a tournament in which every k-subset has at least one vertex beating all elements of the subset as we required.</p>
+<blockquote class="colorquote success"><p>Note, that since our proof is not constructive, we do not have a way to directly find the $k$-paradoxical tournament. We do however know that one exists.</p>
+</blockquote>
+
+
+<p>So what bounds does this give us? For $k=2$, trying our know optimum $n = 7$ gives ${7 \choose 2}\frac{3}{4}^5 = 4.983\ldots\gg 1$. It is actually not until $n = 21$ that the theorem condition is satisfied. This is even worse than the bound of 19 that the constructive method gave us.</p>
+<p>By $k=3$, however, things have improved. The first $n$ satisfying the inequality is 91, much less than the value of 151 given by the constructive approach. This may suggest that the probabilistic method has a more favourable asymptotic than the constructive approach. We will explore the in more detail in a moment.</p>
+<h4 id="Limiting-Behaviour"><a href="#Limiting-Behaviour" class="headerlink" title="Limiting Behaviour"></a>Limiting Behaviour</h4><p>An interesting observation is that for any $k&gt;1$, we have that $\lim_{n\to\infty}{n \choose k}(1-2^{-k})^{n-k} = 1$. Indeed</p>
+<p>$$<br>\begin{align}<br>{n \choose k}(1-2^{-k})^{n-k} &amp;\lt \frac{n^k}{k!}(1-2^{-k})^{n-k} \\<br>&amp;\lt n^k(1-2^{-k})^{n-k} \\<br>&amp;\leq n^k(1-2^{-k})^{\frac{n}{2}} &amp; \textrm{for } n \geq 2k\\<br>&amp;= n^kC^{n} &amp; \textrm{with } C = \sqrt{1-2^{-k}} \lt 1\\<br>\end{align}<br>$$</p>
+<p>It is clear that the right hand side tends to zero as $n\to\infty$ and so so must the left hand side by the squeeze rule. The implication of this is that ,for any given $k$, if we have a tournament with enough players, it is very likely (or as $n\to\infty$, almost certain) that a random tournament of that size will be $k$-paradoxical. It just can’t be avoided!</p>
+<h4 id="Comparison-to-Constructive-Approach"><a href="#Comparison-to-Constructive-Approach" class="headerlink" title="Comparison to Constructive Approach"></a>Comparison to Constructive Approach</h4><p>As we saw early, the constructive method gives us a $k$-paradoxical tournament with $O(k^2 4^{k})$ players. Does this new probabilistic method improve on this bound? It turns out that it, as we will now see. Take $k&gt;1$ and observe that</p>
+<p>$$<br>\begin{align}<br>{n \choose k}(1-2^{-k})^{n-k} &amp;\lt \frac{n^k}{k!}(1-2^{-k})^{n-k} \\<br>&amp;\lt \frac{n^k}{k!}\exp\left(-2^{-k}\right)^{n-k} &amp; [1+x \leq e^x] \\<br>&amp;= \frac{n^k}{k!}\exp\left(-(n-k)2^{-k}\right) \\<br>&amp;\lt n^k\exp\left(-n 2^{-k}\right)  &amp; [\textrm{Stirling’s Bound}]<br>\end{align}<br>$$</p>
+<p>Now choose $n &gt; 2^k k^2 \ln(2+\epsilon)$ for some $\epsilon &gt; 0$ and suppose for contradiction that there is no $k$-paradoxical graph on $n$ vertices. By the theorem above we must have that $1 \leq {n \choose k}(1-2^{-k})^{n-k}$ and so from the previous working it follows that</p>
+<p>$$<br>\begin{align}<br>&amp; 1 \lt n^k\exp\left(-n 2^{-k}\right) \\<br>\iff &amp; 1 \lt n\exp\left(-nk 2^{-k}\right) \\<br>\iff &amp; 1 \lt n^{\frac{1}{n}}\exp\left(-k 2^{-k}\right) \\<br>\iff &amp;  \exp\left(k 2^{-k}\right) \lt  n^{\frac{1}{n}} \\<br>\iff &amp; \frac{1}{k2^k} \lt \frac{\ln n}{n}<br>\end{align}<br>$$</p>
+<p>Now,, since $\frac{\ln n}{n}$ is decreasing for $n\geq3$ and, by assumption, $n &gt; 2^k k^2 \ln(2+\epsilon) \geq 3$, for $k&gt;1$ we have that</p>
+<p>$$\frac{1}{k2^k} \lt \frac{\ln q}{q} \qquad \textrm{with } q = 2^k k^2 \ln(2+\epsilon)$$</p>
+<p>That is to say that</p>
+<p>$$k\ln(2 + \epsilon) \lt \ln(2^k k^2 \ln(2+\epsilon))$$</p>
+<p>Which is</p>
+<p>$$\ln(2 + \epsilon) \lt \ln(2) + \frac{1}{k}\ln(k^2 \ln(2+\epsilon))$$</p>
+<p>This however will not hold for any $\epsilon&gt;0$ if we choose $k$ to be large enough. Therefore, for sufficiently large $k$, whenever $n &gt; 2^k k^2 \ln(2+\epsilon)$, we will have at least one $k$-paradoxical tournament on $n$ vertices.</p>
+<p>It follows from this that there exists a $k$-paradoxical tournament with $O(k^2 2^k)$ players. This is a massive improvement on the $O(k^2 4^k)$ players that we had before. In fact, it is almost the square root of the original complexity</p>
+<h3 id="Lower-Bounds"><a href="#Lower-Bounds" class="headerlink" title="Lower Bounds"></a>Lower Bounds</h3><p>So far we have taken a look at some upper bounds, that is, how many players we need before it is certain that we can find a $k$-paradoxical tournament. But what of lower bounds? What is the minimum number of players that we require before a $k$-paradoxical tournament could even be possible. An inductive argument can show that we must have at least $2^{k+1} - 1$ players for a tournament to be $k$-paradoxical. It goes like this.</p>
+<p>We know that this inequality holds for $k=1$ — a tournament with less than $2^2-1=3$ players certainly can’t be paradoxical. We proceed inductively. Suppose that the statement holds for $k = m-1$ for some integer $m &gt; 1$; we want to show that, under this assumption, it also holds for $k=m$.</p>
+<p>Suppose, for contradiction, that this is not the case. That means that we have a graph $G^{(n)}$ which is $m$-paradoxical but with $n \leq 2^{m+1} - 2$. For each vertex $v$ of $G^{(n)}$, let $G^{(n)}(v)$ denote the set of starting points of all edges of $G^{(n)}$ which end at $v$, that is, the set of vertices which are beating $v$.</p>
+<p>As we showed in ‘A Brute Force Strategy’, $G^{(n)}$ has $\frac{1}{2}n(n-1)$ edges, so at least one of $G^{(n)}(v)$ must have $\frac{1}{2}(n-1)$ elements or fewer by the Pigeonhole Principle. Let $v^<em>$ be such a vertex with $G^{(n)}(v^</em>)=:N\leq\frac{1}{2}(n-1)$. Since we assumed that $n \leq 2^{m+1} -2$, it follows that $N \leq 2^m - 2$.</p>
+<blockquote class="colorquote success"><p>Remember, $N$, is an integer so $N \leq 2^m - \frac{3}{2} \implies N \leq 2^m - 2$.</p>
+</blockquote>
+
+
+<p>We now have two possibilities to look at:</p>
+<ol>
+<li>$N \geq m - 1$ </li>
+<li>$N \lt m -1$</li>
+</ol>
+<p>We start with the first case. Our plan of attack is to show that $G^{(n)}(v^*)$ is $(m-1)$-paradoxical. It then would follow from our inductive hypothesis that $N \geq 2^m - 1$ which contradicts that $N \leq 2^m -2$.</p>
+<p>Let $V$ be any set of any $m-1$ elements of $G^{(n)}(v^<em>)$. Since $G^{(n)}$ is $m$-paradoxical by assumption, and $V \cup v^</em>$ is of size $n$, we must be able to find a vertex $w$ which beats all of $V \cup v^<em>$. In particular, this means that $w$ beats $v^</em>$ and so $w \in G^{(n)}(v^<em>)$ by definition. Since this is true for arbitrary $V$, we have that $G^{(n)}(v^</em>)$ is $(m-1)$-paradoxical, giving the contradiction mentioned above.</p>
+<p>We now turn our attention to the second case. Take $G^{(n)}(v^<em>)$ and add any $m-1-N$ vertices from $G^{(n)}$, excluding $v^</em>$, to obtain an $m-1$ vertex subgraph $G^{(m-1)}$. This subgraph will be $(m-1)$-paradoxical. Why? Let’s see:</p>
+<p>Consider the vertices of $G^{(m-1)}$ along with $v^<em>$. This forms a set of $m$ vertices in $G^{(n)}$ and since we have assumed that this is $m$-paradoxical, we can find $w$ as before that beats all of $G^{(m-1)}$ and $v^</em>$. Using the same argument as before, $w\in G^{(m-1)}$. But this is impossible since $G^{(m-1)}$ has $m-1$ vertices all of which are beaten by $w \in G^{(m-1)}$, implying the existence an $m$th vertex.</p>
+<p>Either way, we arrive at a contradiction. Hence it must be the case that $n \gt 2^{m+1} - 2$ and we are done.</p>
+<h4 id="Improving-Bounds"><a href="#Improving-Bounds" class="headerlink" title="Improving Bounds"></a>Improving Bounds</h4><p>This bound was improved by Esther and George Szekeres in 1965 to $(k+2)2^{k-1}-1$<sup><a href="https://www.jstor.org/stable/pdf/3612854.pdf?seq=1#page_scan_tab_contents" target="_blank" rel="noopener">[src]</a></sup>. But this blog post is already very long so we will leave it their and move on to summarising these results.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>We have covered an incredible amount of material on $k$-paradoxical tournaments in just one post so I suggest that it would be beneficial to summarise all of the results we have arrived at in a table. </p>
+<style>
+table {
+    width: 100% !important;
+}
+th {
+    text-align: center !important;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th align="center">k</th>
+<th align="center">Erdos LB</th>
+<th align="center">Szekeres LB</th>
+<th align="center">Optimum</th>
+<th align="center">Erdos UB</th>
+<th align="center">Graham UB</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">3</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">21</td>
+<td align="center">19</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">15</td>
+<td align="center">19</td>
+<td align="center">19</td>
+<td align="center">91</td>
+<td align="center">151</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">31</td>
+<td align="center">47</td>
+<td align="center">?</td>
+<td align="center">149</td>
+<td align="center">1031</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">63</td>
+<td align="center">111</td>
+<td align="center">?</td>
+<td align="center">353</td>
+<td align="center">6427</td>
+</tr>
+<tr>
+<td align="center">As eluded to in the table, we are still yet to have found the optimal values of $n$ for $k$ bigger than 3. Looking at the Szekeres Lower Bound is it is clear that using traditional computing, this problem is completely intractable for a brute force approach. Never-the-less breakthroughs in the field could open up new possibilities but for now, it’s probably best to close your console and get back to pen and paper if you really want to make any progress.</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>At this point, I would normally suggest further reading, but frankly, we have exhausted almost all of what the literature has to offer. Perhaps the next step would be to have a look at the original source documents that I have used to write this post (using <code>ctrl-F</code> to search for ‘src’ will help you find those).</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/graph-theory/">graph-theory</a>, <a class="has-link-grey -link" href="/tags/lesson/">lesson</a>, <a class="has-link-grey -link" href="/tags/no-coding/">no-coding</a>, <a class="has-link-grey -link" href="/tags/probabilistic-method/">probabilistic-method</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/wall-of-music/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Bank Holiday Bodge: A Wall of Music</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/integrating-hexo-and-jupyter/">
+                <span class="level-item">Integrating Hexo and Jupyter to Build a Data Science Blog</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/paradoxical-tournaments/';
+        this.page.identifier = 'paradoxical-tournaments/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#A-Paradoxical-Problem">
+        <span class="has-mr-6">1</span>
+        <span>A Paradoxical Problem</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Generalisation">
+        <span class="has-mr-6">1.1</span>
+        <span>Generalisation</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-paradoxical-Tournaments">
+        <span class="has-mr-6">1.2</span>
+        <span>2-paradoxical Tournaments</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Diving-Deep">
+        <span class="has-mr-6">2</span>
+        <span>Diving Deep</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#A-Brute-Force-Strategy">
+        <span class="has-mr-6">2.1</span>
+        <span>A Brute Force Strategy</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Constructive-Approach">
+        <span class="has-mr-6">2.2</span>
+        <span>A Constructive Approach</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Tightening-Bounds">
+        <span class="has-mr-6">2.2.1</span>
+        <span>Tightening Bounds</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Probabilistic-Methods">
+        <span class="has-mr-6">2.3</span>
+        <span>Probabilistic Methods</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Limiting-Behaviour">
+        <span class="has-mr-6">2.3.1</span>
+        <span>Limiting Behaviour</span>
+        </a></li><li>
+        <a class="is-flex" href="#Comparison-to-Constructive-Approach">
+        <span class="has-mr-6">2.3.2</span>
+        <span>Comparison to Constructive Approach</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Lower-Bounds">
+        <span class="has-mr-6">2.4</span>
+        <span>Lower Bounds</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Improving-Bounds">
+        <span class="has-mr-6">2.4.1</span>
+        <span>Improving Bounds</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#Summary">
+        <span class="has-mr-6">3</span>
+        <span>Summary</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Paradoxical Tournaments" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

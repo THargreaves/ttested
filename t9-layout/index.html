@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Rethinking the T9 Typing Layout - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Using an old number-pad mobile phone to send a text has to be one of the most strenuous and irritating tasks of the first world. In this post - although far too late to be of any use - I attempt to op">
+<meta name="keywords" content="no-coding,combinatorical optimisation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rethinking the T9 Typing Layout">
+<meta property="og:url" content="https://www.ttested.com/t9-layout/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Using an old number-pad mobile phone to send a text has to be one of the most strenuous and irritating tasks of the first world. In this post - although far too late to be of any use - I attempt to op">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/t9-layout.png">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.439Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rethinking the T9 Typing Layout">
+<meta name="twitter:description" content="Using an old number-pad mobile phone to send a text has to be one of the most strenuous and irritating tasks of the first world. In this post - although far too late to be of any use - I attempt to op">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/t9-layout.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Rethinking the T9 Typing Layout" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/t9-layout.png" alt="Rethinking the T9 Typing Layout">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-27T23:00:00.000Z">2018-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    11 minutes read (About 2100 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Rethinking the T9 Typing Layout
+            
+        </h1>
+        <div class="content">
+            <p>I’ll confess. This blog post is a bit late. 10 years too late, in fact.</p>
+<p>For those not aware, the T9 typing layout was a technology designed by Tegic Communications for use on mobile phones with a 3x4 numeric keypad. The letters of the alphabet would be distributed in order among the keys with three or four characters assigned to each of the numbers 2-9 with the 0 and 1 key reserved for punctuation. The T9 system actually involved predictive technology too, allowing you to press a series of numbers each of which gave a few possibilities for each letter composing the word you wanted to type and then there would be an algorithm designed to guess the word you most likely intended.<br><img src="/images/t9-layout/nokia_phone.jpg" alt="A Nokia mobile phone with a T9 typing layout"><br>As you can quite possibly imagine, this was not the most reliable method of input. For example, all of the words “goner”, “goods”, “goofs”, “homes”, “hones”, “hoods”, “hoofs”, and “inner” all have the same T9 key sequences. You had very little chance of getting the correct word in these scenarios and would have to fumble through the possibilities until you came across the one you wanted and, with this technology being used heavily in the early 2000’s, phones were no where near capable of using context clues to decide which of the T9 synonyms you were after. </p>
+<p>This left many people to give up on the predictive ability of the T9 system and instead manually input each letter by altering the number of presses that is made to each key. For example, the <a href="https://en.wikipedia.org/wiki/T9_(predictive_text)#/media/File:Telephone-keypad2.svg" target="_blank" rel="noopener">standard T9 layout</a> has the letters “ABC” for the number 2 and so to get a letter “C”, you would have to press this key three times. Undeniably slower but far more consistent.</p>
+<p>With the smartphones now being a commonplace item, the T9 system is now generally obsolete, a few inexpensive and unimaginative budget phones aside. With the adoption of touchscreen keyboards, there is no need for T9 and its use is becoming rarer and rarer. If there ever was going to be a redesign of the T9 layout, it should have been a lot time a go. Never-the-less, that is just what I plan to do now.</p>
+<h2 id="The-Flaws-of-the-T9-Layout"><a href="#The-Flaws-of-the-T9-Layout" class="headerlink" title="The Flaws of the T9 Layout"></a>The Flaws of the T9 Layout</h2><p>When I was younger, and the T9 layout was in its prime, I was always baffled by the grouping of letters the original designers had employed. I assume that their main goals were aesthetic: three letters for every available number with an extra one in the bottom left and right corners. It’s got a nice symmetry to it but at the same time it’s painfully inefficient. For a start, the most common letter in the English language, “e”, which composes a whopping 12.7% of the character usage, requires two clicks of the 3 key to get to it. That’s the same number as for “x” or “q”, the third and second <em>least</em> used letters in the English language respectively. I could go on: The letter “o” (the fourth most common) requires three button presses and the letter “s” (the seventh most common letter though still making up 6.3% of all use) requires a whole four presses. It’s an efficiency nightmare!<br><img src="/images/t9-layout/T9_layout.jpg" alt="The Standard T9 Typing Layout"><br>This is not the only possible layout in the T9 style that could be used though. If you are willing to sacrifice some beauty and order, you can gain a considerable amount of typing speed in return. The aim of this post is to find the optimum such layout and see how it compares in terms of efficiency to the standard implementation.</p>
+<h2 id="A-Layout-Overhaul"><a href="#A-Layout-Overhaul" class="headerlink" title="A Layout Overhaul"></a>A Layout Overhaul</h2><p>Before we begin optimising our T9 layout we first need to decide on what a valid layout actually <em>is</em>. I propose the following rules:</p>
+<ul>
+<li>The letters corresponding to a larger number must fall later in the alphabet than those corresponding to a smaller one</li>
+<li>Within the set of letters corresponding to a shared number, the letters corresponding to more button presses should be later in the alphabet</li>
+<li>Only the keys 2-9 can be used for inputting letters</li>
+<li>Every number must have at least one letter corresponding to it</li>
+</ul>
+<p>It is worth noting that the last constraint is redundant as an optimal layout would never leave a number key corresponding to no letters but I add this for completeness anyway.</p>
+<p>By changing up the layout even further you will be able to squeeze out even more speed. For example, if you ignore the constraint of keeping things in alphabetical order, you can improve the efficiency by having the eight most common letters each be at the start of a block. This free range actually makes the solution a lot less interesting and far too easy to compute so we instead decide to stick with the description of a T9 layout described above.</p>
+<p>Using this definition, we can think of these layouts in a different way: To form any layout, simply take the list of all letters (in alphabetical order) and insert 7 dividers into 7 of the 25 gaps between the characters. This will result in 8 non-empty groups, all in alphabetical order within and outside too. In other words, this a T9 layout. In fact, this gives us all possible layouts. </p>
+<p>Since we have 25 spaces to put these 7 dividers, the number of possible choices is</p>
+<p>$${25\choose7} = 480700$$</p>
+<p>and so this is how many layouts we have too. This number is small enough that we can just test the efficiency of each one in turn and then pick the best. But how are we going to determine the efficiency?</p>
+<h2 id="A-Metric-for-Layout-Efficiency"><a href="#A-Metric-for-Layout-Efficiency" class="headerlink" title="A Metric for Layout Efficiency"></a>A Metric for Layout Efficiency</h2><p>There are many possible ways to evaluate how efficient a layout all of which have their merits. The method I have decided to use is the mean number of key presses needed to type a random letter of the English alphabet occurring with probability equal to its proportional frequency in the language. That’s quite a mouthful but should be clear with an example.</p>
+<p>In English, the letter frequencies for the first 5 letters are 8.2%, 1.5%, 2.8%, 4.2% and 12.7%. Supposing for now that we are still using the standard layout, we need 1 button press for “a” and “d”, 2 for “b” and “e” and 3 for “c”. Therefore our mean number of key presses metric will begin with</p>
+<p>$$0.082 \times1+0.015\times2+0.028\times3+0.042\times1+0.127\times2+\ldots$$<br>and carry on likewise for all letters.</p>
+<p>This is probably not the most accurate metric for measuring pure typing speed as we are ignoring the fact that if you want to type “b” then “a”, you have to press the 2 key twice, then wait a moment until the button count resets and then press the 2 key once more. Our metric does not account for this pause and this could make the difference between which layout is optimum.</p>
+<p>The issue with implementing a metric more suited to this, however, is that the waiting time needed before retyping will differ by phone model and configuration so we have no way of knowing what an appropriate wait time is. Therefore we stick with our mean number of button presses metric and hope that since the occurrences of two letters from the same number key in a row are rare, this will affect our optimum negligibly.</p>
+<p>Lastly, just before we start computing these optimums, it is worth considering why we should be limiting ourselves to the English language only. We definitely shouldn’t as we may be missing out on interesting differences in the results between languages. Therefore, rather than just using English language letter frequency data, I have scraped a collection of such frequency tables off Wikipedia (specifically, <a href="https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language" target="_blank" rel="noopener">this</a> page). I did this using an R script which is also responsible for the later visualisations in this post. I have not included any code in this post as it doesn’t add much of interest but if you wish to reproduce my work, the source code can be found on my <a href="https://github.com/THargreaves" target="_blank" rel="noopener">GitHub</a>.</p>
+<p>Letter frequency tables are rather dull and hard to read so I’ve cooked up a visualisation of the distributions for each of the languages we’re looking at. This gives us some insight into how we may want to design our optimum layout for each language but to know the exact best solution, we’ll have to start our computations.</p>
+<pre><code>Warning message:
+&quot;funs() is soft deprecated as of dplyr 0.8.0
+please use list() instead
+
+  # Before:
+  funs(name = f(.))
+
+  # After: 
+  list(name = ~ f(.))
+[90mThis warning is displayed once per session.[39m&quot;</code></pre><p><img src="/images/t9-layout/t9-layout_18_0.png" alt></p>
+<h2 id="Finding-Optimum-Layouts"><a href="#Finding-Optimum-Layouts" class="headerlink" title="Finding Optimum Layouts"></a>Finding Optimum Layouts</h2><p>We are now ready to compute the optimum layouts for each language. The method I intend to employ to calculate this is simply brute force, finding the efficiency for every  valid combination and then choosing the best. There are others methods worth considering. For example, we could use a dynamic programming technique - a method for solving a complex problem by breaking them down into a collection of simpler sub-problems. Or, at the very least, we could reduce our space of possible layouts using some heuristics. Both of these are not worth the effort, however, as our task is small enough to compute by force in a reasonable amount of time. If we were to expand the problem however, say to allow more dividers or a longer alphabet, we’d have to reconsider these other options.</p>
+<p>After running the optimisation function I produced for a few minutes, the following result popped out:</p>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>$(document).ready( function () {$('#table0').DataTable();} );</script>
+<table id="table0" class="display">
+
+<thead>
+    <tr><th></th><th scope="col">Break 1</th><th scope="col">Break 2</th><th scope="col">Break 3</th><th scope="col">Break 4</th><th scope="col">Break 5</th><th scope="col">Break 6</th><th scope="col">Break 7</th></tr>
+</thead>
+<tbody>
+    <tr><th scope="row">Czech</th><td>c|d</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td><td>u|v</td></tr>
+    <tr><th scope="row">Danish</th><td>c|d</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Dutch</th><td>c|d</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">English</th><td>b|c</td><td>d|e</td><td>g|h</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Esperanto</th><td>c|d</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Finnish</th><td>d|e</td><td>h|i</td><td>j|k</td><td>m|n</td><td>q|r</td><td>s|t</td><td>t|u</td></tr>
+    <tr><th scope="row">French</th><td>b|c</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">German</th><td>b|c</td><td>d|e</td><td>g|h</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Icelandic</th><td>d|e</td><td>f|g</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Italian</th><td>b|c</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Polish</th><td>b|c</td><td>d|e</td><td>h|i</td><td>m|n</td><td>q|r</td><td>v|w</td><td>x|y</td></tr>
+    <tr><th scope="row">Portuguese</th><td>b|c</td><td>d|e</td><td>h|i</td><td>l|m</td><td>n|o</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Spanish</th><td>b|c</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Swedish</th><td>c|d</td><td>d|e</td><td>h|i</td><td>k|l</td><td>m|n</td><td>q|r</td><td>s|t</td></tr>
+    <tr><th scope="row">Turkish</th><td>c|d</td><td>h|i</td><td>j|k</td><td>m|n</td><td>q|r</td><td>s|t</td><td>x|y</td></tr>
+</tbody>
+</table>
+
+
+
+<p>This is far from the nicest format to view the results in so I’ve produced this graphic <a href="/files/OptimumT9Layouts.pdf">here</a> to display the same information in a more aesthetically pleasing way. And for the specific case where the language we are optimising for is English, I have produced a mock-up image of what a phone would look like with the most efficient layout:<br><img src="/images/t9-layout/optimal_layout.png" alt="The Optimum T9 Typing Layout for English"></p>
+<h2 id="Comparing-the-Standard-and-Optimum-Layouts"><a href="#Comparing-the-Standard-and-Optimum-Layouts" class="headerlink" title="Comparing the Standard and Optimum Layouts"></a>Comparing the Standard and Optimum Layouts</h2><p>We are now ready to compare the standard T9 layout with the new optimum layouts we have produced. Here is a graphic I produced to show the typing efficiency (using the metric described earlier) for each language and type of layout.</p>
+<p><img src="/images/t9-layout/t9-layout_34_0.svg" alt></p>
+<p>As you can see, using our new layouts provided a considerable improvement in typing speed for every single language. The language with the best efficiency for the standard layout was Italian with a MNBP (Mean Number of Button Presses) or 2.01 and the worst was Turkish with a MNBP of 2.35. After optimising the layouts, the new most efficient language is French with a MNBP of 1.61 (though Italian is a close second with 2.04) and the new least efficient is Polish with a MBNP 1.89. This is notably different from the other optimal speeds which are all below a MBNP of 1.8. This can most likely be explained by the abnormally high usage of “z” in the language. Being the last letter of the alphabet, this can either by included by itself (meaning other groups will have to be larger and so slower) or as a later letter in a shared group (with the same result). The language that improved the most from having its layout optimised was German with an decreased MBNP of 0.629 and even the least improved language, Czech had an improvement of 0.339. </p>
+<p>It’s safe to say that this project was a massive success. Sadly though, the T9 layout is still not going to change but we can feel glad in knowing that if it were to, we’d know exactly what replacement we should be putting forward. </p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/combinatorical-optimisation/">combinatorical optimisation</a>, <a class="has-link-grey -link" href="/tags/no-coding/">no-coding</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/exponential-integration-tricks/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Integration Tricks using the Exponential Distribution</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/streamlining-with-magrittr/">
+                <span class="level-item">Streamlining Your Data Science Workflow With Magrittr</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/t9-layout/';
+        this.page.identifier = 't9-layout/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Flaws-of-the-T9-Layout">
+        <span class="has-mr-6">1</span>
+        <span>The Flaws of the T9 Layout</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Layout-Overhaul">
+        <span class="has-mr-6">2</span>
+        <span>A Layout Overhaul</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Metric-for-Layout-Efficiency">
+        <span class="has-mr-6">3</span>
+        <span>A Metric for Layout Efficiency</span>
+        </a></li><li>
+        <a class="is-flex" href="#Finding-Optimum-Layouts">
+        <span class="has-mr-6">4</span>
+        <span>Finding Optimum Layouts</span>
+        </a></li><li>
+        <a class="is-flex" href="#Comparing-the-Standard-and-Optimum-Layouts">
+        <span class="has-mr-6">5</span>
+        <span>Comparing the Standard and Optimum Layouts</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Rethinking the T9 Typing Layout" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

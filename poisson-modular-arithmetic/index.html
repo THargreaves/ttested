@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>The Poisson Distribution Meets Modular Arithmetic - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distributi">
+<meta name="keywords" content="tutorial,problem-solving,probability,puzzle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Poisson Distribution Meets Modular Arithmetic">
+<meta property="og:url" content="https://www.ttested.com/poisson-modular-arithmetic/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distributi">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/poisson-modular-arithmetic.png">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Poisson Distribution Meets Modular Arithmetic">
+<meta name="twitter:description" content="Inspired by a simple probability puzzle, I set out to determine the probability that a Poisson random variable is divisible by a given integer, before extending this result to calculate the distributi">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/poisson-modular-arithmetic.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="The Poisson Distribution Meets Modular Arithmetic" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 2000 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                The Poisson Distribution Meets Modular Arithmetic
+            
+        </h1>
+        <div class="content">
+            <p>Recently, I’ve been working my way through Federick Mosteller’s excellent book <a href="https://books.google.co.uk/books?id=sQr5AAAAQBAJ" target="_blank" rel="noopener">Fifty Challenging Problems in Probability</a>. Although the name might be a bit of a misnomer, with few questions proving that demanding for anyone with a decent grasp of undergraduate probability (see <a href="https://books.google.co.uk/books/about/Probability_and_Stochastic_Calculus_Quan.html?id=bHxpzgEACAAJ" target="_blank" rel="noopener">Probability and Stochastic Calculus Quant Interview Questions</a> for a more testing problem collection), it’s been a fun read and has provided me with a lot of inspiration for creating my own variants of the showcased problems.</p>
+<p>One particular question that I have playing with asks the reader to calculate the probability that a Poisson random variable $X \sim \text{Poisson}\left(\lambda\right)$ is even. The solution follows almost immediately from definitions:</p>
+<p>$$<br>\begin{align}<br>\mathbb{P}\left(X \text{ is even}\right) &amp;= \sum_{k=0}^{\infty}\frac{\lambda^{2k}e^{-\lambda}}{\left(2k\right)!} \\<br>&amp;=e^{-\lambda} \sum_{k=0}^{\infty}\frac{\lambda^{2k}}{\left(2k\right)!} \\<br>&amp;= e^{-\lambda}\cosh\left(\lambda\right) \\<br>&amp;= \frac{1}{2}\left(1 + e^{-2\lambda}\right),<br>\end{align}<br>$$</p>
+<p>where we used the well-known Maclaurin expansion for $\cosh(x)$ to reduce the infinite sum.</p>
+<p>Naturally, this led me to think about the generalisation of the problem: what is $\mathbb{P}(X \equiv 0 \bmod d)$ for any $d \in \mathbb{N}$? The rest of this blog post will be dedicated to answering this question, before providing some brief comments about how this result can be extended to any remainder.</p>
+<p>However, before we get to that, I would like to take a quick detour to look into the $d=2$ case in a bit more depth.</p>
+<h2 id="Tangent-Parity-Preference"><a href="#Tangent-Parity-Preference" class="headerlink" title="Tangent: Parity Preference"></a>Tangent: Parity Preference</h2><p>The result from above tells us that the probability that a Poisson random variable is even is given by $\frac{1}{2}\left(1 + e^{-2\lambda}\right)$. This expression is notable for the fact that it is always strictly greater than $\frac{1}{2}$, meaning that the Poisson distribution has a preference for even numbers regardless of the value of $\lambda$. </p>
+<p>I found this to be quite a surprising result and so have spent some time trying to build intuition as to why this is true. The best explanation that I could come up with involves the characterisation of the Poisson distribution as the limit of a binomial distribution with $np_n \to \lambda$ (known as the <a href="https://en.wikipedia.org/wiki/Poisson_limit_theorem" target="_blank" rel="noopener">Law of Rare Events</a>). Using this result, it is sufficient to show that the binomial distribution has a preference for even numbers for $p &lt; \frac{1}{2}$ (for $p &gt; \frac{1}{2}$ the opposite will hold by the symmetry $X \to n - X$).</p>
+<p>A nifty way to see this is to label the successes and failures of the underlying Bernoulli trials ($X_i$) as $+1$ and $-1$, respectively. It then follows that,</p>
+<p>$$<br>\begin{align}<br>1 - 2 \cdot \mathbb{P}\left(\sum_{i=1}^n X_i \text{ is even}\right) &amp;= \mathbb{E}\left(X_1 \cdot \ldots \cdot X_n\right) \\<br>&amp;= \mathbb{E}\left(X_1\right) \cdot \ldots \cdot \mathbb{E}\left(X_n\right)  \quad \text{[independence]} \\<br>&amp;= (2p - 1)^n<br>\end{align}<br>$$</p>
+<p>and so,</p>
+<p>$$<br>\mathbb{P}\left(\sum_{i=1}^n X_i \text{ is even}\right) = \frac{1}{2}\left(1 + (1 - 2p)^n\right) &gt; \frac{1}{2}.<br>$$</p>
+<p>Although this is a nice technique, it doesn’t really provide any intuition. For this, the clearest explanation I came up with involved using induction.</p>
+<p>Let $P_n$ be the probability that a binomial random variable $X \sim \text{Binomial}\left(n, p\right)$ is even. Then, we have that,</p>
+<p>$$<br>P_{n + 1} = p \cdot (1 - P_n) + (1 - p) \cdot P_n = P_n + p - 2 p P_n.<br>$$</p>
+<p>If our inductive hypothesis is that $P_n &gt; \frac{1}{2}$, then we can write $P_n = \frac{1}{2} + \varepsilon$ for some $\varepsilon &gt; 0$. Likewise, we are working under the assumption that $p &lt; \frac{1}{2}$ so we write $p = \frac{1}{2} - \delta$ for some $\delta &gt; 0$. Substituting these expressions into the above equation, we get,</p>
+<p>$$<br>P_{n + 1} = \frac{1}{2} + \varepsilon \delta &gt; \frac{1}{2},<br>$$</p>
+<p>That is, adding additional Bernoulli trials does not change the parity preference of the binomial distribution. Hence, taking $n$ to infinity, we see that the Poisson distribution has this same preference.</p>
+<p>I’m not particularly satisfied with this explanation, nor the need to rely on the Law of Rare Events. If anyone has any better ideas, please get in touch, or better yet, leave a comment at the bottom of this post.</p>
+<h2 id="Generalisation-to-Prime-Multiples"><a href="#Generalisation-to-Prime-Multiples" class="headerlink" title="Generalisation to Prime Multiples"></a>Generalisation to Prime Multiples</h2><p>Returning to our main task, to calculate $\mathbb{P}(X \equiv 0 \bmod d)$ for integral $d$ we are going to use a clever trick involving complex numbers commonly used in Olympiad-style problem-solving. Specifically, given an infinity series $f(x) = \sum_{n=0}^{\infty} a_n x^n$, we can write,</p>
+<p>$$<br>\sum_{n=0}^{\infty} a_{dn} x^{dn} = \frac{1}{p}\sum_{k=0}^{d-1} f\left(\zeta^k x\right),<br>$$</p>
+<p>where $\zeta = e^{2\pi i / d}$ is a primitive $d$ th root of unity. This result is known as the Roots of Unity Filter and an excellent introductory application can be found in Grant Sanderson’s video <a href="https://www.youtube.com/watch?v=bOXCLR3Wric" target="_blank" rel="noopener">Olympiad level counting</a>.</p>
+<p>For our particular use-case, the identity takes the form</p>
+<p>$$<br>\begin{align}<br>\mathbb{P}(X \equiv 0 \bmod d) &amp;= \sum_{k=0}^{\infty}\frac{\lambda^{dk}e^{-\lambda}}{\left(dk\right)!} \\<br>&amp;= \frac{e^{-\lambda}}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) \\<br>\end{align}<br>$$</p>
+<p>This result can be verified algebraically, but to gain some intuition, consider expanding each exponential term of the sum as a power series and arranging the results in a table. For example, for $d = 3, \lambda=1$ we have,</p>
+<p>$$<br>\begin{array}{c|ccccccc}<br>&amp; 0 &amp; 1 &amp; 2 &amp; 3 &amp; 4 &amp; 5 &amp; \ldots \\<br>\hline<br>\exp(\zeta^0) &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp;  \ldots\\<br>\exp(\zeta^k) &amp; 1 &amp; \zeta &amp; \zeta^2 &amp; 1 &amp; \zeta &amp; \zeta^2 &amp; \ldots \\<br>\exp(\zeta^{2k}) &amp; 1 &amp; \zeta^2 &amp; \zeta^1 &amp; 1 &amp; \zeta^2 &amp; \zeta^1 &amp; \ldots\\<br>\end{array}<br>$$</p>
+<p>Recalling that the roots of unity sum to zero, we see that only the columns corresponding to multiples of $d$ have non-zero sums (with value $d$).</p>
+<p>From here, all we have to do is perform a bit of algebraic manipulation. For simplicity, I will focus on the case where $d$ is odd, with only a few details needing to be tweaked for the even case. We start by pulling out the $d = 0$ term,</p>
+<p>$$<br>\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) = \frac{1}{d} \left[1 + e^{-\lambda}\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)\right],<br>$$</p>
+<p>so we can focus our attention on $\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)$. To simplify this term, we write the root of unity in trigonometric form,</p>
+<p>$$<br>\begin{align}<br>\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right) &amp;= \sum_{k=1}^{d - 1} \exp\left(\lambda \left[\cos\left(\frac{2\pi k}{d}\right) + i \sin\left(\frac{2\pi k}{d}\right)\right]\right) \\<br>&amp;= \sum_{k=1}^{d - 1} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \exp\left(i \sin\left(\frac{2\pi k}{d}\right)\right).<br>\end{align}<br>$$</p>
+<p>Noting that the term involving $\sin$ is the polar form of a complex number we can write,</p>
+<p>$$<br>\begin{align}<br>&amp;\sum_{k=1}^{d - 1} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \exp\left(\lambda\sin\left(\frac{2\pi k}{d}\right)i\right) = \\<br>&amp;\sum_{k=1}^{d - 1} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \left[\cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right) + i \sin\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right] \\<br>\end{align}<br>$$</p>
+<p>Finally, by considering the symmetry of the trigonometric functions, we obtain,</p>
+<p>$$<br>\sum_{k=1}^{d - 1} \exp\left(\lambda \zeta^k\right)<br>= 2 \cdot \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right).<br>$$</p>
+<p>Note that we are now summing over half the terms, since the other half are complex conjugates. Putting this all together, we have,</p>
+<p>$$<br>\mathbb{P}(X \equiv 0 \bmod d) = \frac{1}{d} \left[1 + 2 e^{-\lambda}\sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right)\right)\right].<br>$$</p>
+<p>As far as I can tell, this only has a closed form for the case $d = 3$, in which case we have,</p>
+<p>$$<br>\mathbb{P}(X \equiv 0 \bmod 3) = \frac{1 + 2 e^{-\frac{3\lambda}{2}}\cos\left(\frac{\sqrt{3}\lambda}{2}\right)}{3}.<br>$$</p>
+<p>Either way, we have a reduced a sum over an infinite series to a sum over a finite series, which is much more tractable. If anyone has any clever ideas on how this can be reduced to a closed form, I would be interested to hear—please get in touch or leave a comment.</p>
+<p>To verify that this is correct, we can compare the results to the Monte Carlo simulation.</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np</span><br><span class="line"><span class="hljs-keyword">from</span> scipy.stats <span class="hljs-keyword">import</span> poisson</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">poisson_multiple_odd</span><span class="hljs-params">(mu, d)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    Returns the probability that a Poisson random variable with mean mu is divisible by odd d.</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    <span class="hljs-keyword">return</span> (<span class="hljs-number">1</span> + <span class="hljs-number">2</span> * sum(</span><br><span class="line">        np.exp(mu * (np.cos(<span class="hljs-number">2</span> * np.pi * k / d) - <span class="hljs-number">1</span>)) * np.cos(mu * np.sin(<span class="hljs-number">2</span> * np.pi * k / d))</span><br><span class="line">        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, (d - <span class="hljs-number">1</span>) // <span class="hljs-number">2</span> + <span class="hljs-number">1</span>)</span><br><span class="line">    )) / d</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_poisson_multiple_approx</span><span class="hljs-params">(mu, d, r=<span class="hljs-number">0</span>, reps=<span class="hljs-number">10</span>**<span class="hljs-number">6</span>)</span>:</span></span><br><span class="line">    xs = poisson.rvs(mu, size=reps)</span><br><span class="line">    n_multiple = sum(xs % d == r)</span><br><span class="line">    prop = n_multiple / reps</span><br><span class="line">    std = np.sqrt(prop * (<span class="hljs-number">1</span> - prop) / reps)</span><br><span class="line">    <span class="hljs-keyword">return</span> prop, std</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="hljs-number">42</span>)</span><br><span class="line"></span><br><span class="line">mu, d = <span class="hljs-number">2.2</span>, <span class="hljs-number">5</span></span><br><span class="line">print(<span class="hljs-string">f"TEST 1: mu = <span class="hljs-subst">&#123;mu&#125;</span>, d = <span class="hljs-subst">&#123;d&#125;</span>"</span>)</span><br><span class="line">print(<span class="hljs-string">"Analytic Solution:"</span>, poisson_multiple_odd(mu, d))</span><br><span class="line">print(<span class="hljs-string">"Monte Carlo Approximation:"</span>, <span class="hljs-string">"&#123;&#125; (±&#123;:.5f&#125;)"</span>.format(*_poisson_multiple_approx(mu, d)))</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_poisson_multiple_three</span><span class="hljs-params">(mu)</span>:</span></span><br><span class="line">    <span class="hljs-keyword">return</span> (<span class="hljs-number">1</span> + <span class="hljs-number">2</span> * np.exp(<span class="hljs-number">-3</span>/<span class="hljs-number">2</span> * mu) * np.cos(np.sqrt(<span class="hljs-number">3</span>) * mu / <span class="hljs-number">2</span>)) / <span class="hljs-number">3</span></span><br><span class="line"></span><br><span class="line">mu, d = <span class="hljs-number">1.5</span>, <span class="hljs-number">3</span></span><br><span class="line">print(<span class="hljs-string">f"\nTEST 2: mu = <span class="hljs-subst">&#123;mu&#125;</span>, d = <span class="hljs-subst">&#123;d&#125;</span>"</span>)</span><br><span class="line">print(<span class="hljs-string">"Analytic Sum Form:"</span>, poisson_multiple_odd(mu, d))</span><br><span class="line">print(<span class="hljs-string">"Analytic Closed Form:"</span>, _poisson_multiple_three(mu))</span><br></pre></td></tr></table></figure>
+
+<pre><code>TEST 1: mu = 2.2, d = 5
+Analytic Solution: 0.1584708275917
+Monte Carlo Approximation: 0.158391 (±0.00037)
+
+TEST 2: mu = 1.5, d = 3
+Analytic Sum Form: 0.35219456292556717
+Analytic Closed Form: 0.35219456292556717</code></pre><p>For even $d$ we simply have to take care over how we treat $\zeta^\frac{d}{2}$ since it has no complex conjugate in the sum to cancel with. I will leave this as an exercise for the reader.</p>
+<h2 id="General-Remainders"><a href="#General-Remainders" class="headerlink" title="General Remainders"></a>General Remainders</h2><p>It remains to consider how we can generalise our approach to compute $\mathbb{P}(X \equiv r \bmod d)$ for $r \neq 0$. The change we need to make is fairly simple, so I’ll leave the algebraic details for the reader to verify. The key idea is that by replacing</p>
+<p>$$\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) $$</p>
+<p>with</p>
+<p>$$<br>\frac{1}{d} \sum_{k=0}^{d - 1} \exp\left(\lambda \zeta^k\right) \zeta^{-rk},<br>$$</p>
+<p>we shift the column of ones in the table above so that it corresponds to the $(md + r)$ th columns for $m\in\mathbb{N}$. Following similar steps to the ones above, we obtain,</p>
+<p>$$<br>\mathbb{P}(X \equiv r \bmod d) = \sum_{k=1}^{\frac{d - 1}{2}} \exp\left(\lambda\cos\left(\frac{2\pi k}{d}\right)\right) \cos\left(\lambda\sin\left(\frac{2\pi k}{d}\right) - \frac{2\pi kr}{d}\right).<br>$$</p>
+<p>Note that as $d \to \infty$ the additional term goes to zero and $X \bmod d \overset d \to \text{Unif}({0, \ldots d-1})$. Again, we can verify this result using Monte Carlo simulation.</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">poisson_multiple_odd_remainder</span><span class="hljs-params">(mu, d, r)</span>:</span></span><br><span class="line">    <span class="hljs-string">"""</span></span><br><span class="line"><span class="hljs-string">    Returns the probability that a Poisson random variable with mean mu is divisible by odd d.</span></span><br><span class="line"><span class="hljs-string">    """</span></span><br><span class="line">    <span class="hljs-keyword">return</span> (<span class="hljs-number">1</span> + <span class="hljs-number">2</span> * sum(</span><br><span class="line">        np.exp(mu * (np.cos(<span class="hljs-number">2</span> * np.pi * k / d) - <span class="hljs-number">1</span>)) * np.cos(mu * np.sin(<span class="hljs-number">2</span> * np.pi * k / d) - <span class="hljs-number">2</span> * np.pi * k * r / d)</span><br><span class="line">        <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>, (d - <span class="hljs-number">1</span>) // <span class="hljs-number">2</span> + <span class="hljs-number">1</span>)</span><br><span class="line">    )) / d</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="hljs-number">42</span>)</span><br><span class="line"></span><br><span class="line">mu, d, r = <span class="hljs-number">2.2</span>, <span class="hljs-number">5</span>, <span class="hljs-number">2</span></span><br><span class="line">print(<span class="hljs-string">f"\nTEST 3: mu = <span class="hljs-subst">&#123;mu&#125;</span>, d = <span class="hljs-subst">&#123;d&#125;</span>, r = <span class="hljs-subst">&#123;r&#125;</span>"</span>)</span><br><span class="line">print(<span class="hljs-string">"Analytic Solution:"</span>, poisson_multiple_odd_remainder(mu, d, r))</span><br><span class="line">print(<span class="hljs-string">"Monte Carlo Approximation:"</span>, <span class="hljs-string">"&#123;&#125; (±&#123;:.5f&#125;)"</span>.format(*_poisson_multiple_approx(mu, d, r)))</span><br><span class="line"></span><br><span class="line">print(<span class="hljs-string">f"\nTEST 4: Law of Total Probability"</span>)</span><br><span class="line">print(<span class="hljs-string">"Total Probability:"</span>, sum(poisson_multiple_odd_remainder(mu, d, r) <span class="hljs-keyword">for</span> r <span class="hljs-keyword">in</span> range(d)))</span><br></pre></td></tr></table></figure>
+
+
+<pre><code>TEST 3: mu = 2.2, d = 5, r = 2
+Analytic Solution: 0.2736304014426759
+Monte Carlo Approximation: 0.273778 (±0.00045)
+
+TEST 4: Law of Total Probability
+Total Probability: 1.0</code></pre>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/probability/">probability</a>, <a class="has-link-grey -link" href="/tags/problem-solving/">problem-solving</a>, <a class="has-link-grey -link" href="/tags/puzzle/">puzzle</a>, <a class="has-link-grey -link" href="/tags/tutorial/">tutorial</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/terminal-velocity/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Terminal Velocity in a Vacuum</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/pseudo-loadings/">
+                <span class="level-item">Principal Component Regression as Pseudo-Loadings</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/poisson-modular-arithmetic/';
+        this.page.identifier = 'poisson-modular-arithmetic/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Tangent-Parity-Preference">
+        <span class="has-mr-6">1</span>
+        <span>Tangent: Parity Preference</span>
+        </a></li><li>
+        <a class="is-flex" href="#Generalisation-to-Prime-Multiples">
+        <span class="has-mr-6">2</span>
+        <span>Generalisation to Prime Multiples</span>
+        </a></li><li>
+        <a class="is-flex" href="#General-Remainders">
+        <span class="has-mr-6">3</span>
+        <span>General Remainders</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="The Poisson Distribution Meets Modular Arithmetic" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

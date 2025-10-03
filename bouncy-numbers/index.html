@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Maths Matters: Bouncy Numbers - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="When we get swept up by the data science craze, it is often all too easy to forget the importance of pure mathematics and statistics, in place of flashy new algorithms and machine learning models. As">
+<meta name="keywords" content="combinatorics,problem-solving">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maths Matters: Bouncy Numbers">
+<meta property="og:url" content="https://www.ttested.com/bouncy-numbers/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="When we get swept up by the data science craze, it is often all too easy to forget the importance of pure mathematics and statistics, in place of flashy new algorithms and machine learning models. As">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/bouncy-numbers.jpg">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maths Matters: Bouncy Numbers">
+<meta name="twitter:description" content="When we get swept up by the data science craze, it is often all too easy to forget the importance of pure mathematics and statistics, in place of flashy new algorithms and machine learning models. As">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/bouncy-numbers.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Maths Matters: Bouncy Numbers" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/bouncy-numbers.jpg" alt="Maths Matters: Bouncy Numbers">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-18T23:00:00.000Z">2019-10-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Computer-Science/">Computer Science</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/Computer-Science/Coding-Problems/">Coding Problems</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 minutes read (About 2700 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Maths Matters: Bouncy Numbers
+            
+        </h1>
+        <div class="content">
+            <blockquote class="colorquote warning"><p>This blog post will contain a solution to problem #113 (non-bouncy numbers) of ProjectEuler+ which will in turn provide a substantial hint for problem #112 (bouncy numbers). </p>
+</blockquote>
+
+
+<p>Almost a year ago now I wrote a blog post titled <a href="/google-interview-question/">Efficiently Solving a Google Coding Interview Question Using Pure Mathematics</a>. In it, I discuss how I had used techniques from pure mathematical fields such as combinatorics and linear algebra, to find a solution to a typical Google interview problem that was simple, efficient, and impressively short. </p>
+<p>Today’s post could easily be described as the spiritual successor to the former. We will tackle a new problem, this time from <a href="https://www.hackerrank.com/contests/projecteuler/challenges" target="_blank" rel="noopener">ProjectEuler+</a> (<a href="https://www.hackerrank.com" target="_blank" rel="noopener">HackerRank</a>‘s take on the original <a href="https://projecteuler.net/" target="_blank" rel="noopener">ProjectEuler</a>). The exact techniques we use will certainly differ but the overall style and structure will be the same. More importantly, so will the take-away message: maths matters!</p>
+<h2 id="Bouncy-Numbers"><a href="#Bouncy-Numbers" class="headerlink" title="Bouncy Numbers"></a>Bouncy Numbers</h2><p>The problem that we will be looking at involves a definition of what makes a number bouncy, or more importantly <em>not</em> bouncy. We will be concerned with counting how many non-bouncy numbers there are less than a given power of ten.</p>
+<p>The best place to start is by defining what exactly a bouncy number is.</p>
+<h3 id="The-Problem-Statement"><a href="#The-Problem-Statement" class="headerlink" title="The Problem Statement"></a>The Problem Statement</h3><p>The specific problem that we will be looking at is #113 - non-bouncy numbers. The original problem statement can be found <a href="https://www.hackerrank.com/contests/projecteuler/challenges/euler113/problem" target="_blank" rel="noopener">here</a> but I will summarise below.</p>
+<p>We say that a number is increasing if no digit is exceeded by the digit to its left. For example, 123 and 445 are both increasing numbers but 687 isn’t. We have a similar definition for decreasing numbers in which no digit is exceed by the digit to its right.</p>
+<p>We call any positive integer that is neither increasing nor decreasing a bouncy number. The crux of the question is simply-stated: how many positive integers below $10^k$ are <em>not</em> bouncy?</p>
+<blockquote class="colorquote info"><p>These answers grow large with $k$ and so the original problem adds that the answer should be printed modulo $(10^9 + 7)$ but we will ignore this for simplicity.</p>
+</blockquote>
+
+
+<h3 id="A-Typical-Solution"><a href="#A-Typical-Solution" class="headerlink" title="A Typical Solution"></a>A Typical Solution</h3><p>This problem stood out to me as it seemed to have a surprisingly low success rate of around 50% for what to me seemed like a straight-forward problem. The reason for this disparity is that my initial approach to the problem took a vastly different line of attack to most, judging by the problem discussion board.</p>
+<p>It appears that most competitors tried to tackle the problem using either brute force (good luck) or dynamic programming. The issue is, that due to the large number of test cases and range of $k$ (up to $10^5$) any brute force approach, and all but the most efficient dynamic programming solutions, will ending up using more than the allowable code execution time.</p>
+<p>My solution differs in that there is no recursion, no iteration, and no enumeration; in fact there’s not really any code at all. Why? Because my experience with combinatorics led me to know a closed form for the solution.</p>
+<h2 id="A-Mathematical-Approach"><a href="#A-Mathematical-Approach" class="headerlink" title="A Mathematical Approach"></a>A Mathematical Approach</h2><p>Before we get into the nitty-gritty mathematics, lets take a look at the code for my solution (written in Python). The input format for the problem is first an integer $t$ giving the number of test cases, followed by $t$ lines each containing a different value of $k$. The output format is then $t$ lines, each containing the number of non-bouncy numbers less than $10^k$.</p>
+<h3 id="The-Final-Code-First"><a href="#The-Final-Code-First" class="headerlink" title="The Final Code, First"></a>The Final Code, First</h3><figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">from</span> functools <span class="hljs-keyword">import</span> reduce </span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># define combinatorial choose function</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">nCr</span><span class="hljs-params">(n,k)</span>:</span></span><br><span class="line">    numer = reduce(<span class="hljs-keyword">lambda</span> x, y: x * y, list(range(n, n - k, <span class="hljs-number">-1</span>)))</span><br><span class="line">    denom = reduce(<span class="hljs-keyword">lambda</span> x, y: x * y, list(range(<span class="hljs-number">1</span>, k + <span class="hljs-number">1</span>)))</span><br><span class="line">    <span class="hljs-keyword">return</span> numer // denom</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> range(int(input())):</span><br><span class="line">    k = int(input())</span><br><span class="line">    num_increasing = nCr(k + <span class="hljs-number">9</span>, <span class="hljs-number">9</span>) - <span class="hljs-number">1</span></span><br><span class="line">    num_decreasing = nCr(k + <span class="hljs-number">10</span>, <span class="hljs-number">10</span>) - (k + <span class="hljs-number">1</span>)</span><br><span class="line">    num_both = <span class="hljs-number">9</span> * k</span><br><span class="line">    num_not_bouncy = num_inc + num_dec - num_bth</span><br><span class="line">    print(num_not_bouncy)</span><br></pre></td></tr></table></figure>
+
+
+<p>This code passes all visible and hidden test cases for the problem in barely any time.</p>
+<p>The first section of the code—importing <code>functools.reduce</code> and defining <code>nCr(n,k)</code>—isn’t actually part of the general problem-solving logic. They simply make up for the lack of base mathematical functionality in Python by manually adding definitions. In all, only the four lines starting <code>num_{something} =</code> are essential for solving the problem, the rest is just boilerplate code.</p>
+<p>These four lines carry a lot of power. Before we piece them together though, we will have to have a quick review of elementary combinatorics.</p>
+<h3 id="My-Thought-Process"><a href="#My-Thought-Process" class="headerlink" title="My Thought Process"></a>My Thought Process</h3><h4 id="Elementary-Combinatorics"><a href="#Elementary-Combinatorics" class="headerlink" title="Elementary Combinatorics"></a>Elementary Combinatorics</h4><blockquote class="colorquote info"><p>If you feel like you have a good grasp of basic combinatorics including the definition of $n \choose k$ and knowledge of the principle of bijections, this section will not teach you anything new so I advise that you skip over it.</p>
+</blockquote>
+
+
+<p>Combinatorics is a vast field of mathematics but we will only need to take a short glance at a specific area. In particular, we will be looking at the function denoted by</p>
+<p>$$n\choose k$$</p>
+<p>which we pronounce as <em>n choose k</em>. </p>
+<p>This function gives the number of ways of selecting $k$ objects out of $n$ distinguishable choices. For example if we to form a team of 5 out of a class of 30 pupils, we would be able to do this in ${30 \choose 5}$ unique ways.</p>
+<p>That’s nice and all, but just defining a notation for a concept doesn’t get us very far. The important point is that we have a formula for $n\choose k$ which lets us calculate it simply and efficiently for any reasonable $n$ and $k$. The formula is as follows:</p>
+<p>$${n\choose k} = \frac{n!}{k!(n-k)!} = \frac{n \cdot (n-1) \cdot \ldots \cdot (n - k + 2) \cdot (n - k + 1)}{k \cdot (k-1) \cdot \ldots \cdot 2 \cdot 1}$$</p>
+<p>This is exactly what that first block of code in our solution is for. It sets up the function to compute $n \choose k$ for any positive integers $0 \leq k \leq n$. This doesn’t contribute to the overall logic of the solution but is necessary component to the required computations.</p>
+<hr>
+
+<p>Before we get on to exactly into how my solution works, we will need to take a quick detour to learn about the principle of bijections. This is best illustrated with a motivating example.</p>
+<p>Suppose that you have a handful of apples and oranges and you want to know whether you have the same quantity of each fruit. The obvious way to check this is to count how many of each fruit you have and then compare these two numbers to check for equality. </p>
+<p>Let’s consider this problem again but now with two large crates, each full of apples and oranges respectively. Counting is now a risky endeavour; how can we be sure that we don’t lose count or accidentally miss a piece of fruit? A more robust solution would be to pair the apples and oranges up until we either run out of both fruits at the same time - in which case the original quantities of each fruit were the same - or there is one type of fruit left over - and so the original numbers were not equal.</p>
+<p>This notation is abstracted in the field of combinatorics (and maths at large) to what is known as the principle of bijections. This states that whenever we can form a one-to-one correspondence (also known as a bijection, hence the name) between two sets, they are of the same size. This principle will come in handy in just a few moments.</p>
+<h4 id="Application-to-the-Problem"><a href="#Application-to-the-Problem" class="headerlink" title="Application to the Problem"></a>Application to the Problem</h4><p>With preliminaries out of the way, we can proceed to solve to the problem. We split our approach into four parts:</p>
+<p>1) Calculate the number of increasing numbers less than $10^k$</p>
+<p>2) Calculate the number of decreasing numbers less than $10^k$</p>
+<p>3) Calculate the number of numbers less than $10^k$ that are both increasing and decreasing</p>
+<p>4) Compute the number of bouncy numbers less than $10^k$ using the above three values</p>
+<p>It turns out that each of these can each be completed in just a single line of code involving the <code>nCr(n, k)</code> function we defined earlier. We will break down each step one at a time.</p>
+<h4 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h4><p>We start by counting the number of increasing numbers less than $10^k$. As a reminder, we include both strictly increasing (e.g. $123$) and weakly increasing (e.g. $455$) in our general definition of increasing numbers.</p>
+<p>Counting these directly is rather difficult but we can introduce a clever one-to-one correspondence to make this task much easier. We will define the mapping as follows:</p>
+<ul>
+<li>Given an increasing positive integer less than $10^k$, write it in the form $d_1d_2\ldots d_k$ where $d_1 \ldots d_k$ are digits between 0 and 9 to be concatenated</li>
+<li>Since the given number was increasing we have $0 \leq d_1 \leq d_2 \leq \ldots \leq d_k \leq 9$</li>
+<li>We map this integer to a sequence of stars (*) and bars (|) such that each star corresponds to the digits $d_1\ldots d_k$</li>
+<li>Further we set the number of bars between the $i$th and $(i+1)$th star to be equal $d_{i+1} - d_{i}$</li>
+<li>Lastly we place a number of bars equal to $d_1$ at the start of the sequence and $9 - d_k$ at the end</li>
+</ul>
+<p>They may seem like a highly opaque definition but hopefully the inclusion of an example will add clarity. </p>
+<p>First we look at the number $457$ when $k=5$. Since we are considering five digits, we write this as 00457. We start with our 5 stars:</p>
+<p>$$*****$$</p>
+<p>Our first digit is $0$ so we don’t place any bars at the start. Likewise our second digit is $0$ and so as there was no increase, we do not insert a bar. Between the second and third digit however we have an increase of $4$ so we insert that many bars there to get:</p>
+<p>$$**||||***$$</p>
+<p>Carrying on, we have a jump of $1$ between the third and fourth digit and $2$ between the fourth and last so we add the corresponding number of bars to the diagram:</p>
+<p>$$**||||*|*||*$$</p>
+<p>Finally, we add two bars to the end of the sequence since $7$ is two short of $9$. This leaves us with:</p>
+<p>$$**||||*|*||*||$$</p>
+<p>Notice that we can convert these sequence representations back by reversing our rules. For example the sequence,</p>
+<p>$$||**|**|*|||||$$</p>
+<p>corresponds to the increasing number $22334$.</p>
+<p>Notice that in general we will have $k$ stars and 9 bars. The reason for the latter is perhaps less apparent. It follows from the way we defined the number of bars between each of the digits and at the end. The number at the start was $d_1$. Then we had $d_2-d_1$ between the first pair, and $d_3-d_2$ between the next. We continue this until there are $d_k - d_{k-1}$ between the last pair. Lastly, we add $9-d_k$ bars to the end. So in total we have</p>
+<p>$$d_1 + (d_2 - d_1) + (d_3 - d_2) + \ldots (d_k - d_{k-1}) + (9-d_k) = 9$$</p>
+<p>bars.</p>
+<p>Since mappings are unique in both the forwards and backwards direction (try working backwards from the stars and bars above to the original number), we have a one-to-one correspondence. It follows from the principle of bijections that the number of increasing numbers less than $10^k$ is exactly equal to the number of ways of creating a sequence of $k$ stars and $9$ bars.</p>
+<p>The end is now in sight. The last step is to notice that the number of ways of arranging $k$ stars and $9$ bars is the same as the number of ways of picking $9$ objects from a choice of $k+9$. Why is this? Well suppose that we have $k+9$ spaces which can each be filled with either a star or a bar:</p>
+<p>$$\underbrace{\_\,\_\,\_\ldots\_\,\_\,\_}_{k+9}$$</p>
+<p>We then pick $9$ of these to fill with the 9 bars we have available. Then the remaining $k$ spaces are forced to be stars. Since the choice of spaces to fill with bars uniquely determines the sequence of stars and bars, and vice-versa, these represent the same process.</p>
+<p>Finally, remember from our definition of $n \choose k$ is the number of ways of choosing k elements from a selection of n objects. Well that is exactly what we have done here, but choosing $9$ objects from $k+9$ instead. </p>
+<p>There are therefore</p>
+<p>$${k+9} \choose 9$$</p>
+<p>ways to create such sequences of stars and bars, and so using the principle of bijections, this is exactly how many increasing numbers less than $10^k$ we have.</p>
+<p>A small tweak remaining is just to subtract $1$ from the result since the problem specifically concerns <em>positive</em> integers. With this addition made we are left with the first ‘proper’ line of code in my solution:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num_increasing = nCr(k + <span class="hljs-number">9</span>, <span class="hljs-number">9</span>) - <span class="hljs-number">1</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h4><p>This next step is very similar to the last but with a minor change. This is since, with decreasing numbers, we are allowed to have zeros both at the start and end of the number (the leading zeros being used to pad the number to have $k$ digits).</p>
+<p>We use the same numbers of stars as before but add an extra bar. We also decide on the number of bars between each star in a slightly altered way. This is harder to describe algebraically so instead we use the rule that for each additional bar, our next star progresses one place in the following sequence</p>
+<p>$${0,9,8,\ldots,1,0}$$</p>
+<p>This is highly analogous to the previous method so I won’t go into additional examples though I encourage the reader to try one out for themselves.</p>
+<p>The important point is that we are now arranging $k$ stars and $10$ bars. In a similar way to before we find that this can be done in</p>
+<p>$${k+10} \choose 10$$</p>
+<p>ways.</p>
+<p>We must make a similar correction to before. This time, however, we subtract $k+1$ rather $1$. This is because we have $k+1$ unique representations of zero, show below.</p>
+<p>$$\underbrace{***\ldots***}_{k}||||||||||$$</p>
+<p>$$\underbrace{***\ldots***}_{k-1}||||||||||*$$</p>
+<p>$$\vdots$$</p>
+<p>$$*||||||||||\underbrace{***\ldots***}_{k-1}$$</p>
+<p>$$||||||||||\underbrace{***\ldots***}_{k}$$</p>
+<p>This leaves us with the second essential line of code:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num_increasing = nCr(k + <span class="hljs-number">10</span>, <span class="hljs-number">10</span>) - (k + <span class="hljs-number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h4><p>Thankfully this step is much simpler than the last two. We introduce this to prevent double-counting numbers that are both increasing and decreasing. The only numbers satisfying both these properties are those made of a single digit.</p>
+<p>It is not hard to show that there are $9 \cdot k$ ways to do this. Indeed, there are $9$ digits that can choose from and then we can repeat it one of $1, 2, \ldots, k$ times (i.e. $k$ different ways). </p>
+<p>This leads us to the third line of the main body of the code:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num_both = <span class="hljs-number">9</span> * k</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h4><p>To round everything up will simply note that the number of non-bouncy integers less than $10^k$, which by definition is the number of integers less than $10^k$ that are neither increasing nor decreasing, is equal the number of integers less than $10^k$ that are increasing plus the number that are decreasing subtract the number that are both increasing and decreasing.</p>
+<p>This gives rise to the final important line of code:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num_not_bouncy = num_inc + num_dec - num_bth</span><br></pre></td></tr></table></figure>
+
+
+<p>With this, we can draw a close to this post. Before we do though, I would like to emphasise the importance of pure mathematics in this solution. Without a reasonable knowledge of combinatorics, coming up with this solution would have been highly unlikely and so one may have been forced to resort to more complicated or inefficient methods. </p>
+<p>Some would argue that this approach seems far more confusing than a dynamic programming approach and I understand that train of thought. At first glance, this solution seems incredibly involved and time-consuming to produce. I argue though, that with practice of pure mathematics—and, in particular, combinatorics—this sort of problem-solving becomes second nature, allowing you to tackle challenges of this sort after only a few seconds of contemplation.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/combinatorics/">combinatorics</a>, <a class="has-link-grey -link" href="/tags/problem-solving/">problem-solving</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/ordering-with-facets/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Ordering Factors within a Faceted Plot</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/sorting-algorithm-visualisation/">
+                <span class="level-item">Yet Another Sorting Algorithm Visualisation</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/bouncy-numbers/';
+        this.page.identifier = 'bouncy-numbers/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Bouncy-Numbers">
+        <span class="has-mr-6">1</span>
+        <span>Bouncy Numbers</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Problem-Statement">
+        <span class="has-mr-6">1.1</span>
+        <span>The Problem Statement</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Typical-Solution">
+        <span class="has-mr-6">1.2</span>
+        <span>A Typical Solution</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#A-Mathematical-Approach">
+        <span class="has-mr-6">2</span>
+        <span>A Mathematical Approach</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-Final-Code-First">
+        <span class="has-mr-6">2.1</span>
+        <span>The Final Code, First</span>
+        </a></li><li>
+        <a class="is-flex" href="#My-Thought-Process">
+        <span class="has-mr-6">2.2</span>
+        <span>My Thought Process</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Elementary-Combinatorics">
+        <span class="has-mr-6">2.2.1</span>
+        <span>Elementary Combinatorics</span>
+        </a></li><li>
+        <a class="is-flex" href="#Application-to-the-Problem">
+        <span class="has-mr-6">2.2.2</span>
+        <span>Application to the Problem</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-1">
+        <span class="has-mr-6">2.2.3</span>
+        <span>Step 1</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-2">
+        <span class="has-mr-6">2.2.4</span>
+        <span>Step 2</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-3">
+        <span class="has-mr-6">2.2.5</span>
+        <span>Step 3</span>
+        </a></li><li>
+        <a class="is-flex" href="#Step-4">
+        <span class="has-mr-6">2.2.6</span>
+        <span>Step 4</span>
+        </a></li></ul></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Maths Matters: Bouncy Numbers" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

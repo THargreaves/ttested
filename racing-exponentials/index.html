@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="I present two exact approaches for efficiently computing the probability that an exponential random variable ranks kth among N independent exponentials with different rate parameters.">
+<meta name="keywords" content="probability,puzzle">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+<meta property="og:url" content="https://www.ttested.com/racing-exponentials/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="I present two exact approaches for efficiently computing the probability that an exponential random variable ranks kth among N independent exponentials with different rate parameters.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/racing-exponentials.jpg">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+<meta name="twitter:description" content="I present two exact approaches for efficiently computing the probability that an exponential random variable ranks kth among N independent exponentials with different rate parameters.">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/racing-exponentials.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    17 minutes read (About 3300 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables
+            
+        </h1>
+        <div class="content">
+            <p>In a recent event that made me feel like a true mathematician of old, I was excited to receive a piece of (admittedly e-)mail from a PhD friend of mine posing an intriguing probability problem that he needed solving.</p>
+<p>The problem concerned $N$ independent (but not identically-distributed) random variables $X_1, \ldots, X_N$ and asks for the probability that $X_1$ ranks $k$th among them when sorted in ascending order. Specifically, he was interested in the case where each $X_i$ is exponentially distributed with unique rate parameters $\lambda_i$, i.e. $X_i \sim \text{Exp}(\lambda_i)$.</p>
+<p>The obvious approach to this problem is Monte Carlo simulation, which he was well aware of. For moderate values of $N$ this is adequate, though computational costs rise rapidly when high precision is required or when $N$ is large. It therefore raises the question, whether there is a way to efficiently compute an exact value for this probability with a direct method.</p>
+<p>I was initially skeptical about finding a tractable solution. To see why, consider the general form of this probability. For $X_1$ to rank $k$th, we need exactly $k-1$ of the other variables to be smaller than $X_1$, and the remaining $N-k$ variables to be larger. We can express this by conditioning on the value of $X_1$. If $X_1 = x$, then we need to choose which $k-1$ of the remaining $N-1$ variables fall below $x$, and the rest must exceed $x$. In the identically-distributed case, this is just a straightforward sum over $N$ terms with some binomial coefficients. However, in the heterogeneous case, we must consider all $\binom{N-1}{k-1}$ possible subsets of size $k-1$ from ${2, \ldots, N}$.<br>This gives:</p>
+<p>$$P(X_1 \text{ ranks } k\text{th}) = \int_{-\infty}^{\infty} f_1(x) \sum_{\substack{S \subseteq {2,\ldots,N} \ |S| = k-1}} \left[\prod_{j \in S} F_j(x) \prod_{j \notin S, j \neq 1} (1-F_j(x))\right] dx$$</p>
+<p>Yikes! Here $f_1$ and $F_j$ denote the density and CDF of the respective random variables, and the sum runs over all $\binom{N-1}{k-1}$ subsets $S$ of size $k-1$ from ${2, \ldots, N}$. For each such subset, the integrand contains a product of $k-1$ CDFs (for variables in $S$) and $N-k$ survival functions (for variables not in $S$). This is a complex expression even before considering the sum over exponentially many subsets. For general distributions, it’s probably fair to say that you’re not going to find such an integrand in your table of integrals.</p>
+<h2 id="A-Closed-Form-Solution-for-Exponentials"><a href="#A-Closed-Form-Solution-for-Exponentials" class="headerlink" title="A Closed-Form Solution for Exponentials"></a>A Closed-Form Solution for Exponentials</h2><p>Despite my initial pessimism, I decided to work through the exponential case to see how far I could get, and luckily, things just so happen to simplify quite nicely.</p>
+<p>For $X_i \sim \text{Exp}(\lambda_i)$, we have the density $f_i(x) = \lambda_i e^{-\lambda_i x}$ and CDF $F_i(x) = 1 - e^{-\lambda_i x}$ for $x \geq 0$. Substituting these into the probability expression above gives:</p>
+<p>$$P(X_1 \text{ ranks } k\text{th}) = \sum_{\substack{S \subseteq {2,\ldots,N} \ |S| = k-1}} \int_{0}^{\infty} \lambda_1 e^{-\lambda_1 x} \prod_{j \in S} (1-e^{-\lambda_j x}) \prod_{j \notin S, j \neq 1} e^{-\lambda_j x} , dx$$</p>
+<p>The crucial insight is that the product $\prod_{j \in S} (1-e^{-\lambda_j x})$ can be expanded using the inclusion-exclusion principle. For any finite set $S$, we have:</p>
+<p>$$\prod_{j \in S} (1-e^{-\lambda_j x}) = \sum_{T \subseteq S} (-1)^{|T|} \prod_{j \in T} e^{-\lambda_j x}$$</p>
+<p>Here the sum is over all subsets $T$ of $S$ (including the empty set), and the sign alternates based on the size of $T$. We can then easily simplify the product of exponentials as:</p>
+<p>$$\prod_{j \in T} e^{-\lambda_j x} = e^{-\sum_{j \in T} \lambda_j x}$$</p>
+<p>This simplification is crucial and appears to be fairly unique to the exponential distribution.</p>
+<p>Substituting this expansion back into our integral:</p>
+<p>$$P(X_1 \text{ ranks } k\text{th}) = \sum_{\substack{S \subseteq {2,\ldots,N} \ |S| = k-1}} \sum_{T \subseteq S} (-1)^{|T|} \int_{0}^{\infty} \lambda_1 e^{-\lambda_1 x} e^{-\sum_{j \in T} \lambda_j x} \prod_{j \notin S, j \neq 1} e^{-\lambda_j x} , dx$$</p>
+<p>Still a bit messy, but importantly, we’ve managed to move the integral inside the sums, making a closed-form solution at least tractable.</p>
+<p>We can now combine all the exponential terms in the integrand. Collecting all terms involving $x$ in the exponent we have:</p>
+<p>$$\int_{0}^{\infty} \lambda_1 \exp\left(-\left[\lambda_1 + \sum_{j \in T} \lambda_j + \sum_{j \notin S, j \neq 1} \lambda_j\right] x\right) dx$$</p>
+<p>It will be convenient to define $\Lambda(S, T)$ to be the constant coefficient of $x$ in this exponential:</p>
+<p>$$\Lambda(S, T) = \lambda_1 + \sum_{j \in T} \lambda_j + \sum_{j \notin S, j \neq 1} \lambda_j$$</p>
+<p>With this notation, our integral has a nice closed-form as:</p>
+<p>$$\int_{0}^{\infty} \lambda_1 e^{-\Lambda(S,T) x} dx = \frac{\lambda_1}{\Lambda(S,T)}$$</p>
+<p>We can simplify the expression for $\Lambda(S,T)$ further. Note that we are summing $\lambda_1$, plus the rates for indices in $T \subseteq S$, plus the rates for all indices outside $S$ (excluding 1). This is equivalent to summing all rates except those in $S \setminus T$ (the elements of $S$ not in $T$). If we define $\Lambda = \sum_{j=1}^{N} \lambda_j$ to be the sum of all rates, then:</p>
+<p>$$\Lambda(S, T) = \Lambda - \sum_{j \in S \setminus T} \lambda_j$$</p>
+<p>Putting everything together, we obtain the closed-form (if not still quite computationally expensive) expression:</p>
+<p>$$P(X_1 \text{ ranks } k\text{th}) = \lambda_1 \sum_{\substack{S \subseteq {2,\ldots,N} \ |S| = k-1}} \sum_{T \subseteq S} \frac{(-1)^{|T|}}{\Lambda - \sum_{j \in S \setminus T} \lambda_j}$$</p>
+<p>This is a double sum over finite sets that can be computed directly. The outer sum iterates over all subsets $S$ of size $k-1$ from ${2, \ldots, N}$, of which there are $\binom{N-1}{k-1}$. For each such subset $S$, the inner sum iterates over all subsets $T$ of $S$, of which there are $2^{|S|} = 2^{k-1}$. Each term in the inner sum involves computing a sum over at most $k-1$ elements (for $S \setminus T$), which takes $O(k)$ time. Therefore, the overall time complexity is:</p>
+<p>$$O\left(\binom{N-1}{k-1} \cdot 2^{k-1} \cdot k\right)$$</p>
+<p>The behavior of this complexity depends strongly on $k$. When $k=1$, the outer sum has only $\binom{N-1}{0} = 1$ term, and the inner sum for the empty set $S = \emptyset$ has only one term (the empty set $T = \emptyset$), giving $\Lambda(\emptyset, \emptyset) = \Lambda$. The formula thus reduces to the well-known result $P(X_1 \text{ is minimum}) = \lambda_1 / \Lambda$, with $O(1)$ complexity.</p>
+<p>At the other extreme, when $k = N/2$, the binomial coefficient is largest. Using Stirling’s approximation, we have:</p>
+<p>$$\binom{N-1}{N/2-1} \approx \frac{2^{N-1}}{\sqrt{\pi (N-1)/2}} \approx \frac{2^{N-1}}{\sqrt{\pi N/2}}$$</p>
+<p>Combining with the $2^{k-1} = 2^{N/2-1}$ factor from the inner sum gives:</p>
+<p>$$\frac{2^{N-1}}{\sqrt{\pi N/2}} \cdot 2^{N/2-1} = \frac{2^{N-1+N/2-1}}{\sqrt{\pi N/2}} = \frac{2^{3N/2-2}}{\sqrt{\pi N/2}} = O\left(2^{3N/2} \cdot \frac{1}{\sqrt{N}}\right)$$</p>
+<p>Including the $O(k) = O(N)$ factor for computing subset sums, the overall complexity for $k = N/2$ is $O(2^{3N/2} \cdot \sqrt{N})$.</p>
+<p>The following Julia implementation computes this probability directly:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Combinatorics</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> prob_x1_kth_direct(λs::<span class="built_in">Vector</span>&#123;<span class="built_in">Float64</span>&#125;, k::<span class="built_in">Int</span>)</span><br><span class="line">    N = length(λs)</span><br><span class="line">    Λ = sum(λs)</span><br><span class="line">    prob = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> S <span class="keyword">in</span> combinations(<span class="number">2</span>:N, k-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> T <span class="keyword">in</span> powerset(S)</span><br><span class="line">            sign = (-<span class="number">1</span>)^length(T)</span><br><span class="line">            denominator = Λ - sum(λs[j] <span class="keyword">for</span> j <span class="keyword">in</span> setdiff(S, T); init=<span class="number">0.0</span>)</span><br><span class="line">            prob += sign / denominator</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> λs[<span class="number">1</span>] * prob</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="A-Dynamic-Programming-Approach"><a href="#A-Dynamic-Programming-Approach" class="headerlink" title="A Dynamic Programming Approach"></a>A Dynamic Programming Approach</h2><p>While the direct summation method is elegant, it is essentially a brute-force enumeration of all possible subsets of variables that could rank below $X_1$. After some playing about, I found out that we can do better than this by taking a dynamic programming approach that exploits the memoryless property of the exponential distribution.</p>
+<p>First, we note that the probability that any $X_i$ is the minimum among all $N$ variables is:</p>
+<p>$$P(X_i = \min(X_1, \ldots, X_N)) = \frac{\lambda_i}{\sum_{j=1}^{N} \lambda_j}$$</p>
+<p>This result can be understood through the Poisson process interpretation: independent exponential random variables $X_1, \ldots, X_N$ with rates $\lambda_1, \ldots, \lambda_N$ represent the first arrival times of $N$ independent Poisson processes. The superposition of these processes is itself a Poisson process with rate $\Lambda = \sum_{j=1}^{N} \lambda_j$. By the thinning property, each arrival of the superposed process is assigned to process $i$ with probability $\lambda_i / \Lambda$. Therefore, the probability that the first arrival comes from process $i$ is simply $\lambda_i / \Lambda$.</p>
+<p>Crucially, once we observe which variable is the minimum, the memoryless property tells us that the remaining variables are still independent exponentials with their original rates. To see this, suppose $X_j$ is the minimum and takes value $t$. Then for any other variable $X_i$ with $i \neq j$, we know $X_i &gt; t$. By the memoryless property of the exponential distribution:</p>
+<p>$$P(X_i &gt; t + s \mid X_i &gt; t) = P(X_i &gt; s)$$</p>
+<p>In other words, conditioning $X_i$ on being larger than $t$ simply shifts the distribution by $t$, but the residual $X_i - t$ is still exponentially distributed with rate $\lambda_i$. This means that after removing the minimum, the remaining variables form exactly the same type of problem, just with one fewer variable.</p>
+<p>This observation suggests a recursive approach. Let $P(R, k)$ denote the probability that $X_1$ ranks $k$th among the subset of variables indexed by $R \subseteq {1, \ldots, N}$, where we require $1 \in R$. We will also use the notation $\Lambda_R = \sum_{j \in R} \lambda_j$ for the sum of rates in subset $R$.</p>
+<p>The base case is straightforward: if we want $X_1$ to be the minimum (rank 1st), this occurs with probability:</p>
+<p>$$P(R, 1) = \frac{\lambda_1}{\Lambda_R}$$</p>
+<p>For $k \geq 2$, we condition on which variable is the minimum among those in $R$. There are two cases. First, if $X_1$ is the minimum, then $X_1$ ranks 1st, which doesn’t contribute to $P(R, k)$ for $k \geq 2$. Second, if some other variable $X_j$ with $j \in R \setminus {1}$ is the minimum, then by the memoryless property, we remove $X_j$ and $X_1$ must rank $(k-1)$th among the remaining variables. This gives the recurrence:</p>
+<p>$$P(R, k) = \sum_{j \in R \setminus {1}} \frac{\lambda_j}{\Lambda_R} \cdot P(R \setminus {j}, k-1)$$</p>
+<p>The probability we seek is $P({1, \ldots, N}, k)$.</p>
+<p>To compute this efficiently, we use memoization. The state space consists of all possible subsets $R \subseteq {1, \ldots, N}$ containing index 1, paired with all possible rank values from 1 to $|R|$. There are at most $2^{N-1}$ such subsets (since 1 must be included), and for each subset of size $m$ we consider up to $m$ different rank values. This gives roughly $O(2^N \cdot N)$ states in total. For each state, computing the sum in the recurrence requires iterating over at most $N$ values of $j$ and performing $O(1)$ work per value (assuming memoized values are cached). Thus the overall time complexity is:</p>
+<p>$$O(2^N \cdot N^2)$$</p>
+<p>A naive implementation would use a dictionary to store memoized values, with subsets represented as sorted vectors or tuples. However, note that since the subsets of ${1, \ldots, N}$ correspond bijectively to integers in ${0, \ldots, 2^N-1}$ via their binary representation (where bit $i$ indicates whether element $i$ is in the subset), we can use a simple array of length $2^N$ for memoization instead. This eliminates the overhead of hashing and dictionary lookups, and significantly reduces memory allocation costs.</p>
+<p>This approach to dynamic programming simultaneously computes the probabilities for all ranks $k$ from 1 to $N$ in a single pass, and in doing so, has complexity that is independent of $k$. This is unlike the direct method which targets a specific rank, with complexity varying dramatically with $k$ (from $O(1)$ for $k=1$ to $O(2^{3N/2}\sqrt{N})$ for $k=N/2$). It follows that for single small values of $k$ (or large values close to $N$), the direct method is likely to be faster, while for moderate values of $k$ near $N/2$ or multiple ranks required, the DP approach will be more efficient (although you will be limited by memory constraints for large $N$).</p>
+<p>In the final section of this post, I discuss some exploratory work in modifying the DP approach for the single target rank case, and using pruning to reduce the state space.</p>
+<p>We implement this DP approach using the efficient bit-masking technique below:</p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> prob_x1_kth_position(lambdas::<span class="built_in">Vector</span>&#123;<span class="built_in">Float64</span>&#125;, k::<span class="built_in">Int</span>)</span><br><span class="line">    n = length(lambdas)</span><br><span class="line">    <span class="comment"># memo[bitmask, target_k] = probability</span></span><br><span class="line">    memo = fill(-<span class="number">1.0</span>, <span class="number">2</span>^n, n)  <span class="comment"># -1.0 indicates not yet computed</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Full set bitmask: all bits set</span></span><br><span class="line">    full_mask = (<span class="number">1</span> &lt;&lt; n) - <span class="number">1</span></span><br><span class="line">    result = dp(full_mask, k, lambdas, memo, n)</span><br><span class="line">    <span class="keyword">return</span> result, memo</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> dp(mask::<span class="built_in">Int</span>, target_k::<span class="built_in">Int</span>,</span><br><span class="line">    lambdas::<span class="built_in">Vector</span>&#123;<span class="built_in">Float64</span>&#125;,</span><br><span class="line">    memo::<span class="built_in">Matrix</span>&#123;<span class="built_in">Float64</span>&#125;,</span><br><span class="line">    n::<span class="built_in">Int</span>)</span><br><span class="line">    <span class="comment"># Count number of elements in the set</span></span><br><span class="line">    set_size = count_ones(mask)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Base cases</span></span><br><span class="line">    <span class="keyword">if</span> set_size == <span class="number">1</span> &amp;&amp; target_k == <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1.0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">if</span> target_k &lt;= <span class="number">0</span> || target_k &gt; set_size</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0.0</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Check memoization</span></span><br><span class="line">    <span class="keyword">if</span> memo[mask+<span class="number">1</span>, target_k] &gt;= <span class="number">0.0</span>  <span class="comment"># +1 for 1-based indexing</span></span><br><span class="line">        <span class="keyword">return</span> memo[mask+<span class="number">1</span>, target_k]</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    result = <span class="number">0.0</span></span><br><span class="line">    lambda_sum = <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Calculate lambda_sum for elements in the mask</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>:n</span><br><span class="line">        <span class="keyword">if</span> (mask &amp; (<span class="number">1</span> &lt;&lt; (i - <span class="number">1</span>))) != <span class="number">0</span></span><br><span class="line">            lambda_sum += lambdas[i]</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Case 1: X₁ (index 1) is the minimum</span></span><br><span class="line">    <span class="keyword">if</span> (mask &amp; <span class="number">1</span>) != <span class="number">0</span> &amp;&amp; target_k == <span class="number">1</span>  <span class="comment"># Check if bit 0 is set (element 1)</span></span><br><span class="line">        result += lambdas[<span class="number">1</span>] / lambda_sum</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Case 2: Some other variable Xⱼ is the minimum</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="number">1</span>:n</span><br><span class="line">        <span class="keyword">if</span> (mask &amp; (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))) != <span class="number">0</span> &amp;&amp; j != <span class="number">1</span>  <span class="comment"># j is in the set and j != 1</span></span><br><span class="line">            new_mask = mask &amp; ~(<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))  <span class="comment"># Remove element j</span></span><br><span class="line">            result += (lambdas[j] / lambda_sum) * dp(new_mask, target_k - <span class="number">1</span>, lambdas, memo, n)</span><br><span class="line">        <span class="keyword">end</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Store result in memo</span></span><br><span class="line">    memo[mask+<span class="number">1</span>, target_k] = result</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Extensions"><a href="#Extensions" class="headerlink" title="Extensions"></a>Extensions</h2><p>To wrap up, I’ll briefly describe two extensions to the above methods that I’ve spent a bit of time exploring, but haven’t fully worked through yet. Proceed with caution, but the general ideas should be solid.</p>
+<h3 id="Repeated-Rate-Parameters"><a href="#Repeated-Rate-Parameters" class="headerlink" title="Repeated Rate Parameters"></a>Repeated Rate Parameters</h3><p>When multiple variables share the same rate parameter, the problem structure simplifies due to exchangeability. Suppose the $N$ variables are partitioned into $G$ groups, where group $g$ contains $n_g$ variables all with rate $\lambda_g$. Without loss of generality, assume $X_1$ belongs to group 1. Within each group, the variables are exchangeable, so we need only track how many variables from each group remain, rather than tracking individual variables.</p>
+<p>We define a state vector $\mathbf{r} = (r_1, \ldots, r_G)$ where $r_1$ counts the number of other variables in group 1 (excluding $X_1$ itself), and $r_g$ for $g \geq 2$ counts the number of remaining variables in group $g$. The target variable $X_1$ is tracked separately. The total instantaneous rate when all variables in state $\mathbf{r}$ are present (including $X_1$) is:</p>
+<p>$$S(\mathbf{r}) = \lambda_1(r_1 + 1) + \sum_{g=2}^{G} \lambda_g r_g$$</p>
+<p>The $+1$ term accounts for $X_1$ itself. Let $F(\mathbf{r}, k)$ denote the probability that $X_1$ ranks $k$th given the current state $\mathbf{r}$. The base case is:</p>
+<p>$$F(\mathbf{r}, 1) = \frac{\lambda_1}{S(\mathbf{r})}$$</p>
+<p>For $k \geq 2$, we condition on which variable is the next to arrive (i.e., the minimum). If one of the $r_1$ other variables from group 1 arrives next, this occurs with probability $\lambda_1 r_1 / S(\mathbf{r})$, and we transition to state $\mathbf{r} - \mathbf{e}_1$ (where $\mathbf{e}_1$ is the unit vector in the first coordinate). Similarly, if a variable from group $g \geq 2$ arrives next, this occurs with probability $\lambda_g r_g / S(\mathbf{r})$. The recurrence is:</p>
+<p>$$F(\mathbf{r}, k) = \sum_{g=1}^{G} \frac{\lambda_g r_g’}{S(\mathbf{r})} F(\mathbf{r} - \mathbf{e}_g, k-1)$$</p>
+<p>where $r_1’ = r_1$ (the other members of group 1) and $r_g’ = r_g$ for $g \geq 2$.</p>
+<p>The advantage of this formulation is that the state space has size $\prod_{g=1}^{G} (n_g + 1)$, which is polynomial in $N$ when $G$ is fixed. For example, with two groups of sizes $n_1$ and $n_2$, the state space has size $O(n_1 n_2) = O(N^2)$, vastly smaller than the $O(2^N)$ states in the general case. This makes problems with repeated rates dramatically more tractable.</p>
+<h3 id="Single-Rank-Memory-Optimization"><a href="#Single-Rank-Memory-Optimization" class="headerlink" title="Single Rank Memory Optimization"></a>Single Rank Memory Optimization</h3><p>The DP implementation presented in Section 3 uses a two-dimensional memoization table storing $(R, k)$ pairs, requiring $O(2^N \cdot N)$ space. This is appropriate when computing probabilities for multiple rank values, but when we only need a single specific rank $k$, we can reduce the memory footprint to $O(2^N)$ by using a one-dimensional table indexed only by $R$.</p>
+<p>The observation is that for a fixed target rank $k_{\text{target}}$, the rank query associated with each subset during the recursion is uniquely determined by the subset size. If we start with $N$ variables and want $X_1$ to rank $k_{\text{target}}$-th, then when we have a subset $R$ of size $m$ remaining, we must be querying whether $X_1$ ranks $(k_{\text{target}} - (N - m))$-th among those $m$ variables. In other words, the rank decreases by exactly one each time we remove a variable from the recursion, so given the initial target rank and the current subset, the rank being computed is implicit.</p>
+<p>This means we can use a single array <code>memo[mask]</code> rather than a matrix <code>memo[mask, k]</code>, reducing memory requirements by a factor of $N$. The downside is that this optimization only benefits single-rank queries—if we want probabilities for multiple values of $k$, we would need to recompute the table for each one.</p>
+<h3 id="Pruned-Dynamic-Programming"><a href="#Pruned-Dynamic-Programming" class="headerlink" title="Pruned Dynamic Programming"></a>Pruned Dynamic Programming</h3><p>When we are only interested in the probability for a single specific value of $k$, particularly when $k$ is small (or close to $N$), the standard DP approach does substantial unnecessary work. The issue is that the memoization table stores results for all possible rank values across all subsets, even though many of these will never be queried when computing $P({1,\ldots,N}, k)$ for a specific $k$.</p>
+<p>We can improve efficiency by pruning branches of the recursion that cannot possibly contribute to the target rank. The key observation is that if we have already removed too many variables (recursed too deeply), it becomes impossible to reach the target rank. Let $d = N - |R|$ denote the current depth (number of variables already removed). For $X_1$ to end up in position $k$ overall, we need $d + k$ to equal $k$ when $X_1$ is selected. If the current state has $d + k &gt; k_{\text{target}} + 1$, then even if $X_1$ were selected immediately as the next minimum, it would be in position $d + 1 &gt; k_{\text{target}}$, so this branch can be pruned.</p>
+<p>Additionally, we can modify the memoization structure to avoid storing results for all rank values. Rather than maintaining a full table of $(R, k)$ pairs, we only compute and memoize states that lie on paths from the initial state $({1, \ldots, N}, k_{\text{target}})$ to valid base cases. This can be implemented by checking, before recursing, whether the recursive call could possibly contribute to reaching the target rank.</p>
+<p>In practice, this bounded DP approach substantially reduces both time and space requirements, particularly when $k$ is small (or close to $N$, by symmetry). The asymptotic worst-case complexity remains $O(2^N)$ when $k = N/2$, but the constant factors improve considerably. For small values of $k$, the pruned search tree can be exponentially smaller, often making the bounded DP competitive with or even faster than the direct summation method, while still maintaining the DP’s flexibility for handling multiple queries.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/probability/">probability</a>, <a class="has-link-grey -link" href="/tags/puzzle/">puzzle</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/terminal-velocity/">
+                <span class="level-item">Terminal Velocity in a Vacuum</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/racing-exponentials/';
+        this.page.identifier = 'racing-exponentials/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#A-Closed-Form-Solution-for-Exponentials">
+        <span class="has-mr-6">1</span>
+        <span>A Closed-Form Solution for Exponentials</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Dynamic-Programming-Approach">
+        <span class="has-mr-6">2</span>
+        <span>A Dynamic Programming Approach</span>
+        </a></li><li>
+        <a class="is-flex" href="#Extensions">
+        <span class="has-mr-6">3</span>
+        <span>Extensions</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Repeated-Rate-Parameters">
+        <span class="has-mr-6">3.1</span>
+        <span>Repeated Rate Parameters</span>
+        </a></li><li>
+        <a class="is-flex" href="#Single-Rank-Memory-Optimization">
+        <span class="has-mr-6">3.2</span>
+        <span>Single Rank Memory Optimization</span>
+        </a></li><li>
+        <a class="is-flex" href="#Pruned-Dynamic-Programming">
+        <span class="has-mr-6">3.3</span>
+        <span>Pruned Dynamic Programming</span>
+        </a></li></ul></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>

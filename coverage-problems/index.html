@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+<title>Solving Complex Coverage Problems Using Microsoft Excel - T-Tested | Blogging about all things data</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+    <meta name="description" content="Microsoft Excel is an incredibly powerful and easy to use tool for data analysis and OR. In this post, I introduce a highly generalised and complex coverage problem and walk through my solving process">
+<meta name="keywords" content="excel,solver,linear-programming">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solving Complex Coverage Problems Using Microsoft Excel">
+<meta property="og:url" content="https://www.ttested.com/coverage-problems/index.html">
+<meta property="og:site_name" content="T-Tested | Blogging about all things data">
+<meta property="og:description" content="Microsoft Excel is an incredibly powerful and easy to use tool for data analysis and OR. In this post, I introduce a highly generalised and complex coverage problem and walk through my solving process">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://www.ttested.com/gallery/thumbnails/coverage-problems.jpg">
+<meta property="og:updated_time" content="2025-10-03T14:28:25.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solving Complex Coverage Problems Using Microsoft Excel">
+<meta name="twitter:description" content="Microsoft Excel is an incredibly powerful and easy to use tool for data analysis and OR. In this post, I introduce a highly generalised and complex coverage problem and walk through my solving process">
+<meta name="twitter:image" content="https://www.ttested.com/gallery/thumbnails/coverage-problems.jpg">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+    
+    <style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+
+    
+    
+    
+    
+
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129615655-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129615655-1');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+    
+    
+    
+
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="Solving Complex Coverage Problems Using Microsoft Excel" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item" href="/">Home</a>
+                
+                <a class="navbar-item" href="/archives">Archives</a>
+                
+                <a class="navbar-item" href="/categories">Categories</a>
+                
+                <a class="navbar-item" href="/tags">Tags</a>
+                
+                <a class="navbar-item" href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="LinkedIn" href="https://www.linkedin.com/in/tim-hargreaves">
+                        
+                        <i class="fab fa-linkedin"></i>
+                        
+                    </a>
+                    
+                    <a class="navbar-item" target="_blank" title="GitHub" href="https://github.com/THargreaves">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="Catalogue" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-image">
+        <span class="image is-7by1">
+            <img class="thumbnail" src="/gallery/thumbnails/coverage-problems.jpg" alt="Solving Complex Coverage Problems Using Microsoft Excel">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-28T00:00:00.000Z">2018-11-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Operational-Research/">Operational Research</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    20 minutes read (About 3900 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Solving Complex Coverage Problems Using Microsoft Excel
+            
+        </h1>
+        <div class="content">
+            <blockquote class="colorquote info"><p>The Excel spreadsheet used in this post can be found on the <a href="https://github.com/THargreaves/ttested" target="_blank" rel="noopener">GitHub repository</a> for this blog</p>
+</blockquote>
+
+
+<h2 id="Formulating-the-Coverage-Problem"><a href="#Formulating-the-Coverage-Problem" class="headerlink" title="Formulating the Coverage Problem"></a>Formulating the Coverage Problem</h2><p>Suppose that you work at a telecommunications company and one day you are sent an Excel spreadsheet with the following data.<br><img src="/images/coverage-problems/Data.png" alt="Screenshot of the problem data"><br>As you can see, the data concerns the location of 6 towns and the number of customers the company has at each one. You are informed that the company wishes to build new communication towers in a selection of these towns so that every customer is covered by at least one tower (we assume that currently no town has any existing coverage). Your objective is to determine the cheapest way in which this can be achieved. The data goes on to detail that there are three sizes of tower available to be built, each with its own associated range, coverage (that is the number of customers it can sustain), and construction costs (we assume that running costs are negligible). There are also limitations on the number of some of the types of satellite you can build. A further constraint is that due to planning permission issues, you can only build one tower in any given town. Lastly it is added that if two towers cover the same customer then only one of them needs to use its coverage to serve that customer.</p>
+<p>This feels very close to the sort of problem a real life telecommunications company may be trying to solve albeit with reduced scale and complexity. The expanse of this example is not limited by the methods we will be using but rather the tool - Microsoft Excel. Using a more powerful method such as a programming language like Python or Matlab would facilitate the expansion of this problem further. Despite this, I believe that this example captures the essence of the problem with the added bonus that it can be formulated in a visual way in a spreadsheet.</p>
+<p>We will solve this problem using linear programming; in particular, the branch and bound algorithm. To do this we will need to build a model to describe the problem and then use the Solver add-in in Excel to find an optimal solution. Before we get to this, let’s take a look at this problem through a mathematical lens.</p>
+<h2 id="A-Mathematical-Description"><a href="#A-Mathematical-Description" class="headerlink" title="A Mathematical Description"></a>A Mathematical Description</h2><p>We begin by formulating the problem mathematically. If you are only interested in the practical side of this problem then feel free to skip this section but I would argue that any good Excel model will have a well-thought-out mathematical model behind it.</p>
+<h3 id="Decision-variables"><a href="#Decision-variables" class="headerlink" title="Decision variables"></a>Decision variables</h3><p>To begin, we will need to define a collection of decision variables. For shorthand, we denote the towers sizes small, medium, and large by the integers 1, 2, and 3 respectively.</p>
+<p>$$<br>c_{i,j} :=<br>\begin{cases}<br>      1 &amp; \textrm{if town } j \text{ is covered by a tower in town } i \\<br>      0 &amp; \textrm{otherwise}<br>   \end{cases}<br>\qquad<br>i \in[6], j \in [6]<br>$$</p>
+<p>$$<br>n_{i,j} :=<br>\begin{matrix}<br>\textrm{the number of customers in town }  \\<br>j \textrm{ covered by a tower in town }<br>\end{matrix}<br>\qquad<br>i \in[6], j \in [6]<br>$$</p>
+<p>$$<br>t_{i,k} :=<br>\begin{cases}<br>      1 &amp; \textrm{if a tower of size } k \text{ is built in town } i \\<br>      0 &amp; \textrm{otherwise}<br>   \end{cases}<br>\qquad<br>i \in[6], k \in [3]<br>$$</p>
+<p>The first two sets of variables may seem redundant when put together but we do in fact need both of these. The use of the second is clear but the first is more subtle. This is used when checking whether the tower range criterion has been met. We want town $i$ to be in the range of town $j$ whenever at least one customer in town $j$ is being covered by a tower in town $i$, otherwise we have no restriction. This condition can be described using an if statement on the expression $n_{i,j} \geq 1$ but such conditional expressions are non-linear so instead we have to use a new decision variable to represent this and force it to behave in the desired way using additional constraints. This will be explained in more detail shortly.</p>
+<h3 id="Constants"><a href="#Constants" class="headerlink" title="Constants"></a>Constants</h3><p>We will also need a way of describing the data we are given at the beginning of the post. We denote the latitude and longitude of town $i$ by $\textrm{lat}_i$ and $\textrm{long}_i$ although these are not very useful to us so we immediately replace them with the 6x6 matrix $D = (d_{i,j})$ with the $(i,j)$th entry representing the Euclidean distance between towns $i$ and $j$. That is</p>
+<p>$$d_{i,j} := \sqrt{(\textrm{lat}_i-\textrm{lat}_j)^2 + (\textrm{long}_i-\textrm{long}_j)^2}<br>\qquad<br>i \in[6], j \in [6]$$<br>We also define a 6-element column vector $\hat{\nu} = (\nu_i)$ where $\nu_i$ is the number of customers in town $i$, as well as 3-element column vectors $\hat{\rho} = (\rho_k)$, $\hat{\gamma} = (\gamma_k)$, $\hat{\pi} = (\pi_k)$, and $\hat{\mu} = (\mu_k)$ where $\rho_k$, $\gamma_k$, $\pi_k$, and $\mu_k$ represent the range ($+\infty$ if not specified), coverage, cost (price), and maximum number allowed for each tower respectively.</p>
+<h3 id="Objective-function-and-constraints"><a href="#Objective-function-and-constraints" class="headerlink" title="Objective function and constraints"></a>Objective function and constraints</h3><p>Our objective function is simple; we just wish to minimise costs. In mathematical language, this is</p>
+<p>$$\textrm{min } w = \sum_{k=1}^3  \left(\pi_k \sum_{i=1}^6 t_{i,j}\right)$$<br>We can now begin to formulate our constraints. We start with the simplest; that is the limit on the number of towers in each town and towers of each type. These are formulated as</p>
+<p>$$<br>\sum_{i=1}^6 t_{i,k} \leq \mu_j \qquad \forall k \in [3] \tag{1}<br>$$</p>
+<p>and </p>
+<p>$$<br>\sum_{k=1}^3 t_{i,k} \leq 1 \qquad \forall i \in [6] \tag{2}<br>$$</p>
+<p>We can now add the constraint that every customer must be covered by at least one tower. Since the customers are indistinguishable, we only require that the potential coverage for each town is larger than the size of the customer base there. That is</p>
+<p>$$<br>\sum_{i=1}^6 n_{i,j} \geq \nu_j \qquad \forall j \in [6] \tag{3}<br>$$</p>
+<p>Similarly, we also need that the total coverage provided by any town is at most the maximum coverage that its tower can supply. Since every town can have at most one tower we have that the maximum coverage is just $\sum_{k=1}^3 \gamma_k t_{i, k}$ (which is zero if no tower is built in that town, as expected) and so we can write</p>
+<p>$$<br>\sum_{j=1}^6 n_{i,j} \leq \sum_{k=1}^3 \gamma_k t_{i, k}  \qquad \forall i \in [6] \tag{4}<br>$$</p>
+<p>Now is an appropriate moment to add a constraint to link the behaviour of each $c_{i,j}$ and $n_{i,j}$. We require that $n_{i,j}$ is zero whenever $c_{i,j}$ is zero, and have no restriction when $c_{i,j} = 1$. Some might say that we should force $n_{i,j}$ to be strictly positive if $c_{i,j} = 1$ but this is redundant since the model will force this behaviour naturally - it would be sub-optimal to cover a new town, possibly worsening the range constraint and then not serve any customers there. We first define $M = \sum_{i=1}^6 \nu_i$ to be a large constant representing the total number of customers across all towns. Then, we use the following constraint to link the variables</p>
+<p>$$n_{i,j}\leq Mc_{i,j} \qquad \forall i \in [6], j \in [6] \tag{5}$$ </p>
+<p>Lastly, we need a constraint to control the ranges of the satellites. This is the most complicated to implement but using the variables $c_{i,j}$, it becomes reasonably simple</p>
+<p>$$d_{i,j}c_{i,j} \leq \sum_{k=1}^3 t_{i,k} \rho_ \qquad \forall i \in [6], j \in [6] \tag{6}$$</p>
+<p>Note that since $j$ does not appear on the left-hand side, this can be rephrased as </p>
+<p>$$\max\limits_{j\in[6]}( d_{i,j}c_{i,j}) \leq \sum_{k=1}^3 t_{i,k} \rho_ \qquad \forall i \in [6]$$<br>Though this is no longer linear.</p>
+<p>This concludes the constraints for the problem and so the entire linear programming formulation too. In total we have 90 decision variables and 93 constraints, plus the implicit constraints that 54 decision variables and binary and the other 36 are non-negative. If we generalised this problem to have $n$ towns and $m$ towers, a similar calculation gives $n(m+2n)$ decision variables and $m+3n+2n^2$, with the implicit constraints that we have $n(m+n)$ binary variables and $n^2$ non-negative real variables. It is clear that this problem will become computationally infeasible very quickly as both variables are increased.</p>
+<p>We are now in a strong position to begin translating these mathematical relations into an Excel model.</p>
+<h2 id="Modelling-the-problem-with-Excel"><a href="#Modelling-the-problem-with-Excel" class="headerlink" title="Modelling the problem with Excel"></a>Modelling the problem with Excel</h2><h3 id="The-distance-matrix"><a href="#The-distance-matrix" class="headerlink" title="The distance matrix"></a>The distance matrix</h3><p>For clarity in Excel formulae, I began by assigning names to the two tables in the data sheet. I named the left table <code>TownData</code> and the right table <code>TowerData</code>. Then, the first step in building our Excel model is to convert the Cartesian locations of the towns into a distance matrix. I did this by adding a new sheet in the workbook named ‘Distance Matrix’ and creating a table to contain the distances. This is the final result<br><img src="/images/coverage-problems/DistanceMatrix.png" alt="Screenshot of the distance matrix worksheet"><br>The values in the table are generated by several <code>VLOOKUP</code> formulae. In particular, for cell <code>D4</code> I used</p>
+<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">=<span class="hljs-built_in">SQRT</span>((<span class="hljs-built_in">VLOOKUP</span>(D$<span class="hljs-number">3</span>, TownData, <span class="hljs-number">2</span>) - <span class="hljs-built_in">VLOOKUP</span>($<span class="hljs-symbol">C4</span>, TownData, <span class="hljs-number">2</span>))^<span class="hljs-number">2</span> +</span><br><span class="line">      (<span class="hljs-built_in">VLOOKUP</span>(D$<span class="hljs-number">3</span>, TownData, <span class="hljs-number">3</span>) - <span class="hljs-built_in">VLOOKUP</span>($<span class="hljs-symbol">C4</span>, TownData, <span class="hljs-number">3</span>))^<span class="hljs-number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>Breaking this down, the first <code>VLOOKUP</code> statement, <code>VLOOKUP(D$2, TownData, 2)</code>, looks in the <code>TownData</code> table and finds the row matching matching the value in <code>D3</code>, the label of the column we are in, and then selects the second column (latitude) from that row of the table. The other 3 <code>VLOOKUP</code>s are similar. <code>C4</code> is used to select the label of the row that we are in and we replace the third argument with 3 to select the third column of <code>TownData</code>, longitude. I then used the standard formula for the Euclidean distance between two points to give the final value. Note, that I anchor the row for <code>D3</code> and the column for <code>C4</code> using the dollar symbol so that when this formula is copied to the other cells in the table, the row and column labels are referenced correctly.</p>
+<p>I then applied some formatting to the table. Firstly, I changed the data type for the inner cells to have no decimal places displayed to improve clarity. I then applied a series of conditional formatting rules to the table to colour the cells green, yellow, orange, or red depending on whether the distance between any two towns could be covered by every tower, the two largest towers, just the largest tower, or none. This makes the assumption that the ranges of the towers are increasing with size which will almost certainly be true in reality and so if our input data is valid, we will not have any issues here. In this example we have no red cells but if we change the range of the largest tower to be 80 we get the following<br><img src="/images/coverage-problems/DistanceMatrixIssue.png" alt="Screenshot of the distance matrix worksheet after altering the tower ranges"></p>
+<h3 id="The-full-model"><a href="#The-full-model" class="headerlink" title="The full model"></a>The full model</h3><p>We are now ready to begin building the full model. I decided to do this on another separate worksheet using the following layout. As mentioned at the start of the post, the final Excel spreadsheet can be found on the <a href="https://github.com/THargreaves/ttested" target="_blank" rel="noopener">GitHub repository</a> for this blog.<br><img src="/images/coverage-problems/StartModel.png" alt="Screenshot of the Solver model worksheet"><br>This may seem daunting at first glance but when it has been broken down to its constituent parts, it is much more palitable. As can be seen in the key, the green cells represent decision variables. For those that read the mathematical formulation, the upper set correspond to $t_{i,k}$, the middle set to $n_{i,j}$, and the lower set $c_{i,j}$. For the time being these are filled with zeros, acting as place-holders. We also have a small grey table at the top and a lone grey cell at the bottom. Their purposes will be discussed later but all that needs to be known for now is that they are constructed by using <code>VLOOKUP</code> statements to copy values across from the data worksheet.</p>
+<p>Let us now look in more detail at the top-left table (cells <code>B2:K9</code>). The blue cells on the right are calculated by summing the rows of the inner table and so represent the total number of each tower type built. This is compared to the maximum number of each tower allowed in the red cells next to them. These values are taken directly from the data worksheet using a <code>VLOOKUP</code> statement, although observe that since our lookup value is a string we need to set the optional <code>range_lookup</code> parameter to be <code>FALSE</code> else we get erratic behaviour. These values are then passed into <code>IF</code> statements to handle the case when they are a blank string. In this case we are allowed an unlimited amount of that type of tower. We cannot represent infinity in Excel so instead we set it to the ceiling of total number of customers divided by the maximum coverage of that tower type since we would never need more towers than that for a reaistic problem. An alternative approach would be to set this to 6 since we only have that many towns, each of which with one possible tower but using the former method generally produces a tighter formulation of the problem and so improve runtime. For a specific example, the formula for cell <code>K4</code> is</p>
+<figure class="highlight excel hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">=<span class="hljs-built_in">IF</span>(<span class="hljs-built_in">ISBLANK</span>(<span class="hljs-built_in">VLOOKUP</span>($<span class="hljs-symbol">C4</span>, TowerData, <span class="hljs-number">5</span>, <span class="hljs-built_in">FALSE</span>)), </span><br><span class="line">    <span class="hljs-built_in">CEILING</span>(), </span><br><span class="line">    <span class="hljs-built_in">VLOOKUP</span>($<span class="hljs-symbol">C4</span>, TowerData, <span class="hljs-number">5</span>, <span class="hljs-built_in">FALSE</span>))</span><br></pre></td></tr></table></figure>
+
+
+<p>The purple row below the inner table simply uses <code>SUMPRODUCT</code> with the column above and the costs of each tower to calculate the build cost for each town. These are then summed up in the gold cell to give the total cost (our objective function). The blue row below this is simply a sum of the inner columns above and so represents the number of towers in each town. This is compared to the fixed value of 1 in each case. </p>
+<p>The setup for the table below this (<code>B11:K20</code>) is very similar We sum the rows and columns as before to get the blue cells. The row sums represent the number of customers that can be covered in each town and the column sums represent how many customer a tower in a given town is covering. On the right we then compare these to the size of the customer base in each town taken from the data worksheet using another <code>VLOOKUP</code> statement. On the bottom we compare these to the range of the chosen tower (or lack of) by computing the <code>SUMPRODUCT</code> of the corresponding column of the inner upper table and the coverage data for each tower. For example, the formula in <code>D20</code> is <code>=SUMPRODUCT(D$4:D$6, $M$3:$M$5)</code>.</p>
+<p>The model now gets slightly more convoluted due to the limitations of the two dimensions of a spreadsheet. Since Excel Solver constraints cannot handle additional constants, we must manually multiple our coverage decision variables ($c_{i,j}$) by our large constant ($M$) We do this using the array formula <code>{=$D$40 * $D$24:$I$29}</code> applied to the cells <code>D33:I38</code>. We will later use these new scaled variables to control the behaviour to control the behaviour of the middle table of decision variables ($n_{i,j}$). </p>
+<p>Lastly I add two tables on the right to apply the range contraints. The lower green table is simply the product of the distance matrix and the coverage decision variables ($c_{i,j}$) in the lower green table using an array formula. This represents the range required for any particular tower covering some town. These will later be compared to the red table above. Each column in the inner table contains the exact same formula which computes the <code>SUMPRODUCT</code> of the corrsponding column of the top-right inner table and the range data. For example, all of the cells <code>O13:O18</code> contain <code>=SUMPRODUCT(D$4:D$6, $O$3:$O$5)</code>. </p>
+<p>With some additional static formatting, I achieved the result shown above. In particular, I set the data type for each numeric cell to be integral. This is because our problem is complex enough that Excel Solver will only return an answer to a given tolerance rather than an exact solution. However, we are only interested in the exact solution and these will be close enough to this that it will be okay to round. The next step is to setup the Solver add-on and find an optimal solution to the problem.</p>
+<h2 id="Finding-an-optimal-solution"><a href="#Finding-an-optimal-solution" class="headerlink" title="Finding an optimal solution"></a>Finding an optimal solution</h2><p>If you wish to reproduce this example, it is import to make sure that you do in fact have the Excel Solver add-in enabled. If this is not the case, you can learn how to do this through this <a href="https://support.office.com/en-us/article/load-the-solver-add-in-in-excel-612926fc-d53b-46b4-872c-e24772f078ca" target="_blank" rel="noopener">support document</a>. </p>
+<p>I setup Solver as follows<br><img src="/images/coverage-problems/Solver.png" alt="Screenshot of the Solver parameters"><br>Some of the parameters are standard. Our objective cell is <code>J7</code> and we wish to minimise this. Our decision variables are all of the green cells, that is <code>D13:I18</code>, <code>D4:I6</code>, and <code>D24:I29</code>. We also wish to make <code>D4:I6</code> and <code>D24:I29</code> binary variables and so two of our parameters control this. The other variables we need to be non-negative and so we select ‘Make Unconstrained Variables Non-Negative’. Our problem is linear so we use the Simplex engine.</p>
+<p>We can now take a look at the other constraints we added. The first is that <code>D13:I18</code> should be element-wise less than or equal to <code>D33:I38</code>. This corresponds to constraint 5 in the mathematical formulation and is used to force the number of customers in town $j$ covered by a tower in town $i$ to be zero whenever the tower in town $i$ is not covering town $j$ and unrestricted otherwise.</p>
+<p>The next constraint says that <code>D19:I19</code> must be at most <code>D20:I20</code> for each element. This corresponds to the constraint that the number of customers covered by a tower in town $i$ can be at most the available coverage (or lack of) of the tower in that town. This relates to constraint 4 above.</p>
+<p>We then have the two binary constraints which we have already discussed.</p>
+<p>The next constraint limits the elements of <code>D8:I8</code> by the corresponding elements of <code>D9:I9</code> which take a constant value of 1. This refers to the constraint that only one tower can be built in each town. This is constraint 2 in the mathematical formulation.</p>
+<p>We then have a constraint that the values of <code>J13:J18</code> must be element-wise greater than or equal to <code>K13:K18</code>. This relates to the requirement that every customer is covered by at least one satellite. This is constraint 3 from the last section.</p>
+<p>The penultemate constraint says that <code>J4:J6</code> can be at most the value of <code>K4:K6</code> for each element. This simply represents that you cannot build more towers of one type than the given maximum, the first constraint from above.</p>
+<p>The final constraint says that each element of <code>O22:T27</code> must be less than or equal to <code>O13:T18</code>. This is used to ensure that no tower covers a town outside of its range. This is constaint 6 in the mathematical formulation.</p>
+<p>This concludes the setup for this problem. Clicking ‘Solve’ begins the branch-and-bound Simplex algorithm and after a few seconds (and around 800 sub-problems) we get the optimal solution shown below (within a negligable tolerance).<br><img src="/images/coverage-problems/FinalModel.png" alt="Screenshot of the optimal solution found be Solver"><br>Reading of the decision variable, we see that the (although there may be more) optimal solution is to build a small tower in town 2, a medium tower in town 1, and a large tower in town 4. We use the medium tower in town 1 to cover 571 customers in itself and, interestingly, all 29 customers in town 2. The small tower in town 2 is then used to solely cover town 6 with spare coverage for 20 customers. The large tower in town 4 is then used to covered all other customers exactly in towns 1, 3, 4, and 5. The cost of this coverage is £33,000.</p>
+<p>Due to the nature of this problem, there will obviously be many different equally-optimal solutions with different exact coverages for each town pair. This blog post is already very long but if I were to continue, I would next fix the optimal price and choose a second objective to function to optimise whilst maintaining the total cost to find a more practical optimal solution. For example, I may try to optimise the amount of overall spare coverage to future proof the network, or attempt to spread the spare coverage around more evenly by adding some padding to the coverage constraints. Another idea might be to add bias to make coverage of closer towns more favourable, although this would require some careful formulation.</p>
+<p>I encourage any reader to download the spreadsheet form the GitHub repository for the blog and try using this model with your own data. The model can be customised by adding or removing rows and columns to change the number of towers and towers. It is worth noting however that the scale and complexity of this problem is right on the edge of the default Excel Solver’s limitations. The add-in allows for up to 200 decision variables of which we are using only 90, however our real issue is the constraint limitation of 100, leaving us with only 7 spare. Even with the current setup, for unusual inputted data, the model can take several minutes to return and optimal solution, running through thousands of sub-problems in the process. In some pathologiacal cases I have discovered, this can be up to tens of minutes. These examples are often not very realistic as they involve towns that are no longer homogenously distributed but instead put deliberately far away form each other. Furthermore, without any limits on the number of each type of tower, the problem can take a long time to solve as the solution space is much larger.</p>
+<p>To overcome these problems there are two solutions. The first is to use a propriety Solver add-in for Excel such <a href="https://www.solver.com/" target="_blank" rel="noopener">Frontline Solvers</a>. This product is made for large coparations some comes with a a heafty price-tag in the thousands of dollars however it is much faster than the standard add-in and can support up to 2000 decision varibales and 8000 constraints for linear problems. My much more prefered solution however is to use a linear programming library for an open-source programming language such as <code>scipy.optimize</code> for Python or <code>JuliaOpt</code> for Julia. I would avoid using R, although some good linear programming packages do exist, due to its reduced numerical computation speed. If you have access to propriety mathematical languages such as MatLab and Mathematica, these also have very powerful optimisation libraries capable of solving linear programming problems like this in much faster times and with greater scale than Excel Solver. Despite this, for a simple, explainable, and visual model of modest size, Excel really can’t be beat.</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/excel/">excel</a>, <a class="has-link-grey -link" href="/tags/linear-programming/">linear-programming</a>, <a class="has-link-grey -link" href="/tags/solver/">solver</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/letter-distributions/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Letter Distributions in the English Language and Their Relations</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/dynamic-wallpaper/">
+                <span class="level-item">Creating a Dynamic 8-Bit Wallpaper for Linux with Python</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://www.ttested.com/coverage-problems/';
+        this.page.identifier = 'coverage-problems/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'ttested' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    
+                        <figure class="image is-128x128 has-mb-6">
+                            <img class="is-rounded" src="/images/avatar.png" alt="Tim Hargreaves">
+                        </figure>
+                    
+                    
+                    <p class="is-size-5 is-block">
+                        Tim Hargreaves
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        PhD Candidate
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>PSI² Lab, Cambridge</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        43
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        20
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        41
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://mailchi.mp/b82eb9b2cffb/ttested" target="_blank">
+                Subscribe</a>
+        </div>
+        
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#Formulating-the-Coverage-Problem">
+        <span class="has-mr-6">1</span>
+        <span>Formulating the Coverage Problem</span>
+        </a></li><li>
+        <a class="is-flex" href="#A-Mathematical-Description">
+        <span class="has-mr-6">2</span>
+        <span>A Mathematical Description</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#Decision-variables">
+        <span class="has-mr-6">2.1</span>
+        <span>Decision variables</span>
+        </a></li><li>
+        <a class="is-flex" href="#Constants">
+        <span class="has-mr-6">2.2</span>
+        <span>Constants</span>
+        </a></li><li>
+        <a class="is-flex" href="#Objective-function-and-constraints">
+        <span class="has-mr-6">2.3</span>
+        <span>Objective function and constraints</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Modelling-the-problem-with-Excel">
+        <span class="has-mr-6">3</span>
+        <span>Modelling the problem with Excel</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#The-distance-matrix">
+        <span class="has-mr-6">3.1</span>
+        <span>The distance matrix</span>
+        </a></li><li>
+        <a class="is-flex" href="#The-full-model">
+        <span class="has-mr-6">3.2</span>
+        <span>The full model</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Finding-an-optimal-solution">
+        <span class="has-mr-6">4</span>
+        <span>Finding an optimal solution</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/racing-exponentials/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/racing-exponentials.jpg" alt="Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2025-07-12T23:00:00.000Z">2025-07-13</time></div>
+                    <a href="/racing-exponentials/" class="has-link-black-ter is-size-6">Racing Exponentials: Exact Rank Probabilities for Heterogeneous Exponential Random Variables</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/terminal-velocity/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/terminal-velocity.jpg" alt="Terminal Velocity in a Vacuum">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-09-04T23:00:00.000Z">2023-09-05</time></div>
+                    <a href="/terminal-velocity/" class="has-link-black-ter is-size-6">Terminal Velocity in a Vacuum</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a> / <a class="has-link-grey -link" href="/categories/Mathematics/Analysis/">Analysis</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/poisson-modular-arithmetic/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/poisson-modular-arithmetic.png" alt="The Poisson Distribution Meets Modular Arithmetic">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2023-05-01T23:00:00.000Z">2023-05-02</time></div>
+                    <a href="/poisson-modular-arithmetic/" class="has-link-black-ter is-size-6">The Poisson Distribution Meets Modular Arithmetic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a> / <a class="has-link-grey -link" href="/categories/Statistics/Probability/">Probability</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/pseudo-loadings/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/pseudo-loadings.jpg" alt="Principal Component Regression as Pseudo-Loadings">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-08-13T23:00:00.000Z">2022-08-14</time></div>
+                    <a href="/pseudo-loadings/" class="has-link-black-ter is-size-6">Principal Component Regression as Pseudo-Loadings</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Statistics/">Statistics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/reflection-principle/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/gallery/thumbnails/reflection-principle.jpg" alt="Reflecting on the Reflection Principle">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2022-01-20T00:00:00.000Z">2022-01-20</time></div>
+                    <a href="/reflection-principle/" class="has-link-black-ter is-size-6">Reflecting on the Reflection Principle</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Mathematics/">Mathematics</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Computer-Science/">
+            <span class="level-start">
+                <span class="level-item">Computer Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Algorithms/">
+            <span class="level-start">
+                <span class="level-item">Algorithms</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Cloud-Computing/">
+            <span class="level-start">
+                <span class="level-item">Cloud Computing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Computer-Science/Coding-Problems/">
+            <span class="level-start">
+                <span class="level-item">Coding Problems</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/">
+            <span class="level-start">
+                <span class="level-item">Data Science</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">16</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Best-Practice/">
+            <span class="level-start">
+                <span class="level-item">Best Practice</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Machine-Learning/">
+            <span class="level-start">
+                <span class="level-item">Machine Learning</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Preprocessing/">
+            <span class="level-start">
+                <span class="level-item">Preprocessing</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Data-Science/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/">
+            <span class="level-start">
+                <span class="level-item">Mathematics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Analysis/">
+            <span class="level-start">
+                <span class="level-item">Analysis</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Mathematics/Combinatorics/">
+            <span class="level-start">
+                <span class="level-item">Combinatorics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/Meta/">
+            <span class="level-start">
+                <span class="level-item">Meta</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Operational-Research/">
+            <span class="level-start">
+                <span class="level-item">Operational Research</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Statistics/">
+            <span class="level-start">
+                <span class="level-item">Statistics</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">8</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Statistics/Probability/">
+            <span class="level-start">
+                <span class="level-item">Probability</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">7</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/System/">
+            <span class="level-start">
+                <span class="level-item">System</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Visualisation/">
+            <span class="level-start">
+                <span class="level-item">Visualisation</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/Visualisation/Interactive/">
+            <span class="level-start">
+                <span class="level-item">Interactive</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/animation/" style="font-size: 15.71px;">animation</a> <a href="/tags/bank-holiday-bodge/" style="font-size: 15.71px;">bank-holiday-bodge</a> <a href="/tags/benchmarking/" style="font-size: 11.43px;">benchmarking</a> <a href="/tags/binomial-distribution/" style="font-size: 10px;">binomial-distribution</a> <a href="/tags/clustering/" style="font-size: 10px;">clustering</a> <a href="/tags/coins/" style="font-size: 10px;">coins</a> <a href="/tags/combinatorical-optimisation/" style="font-size: 10px;">combinatorical optimisation</a> <a href="/tags/combinatorics/" style="font-size: 11.43px;">combinatorics</a> <a href="/tags/data-mining/" style="font-size: 12.86px;">data-mining</a> <a href="/tags/dimensionality-reduction/" style="font-size: 10px;">dimensionality-reduction</a> <a href="/tags/ethics/" style="font-size: 11.43px;">ethics</a> <a href="/tags/excel/" style="font-size: 11.43px;">excel</a> <a href="/tags/gcp/" style="font-size: 10px;">gcp</a> <a href="/tags/graph-theory/" style="font-size: 10px;">graph-theory</a> <a href="/tags/hypothesis-testing/" style="font-size: 10px;">hypothesis-testing</a> <a href="/tags/integration/" style="font-size: 10px;">integration</a> <a href="/tags/lesson/" style="font-size: 15.71px;">lesson</a> <a href="/tags/linear-algebra/" style="font-size: 11.43px;">linear-algebra</a> <a href="/tags/linear-programming/" style="font-size: 11.43px;">linear-programming</a> <a href="/tags/linux/" style="font-size: 11.43px;">linux</a> <a href="/tags/magrittr/" style="font-size: 10px;">magrittr</a> <a href="/tags/no-coding/" style="font-size: 20px;">no-coding</a> <a href="/tags/normal-distribution/" style="font-size: 11.43px;">normal-distribution</a> <a href="/tags/number-theory/" style="font-size: 10px;">number-theory</a> <a href="/tags/probabilistic-method/" style="font-size: 10px;">probabilistic-method</a> <a href="/tags/probability/" style="font-size: 12.86px;">probability</a> <a href="/tags/problem-solving/" style="font-size: 15.71px;">problem-solving</a> <a href="/tags/puzzle/" style="font-size: 12.86px;">puzzle</a> <a href="/tags/python/" style="font-size: 17.14px;">python</a> <a href="/tags/r/" style="font-size: 18.57px;">r</a> <a href="/tags/reflection/" style="font-size: 10px;">reflection</a> <a href="/tags/reinforcement-learning/" style="font-size: 10px;">reinforcement-learning</a> <a href="/tags/shiny/" style="font-size: 14.29px;">shiny</a> <a href="/tags/simulation/" style="font-size: 12.86px;">simulation</a> <a href="/tags/solver/" style="font-size: 11.43px;">solver</a> <a href="/tags/sports/" style="font-size: 10px;">sports</a> <a href="/tags/story/" style="font-size: 15.71px;">story</a> <a href="/tags/tidyverse/" style="font-size: 12.86px;">tidyverse</a> <a href="/tags/tutorial/" style="font-size: 20px;">tutorial</a> <a href="/tags/visualisation/" style="font-size: 11.43px;">visualisation</a> <a href="/tags/web-development/" style="font-size: 10px;">web-development</a>
+    </div>
+</div>
+
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="Solving Complex Coverage Problems Using Microsoft Excel" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2025 Tim Hargreaves&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+
+    
+    
+    
+    <script src="/js/animation.js"></script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+    <script src="/js/gallery.js" defer></script>
+    
+
+    
+    
+
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+    <script src="/js/clipboard.js" defer></script>
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
